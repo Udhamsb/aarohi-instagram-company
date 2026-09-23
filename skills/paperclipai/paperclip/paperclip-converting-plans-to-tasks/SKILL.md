@@ -6,11 +6,11 @@ metadata:
   sources:
     -
       kind: "github-dir"
-      commit: null
+      commit: "7944ed3d976d1a7cc26a2d0cee51f227f3542084"
       path: "skills/paperclip-converting-plans-to-tasks"
       repo: "paperclipai/paperclip"
       trackingRef: "master"
-      url: "https://github.com/paperclipai/paperclip/tree/master/skills/paperclip-converting-plans-to-tasks"
+      url: "https://github.com/paperclipai/paperclip/tree/7944ed3d976d1a7cc26a2d0cee51f227f3542084/skills/paperclip-converting-plans-to-tasks"
 key: "paperclipai/paperclip/paperclip-converting-plans-to-tasks"
 ---
 

@@ -6,11 +6,11 @@ metadata:
   sources:
     -
       kind: "github-dir"
-      commit: null
+      commit: "7944ed3d976d1a7cc26a2d0cee51f227f3542084"
       path: "skills/paperclip-board"
       repo: "paperclipai/paperclip"
       trackingRef: "master"
-      url: "https://github.com/paperclipai/paperclip/tree/master/skills/paperclip-board"
+      url: "https://github.com/paperclipai/paperclip/tree/7944ed3d976d1a7cc26a2d0cee51f227f3542084/skills/paperclip-board"
 key: "paperclipai/paperclip/paperclip-board"
 ---
 
