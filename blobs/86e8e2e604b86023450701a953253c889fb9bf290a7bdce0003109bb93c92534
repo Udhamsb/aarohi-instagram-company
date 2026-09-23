@@ -1,0 +1,123 @@
+# AAR-27 Gate Execution Report — AAR-26 prompt package: Gate A/B/C review
+
+**Run:** 8c5ca165-2ccf-49f3-969d-48ecb9c311bf · **Agent:** AI Visual Producer (469984b3-8e05-4975-8c9d-bccc8c1b5fbb) · **Date:** 2026-09-22
+**Scope:** execution of the AAR-27 intake gate's defined gates against the now-published upstream deliverables. **Zero billable calls. Zero credits spent. No assets generated. No publication.**
+**Trigger:** AAR-27 §5 named "review of AAR-24/25/26 is an open acceptance step of this gate; production stays NOT READY until they pass Gate A/B/C review plus the credential check." AAR-24/25/26 have now published, so that review is executable now, on paper, at zero cost.
+
+## 0. Inputs actually read this run (byte-verified, not quoted from memory)
+
+| Deliverable | Source | Bytes | SHA-256 (verified) |
+|---|---|---|---|
+| AAR-26 Script & Prompt Package | document `script-prompt-package` | 33,217 | — |
+| AAR-25 Visual Production Acceptance Standard v1.0 | document `production-standard-v1` | 16,353 | — |
+| AAR-25 Preflight Checklist v1.0 | document `preflight-checklist-v1` | 6,019 | — |
+| AAR-24 Audience demand brief | document `audience-demand-brief` | 33,376 | — |
+| AAR-7 anchor: FACE_BODY_SHEET | attachment `6faf8939-2a6e-48b4-acda-f27bf138f4c4` | 2,374,324 | `23364dba7cb29159…` ✅ matches registry |
+| AAR-7 anchor: CHARACTER_SHEET | attachment `32ead576-fd6b-4f64-9ac0-46b74f06d3fb` | 2,017,425 | `2b57257e59a0164d…` ✅ matches registry |
+| AAR-7 wardrobe ref | attachment `bd31e637-ae04-4d44-89da-b6683d6d4388` | 318,264 | `f09bcea5ccd12729…` ✅ matches registry |
+| AAR-7 criteria/preflight | attachment `b08162df-e582-4bcf-8253-6ef51638f7c6` | 12,053 | `60f2a7d900798289…` ✅ matches registry |
+| AAR-2 Persona Bible | attachment `7a69b57b-ac5e-415b-bb79-3fc1e1d9aea5` | 9,063 | `a2fca0ccc365d1f1…` ✅ matches registry |
+
+Model parameter caps re-verified against the cached official Runway API reference (docs.dev.runwayml.com, fetched 2026-09-22, `runway_api.md`).
+
+## 1. Gate A — prompt-vs-brief conflict scan: **FAIL (3 defects, all pre-render)**
+
+Negative block per concept would be used verbatim, exactly as the package instructs ("append to every generation call").
+
+### Defect A-1 — Z-2 verbatim block incomplete (partial coverage)
+AAR-25 §1 Z-2 requires the verbatim block:
+`text, letters, numbers, captions, subtitles, signage, labels, typography; logos, brand marks, watermarks, stamps; UI elements, app frames, phone-screen UI, fake quotes, speech bubbles; irrelevant decorative elements`
+
+Measured against all three of the package's negative blocks:
+
+| Z-2 token | Present? |
+|---|---|
+| text, captions, subtitles, signage, labels, typography | ✅ |
+| logos, brand marks, watermarks, stamps | ✅ |
+| UI elements, app frames, phone-screen UI, fake quotes, speech bubbles | ✅ |
+| **letters** | ❌ **absent** |
+| **numbers** | ❌ **absent** |
+| **irrelevant decorative elements** | ❌ **absent** |
+
+The blocks add surface exclusions beyond Z-2 (`no shop/menu boards, no readable labels, no price tags, no book/journal page text`) — that part is stronger than required. The defect is the three missing tokens/clause. `letters`/`numbers` are not cosmetic here: Concept 1/3 sit at a chai stall and a market lane, scenes that naturally carry prices and menu boards — the exact AAR-14 chalkboard-menu failure class. AAR-25 Z-5 is explicit: compliance is measured on delivered bytes; "the prompt asked for no text" is not evidence.
+
+### Defect A-2 — the package's prompts cannot execute on the AAR-27 v1.0 primary approved model
+Measured prompt lengths (positive + that concept's negative block):
+
+| Concept | Positive | Negative | Combined |
+|---|---|---|---|
+| C1 (Chai Stall Ep.01) | 971 | 1,367 | **2,338** |
+| C2 (Wind-down carousel) | 798 | 1,181 | **1,979** |
+| C3 (Chai Stall Ep.02) | 1,076 | 1,358 | **2,434** |
+
+Verified caps from the official API reference:
+
+- `gen4.5` (image_to_video): `promptText` **required, max 1000**; **no `negativePrompt` field exists**. AAR-27 §2's own execution note anticipates folding the negative clauses into the positive prompt — the combined figures above then apply.
+- `veo3.1_fast`: `promptText` max 1000 **and** separate `negativePrompt` max 1000. Positive prompts fit (798–1,076; **C3 exceeds by 76**), but every negative block exceeds by 181–367.
+- `seedance2_5`: `promptText` max 15,000, no `negativePrompt` field. **The only approved path that accepts the package as written.**
+
+Feasibility, all three concepts:
+
+| Concept | gen4.5 (≤1000, no neg field) | veo3.1_fast (pt ≤1000 / neg ≤1000) | seedance2_5 (≤15000) |
+|---|---|---|---|
+| C1 | OVER by 1,338 | neg OVER by 367 | ✅ fits |
+| C2 | OVER by 979 | neg OVER by 181 | ✅ fits |
+| C3 | OVER by 1,434 | pt OVER by 76, neg OVER by 358 | ✅ fits |
+
+This is a conflict between three locked sources, not a mistake in any one of them: **AAR-25 Z-2 (verbatim block, locked) ⊥ the AAR-27 §2 primary path's 1000-char cap ⊥ the AAR-26 package's wardrobe-heavy prompts**. Resolving it requires relaxing one, and only the Creative Director or the board may do that.
+
+### Defect A-3 — Z-1 status: **PASS** (recorded for completeness)
+No positive prompt requests or implies text. Verified by scan: zero occurrences of caption / subtitle / typography / signage / watermark / logo / on-screen-text / hashtag / CTA in any of the nine positive prompt blocks. The `AI-generated` string appears in **no** generation prompt — correctly routed to the post-production platform-native overlay per AAR-25 §0 and the AAR-17 lesson. `gen4.5`/`seedance2_5` have no `negativePrompt` field, so the negative block travels inside the positive prompt — mechanically permitted, but see A-2 for the resulting cap math.
+
+## 2. Gate B — continuity kit: **PARTIAL (kit assembled; one approval item open)**
+
+**Anchor locked and provenance created (RC-9 / AAR-25 C-1/C-2):**
+
+- Conditioning anchor set = reference pack v2.1, INTERNAL-ONLY: FACE_BODY_SHEET `6faf8939…` (2,374,324 B, `23364dba7cb29159…`) + CHARACTER_SHEET `32ead576…` (2,017,425 B, `2b57257e59a0164d…`), both re-downloaded and byte-matched against the registry this run.
+- Anchor crop for identity conditioning (face + hair, above shoulders): **1222 × 409 px**, **SHA-256 `92abbc8171461d3d1c1735f8d71fe90affc353136a1dc08f88720311b04b394e`**, derived from the FACE_BODY_SHEET top panel. This value is the one to name in every render contract's P3-2 record.
+- Identity-lock wording check against AAR-25 C-3: age 22–26 ✅, wheatish with natural texture ✅, long dark hair fully open and down ✅, small centred maroon bindi visible when forehead in frame ✅, silver jhumkas visible when ears in frame ✅.
+- Hair-only rule (C-4) honoured: the anchor crop takes head + hair from the sheet; **the character sheet's unapproved camisole garment is not carried forward** — noted explicitly here so no generation inherits it.
+
+**Open item B-1 — wardrobe is described, not cited to the approved list (C-7).**
+AAR-7 §4 fixes eight approved silhouettes and is explicit: *"Any garment not on this list is unapproved. A frame showing an unapproved garment is a modesty breach and is REJECT — regenerate."* The AAR-26 stall-visit wardrobe ("loose straight-cut soft-cotton kurta with full sleeves and visible straight hem, matching salwar, and a soft cotton dupatta draped symmetrically over one shoulder") is described in prose without citing a silhouette number. It sits between **#2 (kurta + salwar — no dupatta)** and **#7 (festive kurta + secure dupatta, both shoulders pinned)**: the package's single-over-the-shoulder drape matches neither exactly. That gap must be resolved before a prompt is bound to a render contract — it is the same garment ambiguity that produced the AAR-20 wardrobe drift the board rejected.
+
+**Note B-2 — the wardrobe reference cannot be an image anchor.** AAR-7 §4 states `AAROHI_WARDROBE_REFERENCE_v1.png` is a garment *specification sheet, not silhouette photography*. It is a text/spec reference for approving a described garment; identity conditioning must use the face/hair crop above. Recording this so a later run does not submit the wardrobe sheet as a conditioning image.
+
+## 3. Gate C — scene hygiene: **PASS as specified**
+Each concept carries explicit surface exclusions for scene-implied text-bearing surfaces (shop/menu boards, price tags, journal page, phone screen rendered face-down/blank, stall price-boards), satisfying the AAR-14 lesson that an unexcluded surface renders text into the frame. The disclosure badge plan exists for the downstream composite on every concept (lower-right, high contrast, phone-legible, full video duration). Preflight checklists in the package are consistent with AAR-25 Passes 0–3.
+
+## 4. Cross-checks against AAR-24 (do-not-create list)
+
+| AAR-24 rule | Package status |
+|---|---|
+| #1 no text baked into a visual | ✅ zero-text by design, disclosure routed to overlay |
+| #2 nothing sexualised / modesty-breaching | ✅ verbatim modesty blocks present |
+| #4 disclosed AI persona (profile label + caption disclosure) | ✅ caption disclosure in every concept script |
+| #8 no Reels over ~30s | ✅ 6–8 s concepts, 3–4 s teaser |
+| #9 no billable generation before AAR-27 `confirm_cost` | ✅ none performed |
+| Coverage note | AAR-24 **R3** (micro-movement / desk-stiffness Reels, the 42 % lifestyle-wellness signal) has **no corresponding concept** in the package; R1/R2 are covered by Concepts 1/3 and Concept 2. Flagged as a coverage gap, not a conflict. |
+
+## 5. The decision this run surfaces (board / Creative Director)
+
+The AAR-27 gate's approved cost basis is **not executable against the AAR-26 package as written**. Only one of the two is possible:
+
+- **(a) Hold the verbatim Z-2 block (keep the package as written)** → the video step must run on `seedance2_5` (30 cr/s at 720p), the *only* approved path that accepts it. Unit cost becomes anchor 20 cr + video 160 cr = **180 cr = $1.80/unit**, not the **80 cr = $0.80/unit** published in AAR-27 v1.0 — **2.25× the planned cost**. Note this is also the model on which the AAR-20 wardrobe drift the board rejected occurred, so it carries the higher correction-cycle risk.
+- **(b) Keep the $0.80/unit `gen4.5` path** → the negative block must be cut to ~29 chars (971 + neg ≤ 1000 for C1) or the positive prompt cut proportionally, which **breaks the AAR-25 Z-2 verbatim lock** and materially reduces the wardrobe-constraint wording that fixed the AAR-20 drift. That is a Creative Director decision on a locked standard.
+- **(c)** `veo3.1_fast` is not a way out as written: its positive cap is 1000 (C3 is 1,076) and its separate `negativePrompt` cap is 1000 (all three blocks exceed it).
+
+Separately and unchanged: the credential gate still blocks all of the above. Secret proposal **`7a700ca0-d88c-42b8-980e-bea769893ff7`** (`runwayml/api-secret`) is **still `pending`** board approval, and `env.RUNWAYML_API_SECRET` is **not bound** to this agent (probed name-only this run: absent). Request carried on AAR-28.
+
+## 6. Spend and side effects
+
+- Billable calls: **0**. Credits spent: **0**. Cost incurred: **$0.00**. Assets generated: **0**. Publications: **0**.
+- AAR-20 STOP directive respected in full: no render submitted, no spend, nothing in flight at any vendor.
+- No secret value was read, printed, or stored in this run. The Runway credential remains unbound and therefore unverified this run; the last read-only verification (`/v1/organization`: 200, creditBalance 500, cap 10,000/mo, 62 models) stands from run 25703363.
+
+## 7. Revised disposition
+
+**Gate itself: executable and executed — Gate A FAIL, Gate B partial, Gate C PASS.** Production renders remain **NOT READY**, now on two verified blockers instead of one:
+
+1. `RUNWAYML_API_SECRET` unbound (unchanged) — AAR-22 credential gate / AAR-28.
+2. **New:** the approved model/cost basis is not executable against the approved prompt package (Defect A-2) and the wardrobe silhouette is uncited against the approved list (Defect B-1). Both need an owner decision on a locked standard before any render contract can name a model, a parameter set, a call count, and a quote.
+
+No billable call will be made without a resolved A-2/B-1 and an explicit `confirm_cost` naming model, params, call count, and quote — as AAR-27 §3 already requires.

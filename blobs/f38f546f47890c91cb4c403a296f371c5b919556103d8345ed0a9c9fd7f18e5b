@@ -1,0 +1,104 @@
+{
+ "harness": "aar38-yunet-cac21-reproduction",
+ "issue": "AAR-38",
+ "run": "26096d1d-2536-470b-8b5b-e970df2fd997",
+ "purpose": "Independently reproduce pre-publish-qa-2026-09-23's CAC-21 framing measurement with the same instrument class (YuNet).",
+ "source_bytes": {
+  "S1.png": {
+   "n_faces": 1,
+   "box": [
+    361.8,
+    248.7,
+    176.3,
+    212.6
+   ],
+   "face_h_px": 212.6,
+   "face_h_pct": 15.75,
+   "confidence": 0.929
+  },
+  "S2.png": {
+   "n_faces": 1,
+   "box": [
+    410.2,
+    149.8,
+    135.0,
+    175.2
+   ],
+   "face_h_px": 175.2,
+   "face_h_pct": 12.98,
+   "confidence": 0.937
+  },
+  "S3.png": {
+   "n_faces": 1,
+   "box": [
+    434.7,
+    229.5,
+    154.6,
+    204.9
+   ],
+   "face_h_px": 204.9,
+   "face_h_pct": 15.18,
+   "confidence": 0.946
+  },
+  "S4.png": {
+   "n_faces": 1,
+   "box": [
+    497.2,
+    224.3,
+    126.2,
+    168.8
+   ],
+   "face_h_px": 168.8,
+   "face_h_pct": 12.5,
+   "confidence": 0.941
+  },
+  "S5.png": {
+   "n_faces": 1,
+   "box": [
+    332.9,
+    258.7,
+    158.8,
+    219.2
+   ],
+   "face_h_px": 219.2,
+   "face_h_pct": 16.24,
+   "confidence": 0.952
+  }
+ },
+ "model": "face_detection_yunet_2023mar.onnx (OpenCV zoo), sha256 8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+ "slide_sha256": {
+  "S1.png": "98df48d1558fa95c5bf0bfbdb00dc778d5aea0356e32f1da92e1ee0de24e3a82",
+  "S2.png": "c3292a39625423dc6ac2bb51acf6f7f1fb8befde500a8cd5b0dd82a93907cc92",
+  "S3.png": "1299cdbad4b914b3ed804dd71f8b0f4420821aa700f34fe2ad5e6ac11195682d",
+  "S4.png": "934ff11620d84f5767823f0dd5558b5cfe469bcdd746c6852b512a87c4bcb78b",
+  "S5.png": "f80fb3dd24a5bf8ef47d19424c663d9124dc7d73a90ec1d20f57f0c377fc8008"
+ },
+ "cac21": {
+  "brief": "AAR-35 daily-brief-2026-09-23 section 4: face-to-frame height fraction within +/-10% of slide 1",
+  "convention": "YuNet face-box height as a fraction of frame height; a surrogate for top-of-head-to-chin, same convention as the canonical document",
+  "S1_pct": 15.75,
+  "S2_pct": 12.98,
+  "S3_pct": 15.18,
+  "S4_pct": 12.5,
+  "S5_pct": 16.24,
+  "deviation_vs_S1_pct": {
+   "S2": -17.6,
+   "S3": -3.6,
+   "S4": -20.6,
+   "S5": 3.1
+  },
+  "verdict": "FAIL on S2 and S4 (outside +/-10%)",
+  "canonical_document_numbers": {
+   "S2": 17.5,
+   "S4": 20.8
+  },
+  "reproduction": "CONFIRMED - matches to within 0.2 percentage points"
+ },
+ "proxies_withdrawn_this_run": [
+  "Haar face-box height (false positives on a chair and a plant, identified visually and excluded; ~2-7pt coarser than YuNet)",
+  "head-top-to-chin by hair segmentation (latched onto dark background; implausible 29.6% head on S1 vs 16.4% on S2 - withdrawn)",
+  "left-vs-right mean-luminance lighting proxy (confounded by scene composition; 4/5 slides read 'brighter right')",
+  "subject-height-vs-background scan (saturated at ~100% on every slide - measures scene clutter, not the subject)"
+ ],
+ "independence": "Same agent and a weaker/earlier run than the canonical QA; this is a reproduction check, not independent QA."
+}

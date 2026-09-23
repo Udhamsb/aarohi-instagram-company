@@ -1,0 +1,216 @@
+#!/usr/bin/env python3
+"""Aarohi Week 1 — asset composer.
+
+Burns the exact `AI-generated` badge + on-image copy into every frame, at
+platform spec. Reels become real encoded MP4s (5 shot frames each) with the
+disclosure burned into every frame, so §4 holds continuously on the encode.
+"""
+import hashlib, json, os, subprocess, sys
+from PIL import Image, ImageDraw, ImageFont
+
+SCRATCH = os.environ["PAPERCLIP_SCRATCH_DIR"]
+FRAMES = os.path.join(SCRATCH, "frames")
+ASSETS = os.path.join(SCRATCH, "assets")
+REELS = os.path.join(SCRATCH, "reels")
+for d in (ASSETS, REELS):
+    os.makedirs(d, exist_ok=True)
+
+LABEL = "AI-generated"
+FB = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FR = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+
+SPEC = {"9:16": (1080, 1920), "4:5": (1080, 1350)}
+
+# ---- per-post on-image copy (from the approved v2 written package) ----
+POST = {
+    "MON": {"head": "10-minute morning movement", "shots": [
+        "10 min, bas. Chalo move karein?",
+        "2 min: slow squats - chest up, knees toes ke saath",
+        "2 min: wall push-ups - easy peasy",
+        "3 min: step-back march, apni pace par",
+        "3 min: stretch + paani. Done!"]},
+    "TUE": {"head": "A realistic active-day reset", "shots": [
+        "A realistic active-day reset - five honest steps",
+        "1. Paani first. Fancy nahi, helpful hai.",
+        "2. 10-minute fresh-air break",
+        "3. Snack ready = less chaos",
+        "4. Bas 3 priorities. Baaki kal."]},
+    "WED": {"head": "Desk-to-dinner athleisure", "shots": [
+        "Desk day, dinner plan? Same outfit.",
+        "Add: soft scarf + tiny jhumkas",
+        "Comfort bhi, cute bhi. Done."]},
+    "THU": {"head": "Beginner lower-body strength", "shots": [
+        "Beginner lower body: chair nearby!",
+        "1. Sit-to-stand x8 - slow control",
+        "2. Supported reverse lunge x6/side",
+        "Rest, water. Sharp pain? Stop."]},
+    "FRI": {"head": "Friday self-care = chai + 10 quiet minutes", "shots": [
+        "Friday self-care = chai + 10 quiet minutes"]},
+    "SAT": {"head": "Festive kurta + sneakers", "shots": [
+        "Festive plans, walking bhi hai?",
+        "Kurta + comfy sneakers = my answer",
+        "Ready for mithai, photos, errands...",
+        "...aur zero shoe regret."]},
+    "SUN": {"head": "Desk-stiffness stretch", "shots": [
+        "Desk-stiff? 3 gentle moves.",
+        "1. 5 slow shoulder rolls",
+        "3. Easy chest opener",
+        "No force. If it hurts, stop."]},
+}
+
+POSTS = [("MON", "9:16", ["MON-S1", "MON-S2", "MON-S3", "MON-S4", "MON-S5"]),
+         ("TUE", "4:5", ["TUE-S1", "TUE-S2", "TUE-S3", "TUE-S4", "TUE-S5"]),
+         ("WED", "9:16", ["WED-S1", "WED-S2", "WED-S3"]),
+         ("THU", "9:16", ["THU-S1", "THU-S2", "THU-S3", "THU-S4"]),
+         ("FRI", "4:5", ["FRI-S1"]),
+         ("SAT", "9:16", ["SAT-S1", "SAT-S2", "SAT-S3", "SAT-S4"]),
+         ("SUN", "9:16", ["SUN-S1", "SUN-S2", "SUN-S3", "SUN-S4"])]
+
+# asset id per post (reels: one master MP4 + cover PNG; carousel/static: slides)
+def asset_ids(day, shots):
+    if day == "TUE":
+        return ["AAR-W1-TUE-CAR-S%d" % (i + 1) for i in range(len(shots))]
+    if day == "FRI":
+        return ["AAR-W1-FRI-STATIC"]
+    return ["AAR-W1-%s-REEL" % day]  # cover id; MP4 shares the stem
+
+
+def cover_crop(im, W, H):
+    s = max(W / im.width, H / im.height)
+    nw, nh = int(round(im.width * s)), int(round(im.height * s))
+    im = im.resize((nw, nh), Image.LANCZOS)
+    l, t = (nw - W) // 2, (nh - H) // 2
+    return im.crop((l, t, l + W, t + H))
+
+
+def wrap(d, text, font, maxw):
+    words, lines, cur = text.split(), [], ""
+    for w in words:
+        t = (cur + " " + w).strip()
+        if d.textlength(t, font=font) <= maxw:
+            cur = t
+        else:
+            if cur:
+                lines.append(cur)
+            cur = w
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def badge(d, W, H, aspect):
+    fs = 34 if aspect == "9:16" else 30
+    f = ImageFont.truetype(FB, fs)
+    tb = d.textbbox((0, 0), LABEL, font=f)
+    tw, th = tb[2] - tb[0], tb[3] - tb[1]
+    x1, y1 = W - 56, H - (110 if aspect == "9:16" else 86)
+    x0, y0 = x1 - (tw + 40), y1 - (th + 24)
+    d.rectangle([x0, y0, x1, y1], fill=(18, 18, 18))
+    d.text((x0 + 20 - tb[0], y0 + 12 - tb[1]), LABEL, font=f, fill=(255, 255, 255))
+    return [x0, y0, x1 - x0, y1 - y0]
+
+
+def compose(fid, src, aspect, onscreen=None, headline=None):
+    W, H = SPEC[aspect]
+    im = cover_crop(Image.open(src).convert("RGB"), W, H)
+    d = ImageDraw.Draw(im)
+    if headline:
+        f = ImageFont.truetype(FB, 52 if aspect == "9:16" else 46)
+        y = 150 if aspect == "9:16" else 90
+        for ln in wrap(d, headline, f, W - 200):
+            tb = d.textbbox((0, 0), ln, font=f)
+            w = tb[2] - tb[0]
+            x = (W - w) // 2
+            d.rectangle([x - 18, y - 10, x + w + 18, y + tb[3] - tb[1] + 14], fill=(18, 18, 18))
+            d.text((x - tb[0], y - tb[1]), ln, font=f, fill=(255, 255, 255))
+            y += (tb[3] - tb[1]) + 42
+    if onscreen:
+        f = ImageFont.truetype(FB, 44 if aspect == "9:16" else 40)
+        lines = wrap(d, onscreen, f, W - 180)
+        lh = 60
+        y = H - (110 if aspect == "9:16" else 86) - 40 - lh * len(lines)
+        for ln in lines:
+            tb = d.textbbox((0, 0), ln, font=f)
+            w = tb[2] - tb[0]
+            x = (W - w) // 2
+            d.rectangle([x - 16, y - 8, x + w + 16, y + tb[3] - tb[1] + 10], fill=(18, 18, 18))
+            d.text((x - tb[0], y - tb[1]), ln, font=f, fill=(255, 255, 255))
+            y += lh
+    bb = badge(d, W, H, aspect)
+    fp = os.path.join(ASSETS, fid + ".png")
+    im.save(fp)
+    return {"id": fid, "file": fp, "aspect": aspect, "dims": "%dx%d" % (W, H), "bbox": bb}
+
+
+def build_reel(day, aspect, shots, out_mp4):
+    """Encode a real 1080x1920 reel from the labelled shot frames."""
+    W, H = SPEC[aspect]
+    n = len(shots)
+    per = 4.0                      # seconds per shot
+    tmp = os.path.join(SCRATCH, "vidparts")
+    os.makedirs(tmp, exist_ok=True)
+    parts = []
+    for i, sid in enumerate(shots):
+        src = os.path.join(ASSETS, "%s_REEL_S%d.png" % (day, i + 1))
+        if not os.path.exists(src):
+            src = os.path.join(ASSETS, "%s" % sid + ".png")
+        p = os.path.join(tmp, "%s_%d.mp4" % (day, i + 1))
+        vf = ("scale=%d:-2,zoompan=z='min(zoom+0.0009,1.10)':d=%d:x='iw/2-(iw/zoom/2)':"
+              "y='ih/2-(ih/zoom/2)':s=%dx%d:fps=30,format=yuv420p" % (W * 2, int(per * 30), W, H))
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-i", src,
+                        "-vf", vf, "-t", str(per), "-r", "30", "-c:v", "libx264",
+                        "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", p], check=True)
+        parts.append(p)
+    lst = os.path.join(tmp, day + ".txt")
+    with open(lst, "w") as fh:
+        for p in parts:
+            fh.write("file '%s'\n" % p)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0",
+                    "-i", lst, "-c", "copy", "-movflags", "+faststart", out_mp4], check=True)
+    return out_mp4
+
+
+def main():
+    manifest = []
+    for day, aspect, shots in POSTS:
+        meta = POST[day]
+        ids = asset_ids(day, shots)
+        if day in ("TUE", "FRI"):
+            for i, sid in enumerate(shots):
+                onscreen = meta["shots"][i] if day == "TUE" else meta["shots"][0]
+                head = meta["head"] if day == "TUE" and i == 0 else (meta["head"] if day == "FRI" else None)
+                r = compose(ids[i], os.path.join(FRAMES, sid + ".png"), aspect,
+                            onscreen=onscreen, headline=head)
+                r["day"], r["role"] = day, ("carousel_slide" if day == "TUE" else "static")
+                manifest.append(r)
+        else:
+            # reel: composited shot frames (each carries badge + its script line)
+            shot_assets = []
+            for i, sid in enumerate(shots):
+                fid = "%s_REEL_S%d" % (day, i + 1)
+                r = compose(fid, os.path.join(FRAMES, sid + ".png"), aspect,
+                            onscreen=meta["shots"][i])
+                r["day"], r["role"] = day, "reel_shot"
+                manifest.append(r)
+                shot_assets.append(fid)
+            mp4 = os.path.join(REELS, ids[0] + ".mp4")
+            build_reel(day, aspect, shots, mp4)
+            manifest.append({"id": ids[0], "file": mp4, "day": day, "role": "reel_master",
+                             "aspect": aspect, "dims": "%dx%d" % SPEC[aspect],
+                             "shots": shot_assets, "seconds": round(4.0 * len(shots), 1),
+                             "sha256": hashlib.sha256(open(mp4, "rb").read()).hexdigest(),
+                             "bytes": os.path.getsize(mp4)})
+            # reel cover still (shot 1), shares the reel asset id
+            cid = ids[0] + "-COVER"
+            r = compose(cid, os.path.join(FRAMES, shots[0] + ".png"), aspect,
+                        onscreen=meta["shots"][0], headline=meta["head"])
+            r["day"], r["role"] = day, "reel_cover"
+            manifest.append(r)
+    json.dump(manifest, open(os.path.join(SCRATCH, "manifest.json"), "w"), indent=1)
+    print("composed", len(manifest), "entries")
+    for m in manifest:
+        print(" ", m["id"], m["role"], m.get("dims"), m.get("bytes"))
+
+
+if __name__ == "__main__":
+    main()

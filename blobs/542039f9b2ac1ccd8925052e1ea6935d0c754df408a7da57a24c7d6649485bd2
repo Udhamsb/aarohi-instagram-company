@@ -1,0 +1,378 @@
+#!/usr/bin/env python3
+"""
+AAR-7 — Aarohi reference-pack re-issue builder (Creative Director, Aarohi_Instagram_company)
+
+Produces, from the owner-supplied anchor sheets (byte-preserved, band-appended only):
+  * AAROHI_REFERENCE_PACK_v2_CHARACTER_SHEET.png   — char sheet v2.0 + burned-in §7.1 disclosure band
+  * AAROHI_REFERENCE_PACK_v2_FACE_BODY_SHEET.png   — face & body sheet + burned-in §7.1 disclosure band
+  * AAROHI_WARDROBE_REFERENCE_v1.png               — §7.3 wardrobe/modesty reference (NEW)
+
+Rules honoured:
+  * Original sheet pixels are NEVER modified — the disclosure is appended as a new
+    footer band, so no reference panel or label is covered. Verified by hashing the
+    untouched top region against the source.
+  * Badge typography/metrics copied from the delivered-asset badge convention
+    (300x66 plate #1f1f1f at 1080 px canvas width, DejaVu Sans Bold, white).
+  * No generative photo synthesis is attempted (no image model is reachable from this
+    runtime). The wardrobe sheet is an explicit garment SPECIFICATION sheet, labelled
+    as such, not a photographic reference.
+
+Layout engine: every text block is wrapped and measured before placement, so nothing
+is clipped or overlapped. Re-run the layout QA after any text edit.
+
+Run:  python3 build_reference_pack.py
+"""
+import hashlib
+import json
+import os
+
+from PIL import Image, ImageDraw, ImageFont
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+SRC_CHAR = os.path.join(HERE, "sheet_char.png")           # owner-supplied character sheet v2.0
+SRC_FACEBODY = os.path.join(HERE, "sheet_facebody.png")   # owner-supplied face & body reference
+
+# ---------------------------------------------------------------- badge convention
+BADGE_REF_W, BADGE_REF_H = 300, 66          # at a 1080 px canvas width
+BADGE_CANVAS_REF = 1080
+PLATE = (31, 31, 31)                        # #1f1f1f — matches delivered assets
+PLATE_HEX = "#1f1f1f"
+INK = (255, 255, 255)
+FONT_DIR = "/usr/share/fonts/truetype/dejavu"
+F_BOLD = os.path.join(FONT_DIR, "DejaVuSans-Bold.ttf")
+F_REG = os.path.join(FONT_DIR, "DejaVuSans.ttf")
+F_SERIF_B = os.path.join(FONT_DIR, "DejaVuSerif-Bold.ttf")
+
+BADGE_TEXT = "AI-generated"
+REF_GLYPH = (28, 15, 275, 48)               # glyph bbox inside the 300x66 reference plate
+
+INTERNAL_STR = "INTERNAL ANCHOR SHEET — NOT FOR PUBLICATION"
+BAND_ACCENT = (166, 38, 74)                 # maroon family, matches sheet accents
+BAND_BG = (245, 241, 234)                   # light warm footer, so the dark badge plate reads as a badge
+BAND_TITLE_INK = (32, 22, 16)
+BAND_BODY_INK = (78, 66, 56)
+BAND_PAD = 34
+
+
+def font(path, size):
+    return ImageFont.truetype(path, size)
+
+
+def wrap(draw, text, fnt, max_w):
+    """Greedy word wrap measured with the real font. Returns a list of lines."""
+    out, line = [], ""
+    for word in text.split():
+        trial = (line + " " + word).strip()
+        if line and draw.textlength(trial, font=fnt) > max_w:
+            out.append(line)
+            line = word
+        else:
+            line = trial
+    if line:
+        out.append(line)
+    return out
+
+
+def badge_image(width):
+    """Render the exact AI-generated badge scaled to `width` (badge convention ratio)."""
+    scale = width / BADGE_REF_W
+    h = int(round(BADGE_REF_H * scale))
+    fnt = font(F_BOLD, max(8, int(round(34 * scale))))
+    img = Image.new("RGB", (width, h), PLATE)
+    d = ImageDraw.Draw(img)
+    bx0, by0, _, _ = fnt.getbbox(BADGE_TEXT)
+    d.text((REF_GLYPH[0] * scale - bx0, REF_GLYPH[1] * scale - by0), BADGE_TEXT, font=fnt, fill=INK)
+    return img
+
+
+def badge_size_for(canvas_w):
+    scale = canvas_w / BADGE_CANVAS_REF
+    return int(round(BADGE_REF_W * scale)), int(round(BADGE_REF_H * scale))
+
+
+def append_disclosure_band(src_path, out_path, title, notes):
+    """Append the §7.1 disclosure band below the sheet. Original pixels untouched."""
+    src = Image.open(src_path).convert("RGB")
+    W, H = src.size
+    bw, bh = badge_size_for(W)
+
+    f_title = font(F_BOLD, 30)
+    f_body = font(F_REG, 22)
+    f_small = font(F_REG, 19)
+
+    scratch = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+    left = 56
+    right_edge = W - bw - 56 - 44          # keep clear of the badge
+    text_w = right_edge - left
+    title_lines = wrap(scratch, title, f_title, text_w)
+    note_lines = [ln for n in notes for ln in wrap(scratch, n, f_body, text_w)]
+
+    body_h = (len(title_lines) * 40) + (len(note_lines) * 30) + 28 + 26
+    band_h = max(body_h + 2 * BAND_PAD, bh + 2 * BAND_PAD, 132)
+
+    out = Image.new("RGB", (W, H + band_h), BAND_BG)
+    out.paste(src, (0, 0))
+    d = ImageDraw.Draw(out)
+    d.rectangle([0, H, W, H + 5], fill=BAND_ACCENT)
+
+    y = H + BAND_PAD
+    for ln in title_lines:
+        d.text((left, y), ln, font=f_title, fill=BAND_TITLE_INK)
+        y += 40
+    y += 4
+    for ln in note_lines:
+        d.text((left, y), ln, font=f_body, fill=BAND_BODY_INK)
+        y += 30
+    y += 6
+    d.text((left, y), INTERNAL_STR + "  ·  Persona Bible §7.1 disclosure applied by the Creative Director",
+           font=f_small, fill=(112, 98, 86))
+
+    out.paste(badge_image(bw), (W - bw - 56, H + (band_h - bh) // 2))
+    out.save(out_path, "PNG", optimize=True)
+    return {"output": os.path.basename(out_path), "size": [W, H + band_h],
+            "original_size": [W, H], "band_y": H, "band_h": band_h,
+            "badge_bbox": [W - bw - 56, H + (band_h - bh) // 2, bw, bh]}
+
+
+# ------------------------------------------------------------------ wardrobe sheet
+WARDROBE = [
+    {"n": "1", "name": "Kurta + relaxed trousers",
+     "week1": "Tue (lifestyle carousel) · Fri (lifestyle static)",
+     "spec": ["Opaque woven cotton kurta, hip/thigh length, straight or A-line.",
+              "Relaxed straight trousers, mid-rise, full length (no leggings).",
+              "Sleeves 3/4 or full; neckline crew / boat / V to collarbone maximum."],
+     "reject": "sheer fabric, clingy fit, low or deep neckline, bare midriff, slit above the knee"},
+    {"n": "2", "name": "Salwar (kurta + salwar)",
+     "week1": "Standing festive / home wardrobe slot",
+     "spec": ["Same kurta rules as item 1.",
+              "Full-length salwar with a secure elasticated or drawstring waist.",
+              "Dupatta optional, and pinned when worn."],
+     "reject": "tight or churidar-thin fit over the hips, translucent fabric, dropped waist"},
+    {"n": "3", "name": "Secure-drape sari",
+     "week1": "Festive / occasion wardrobe slot",
+     "spec": ["Opaque sari cloth, plain or lightly printed.",
+              "Pleats pinned; pallu pinned over the shoulder — double-pin minimum.",
+              "Sleeved blouse, high-neck or crew; midriff covered by the drape.",
+              "Petticoat full length, opaque, secure."],
+     "reject": "slipping pallu, low-cut or backless blouse, bare midriff, single-pin drape"},
+    {"n": "4", "name": "Relaxed top + straight trousers",
+     "week1": "Fri (lifestyle static) · general daytime",
+     "spec": ["Opaque woven or knit top, hip length, relaxed cut.",
+              "Straight trousers, mid-rise, full length.",
+              "Sleeves elbow-length or full."],
+     "reject": "crop length, bodycon knit, off-shoulder, strap or camisole straps"},
+    {"n": "5", "name": "Long cardigan layer",
+     "week1": "Wed (fashion, desk-to-dinner)",
+     "spec": ["Knee-length or longer cardigan over an approved base (item 1 or item 4).",
+              "The base garment must itself be an approved silhouette.",
+              "Open or closed; sleeves full."],
+     "reject": "cardigan over a camisole, strappy vest, or any unapproved base"},
+    {"n": "6", "name": "Fitness — tee + track pants",
+     "week1": "Mon · Thu · Sun (fitness reels)",
+     "spec": ["Opaque crew-neck tee, relaxed fit, hip length, short or long sleeves.",
+              "Straight or relaxed track pants, full length, secure waistband.",
+              "Sports bra never visible; no midriff exposure in any movement.",
+              "Clean trainers; mat and chair props as per the shot list."],
+     "reject": "sports bra as outer layer, tight leggings, tank or cropped top, sheer panels"},
+    {"n": "7", "name": "Festive kurta + secure dupatta",
+     "week1": "Sat (fashion, festive kurta + sneakers)",
+     "spec": ["Straight-cut kurta, jewel tone, opaque, hip/thigh length.",
+              "Secure dupatta, pinned at both shoulders, never slipping.",
+              "Opaque full-length trousers; clean sneakers.",
+              "Walking and arranging flowers only — no dance, no body display."],
+     "reject": "slipping dupatta, backless or low-neck kurta, chiffon overlay, tight fit"},
+    {"n": "8", "name": "Accessory and jewellery lock",
+     "week1": "Every post",
+     "spec": ["Silver jhumkas visible whenever the ears are in frame.",
+              "Small centred maroon bindi visible whenever the forehead is in frame.",
+              "Hair long, open, dark — never tied, braided, clipped, bunned or in an updo.",
+              "One small crossbody bag or tote is approved; no body-emphasising accessories."],
+     "reject": "tied or covered hair, heavy glam jewellery, body chain, any appearance-led styling"},
+]
+
+USAGE_RULES = [
+    "1.  Identity anchor for every generation stays the re-issued face & body sheet (v2.1).",
+    "2.  This is a GARMENT SPECIFICATION, not a photographic reference: no image-generation provider is",
+    "     reachable from the agent runtime, so silhouette photography is deferred to AAR-8.",
+    "3.  A frame may show garments listed here only. Any garment not listed on this sheet is unapproved.",
+    "4.  The 'Hair Variations — Open Hair (default)' panel is a HAIR-ONLY reference: crop head and hair,",
+    "     never inherit its garment. That garment fails §2/§5 and is NOT an approved silhouette.",
+    "5.  Every derived frame carries its own lower-right 'AI-generated' badge, per Persona Bible §4.",
+    "6.  Chest, midriff, hips and upper thighs covered; fabric opaque and secure in every pose (§2).",
+]
+
+
+def build_wardrobe_sheet(out_path, W=1536, cols=2, gap=20, margin=48, cell_pad=20):
+    maroon = (140, 24, 60)
+    ink = (32, 22, 16)
+    sub = (92, 76, 64)
+    reject_col = (150, 32, 40)
+
+    f_brand = font(F_SERIF_B, 60)
+    f_h1 = font(F_BOLD, 31)
+    f_h2 = font(F_REG, 22)
+    f_name = font(F_BOLD, 26)
+    f_week = font(F_BOLD, 18)
+    f_spec = font(F_REG, 20)
+    f_rej = font(F_REG, 19)
+    f_small = font(F_REG, 18)
+
+    scratch = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+    text_w = W - 2 * margin
+    cell_w = (W - 2 * margin - (cols - 1) * gap) // cols
+    inner_w = cell_w - 2 * cell_pad
+
+    # ---- measure header
+    brand_h = 74
+    h1_lines = wrap(scratch, "WARDROBE & MODESTY REFERENCE  v1.0", f_h1, text_w)
+    h2_lines = []
+    for para in ("Approved everyday silhouettes — Persona Bible §7.3. Garment specification sheet.",
+                 "The owner-supplied anchor sheets carry no wardrobe reference; this sheet defines the only "
+                 "garments a Week 1 frame may show."):
+        h2_lines += wrap(scratch, para, f_h2, text_w)
+    header_h = brand_h + len(h1_lines) * 38 + len(h2_lines) * 30 + 34
+
+    # ---- measure each card
+    cards = []
+    for item in WARDROBE:
+        spec_lines = [ln for s in item["spec"] for ln in wrap(scratch, "• " + s, f_spec, inner_w)]
+        rej_lines = wrap(scratch, "REJECT: " + item["reject"], f_rej, inner_w)
+        week_lines = wrap(scratch, item["week1"], f_week, inner_w)
+        name_lines = wrap(scratch, item["name"], f_name, inner_w)
+        h = (cell_pad + len(name_lines) * 32 + len(week_lines) * 24 + 10
+             + len(spec_lines) * 26 + 6 + len(rej_lines) * 24 + cell_pad)
+        cards.append({"item": item, "h": h, "name_lines": name_lines, "week_lines": week_lines,
+                      "spec_lines": spec_lines, "rej_lines": rej_lines})
+
+    rows = [cards[i:i + cols] for i in range(0, len(cards), cols)]
+    row_heights = [max(c["h"] for c in row) for row in rows]
+
+    rules_lines = []
+    for ln in USAGE_RULES:
+        rules_lines += wrap(scratch, ln, f_small, text_w)
+    rules_h = 44 + len(rules_lines) * 25 + 20
+
+    band_h = max(150, badge_size_for(W)[1] + 3 * BAND_PAD)
+    body_top = header_h
+    body_h = sum(row_heights) + gap * (len(rows) - 1)
+    H = body_top + body_h + 28 + rules_h + band_h
+
+    img = Image.new("RGB", (W, H), (252, 249, 245))
+    d = ImageDraw.Draw(img)
+
+    # ---- header
+    d.text((margin, 30), "AAROHI", font=f_brand, fill=ink)
+    y = 30 + brand_h
+    for ln in h1_lines:
+        d.text((margin, y), ln, font=f_h1, fill=maroon)
+        y += 38
+    for ln in h2_lines:
+        d.text((margin, y), ln, font=f_h2, fill=sub)
+        y += 30
+    d.line([margin, header_h - 14, W - margin, header_h - 14], fill=(216, 206, 194), width=2)
+
+    # ---- cards
+    y = body_top
+    for row, row_h in zip(rows, row_heights):
+        for c, card in enumerate(row):
+            x = margin + c * (cell_w + gap)
+            d.rectangle([x, y, x + cell_w, y + row_h], fill=(255, 255, 255), outline=(222, 212, 200), width=2)
+            d.rectangle([x, y, x + cell_w, y + 5], fill=maroon)
+            ty = y + cell_pad + 4
+            d.text((x + cell_pad, ty), card["item"]["n"], font=f_name, fill=maroon)
+            num_w = d.textlength(card["item"]["n"] + "  ", font=f_name)
+            for i, ln in enumerate(card["name_lines"]):
+                d.text((x + cell_pad + num_w, ty + i * 32), ln, font=f_name, fill=ink)
+            ty += len(card["name_lines"]) * 32 + 4
+            d.text((x + cell_pad, ty), "WEEK 1: " + card["week_lines"][0], font=f_week, fill=sub)
+            ty += 24 * len(card["week_lines"])
+            # remaining week lines (rare) — indent
+            for extra in card["week_lines"][1:]:
+                d.text((x + cell_pad + 12, ty), extra, font=f_week, fill=sub)
+                ty += 24
+            ty += 10
+            for ln in card["spec_lines"]:
+                d.text((x + cell_pad, ty), ln, font=f_spec, fill=ink)
+                ty += 26
+            ty += 6
+            for ln in card["rej_lines"]:
+                d.text((x + cell_pad, ty), ln, font=f_rej, fill=reject_col)
+                ty += 24
+        y += row_h + gap
+
+    # ---- usage rules
+    y += 28 - gap
+    d.text((margin, y), "USAGE RULES (binding)", font=f_h1, fill=maroon)
+    y += 44
+    for ln in rules_lines:
+        d.text((margin, y), ln, font=f_small, fill=ink)
+        y += 25
+
+    # ---- disclosure band
+    band_y = H - band_h
+    d.rectangle([0, band_y, W, H], fill=BAND_BG)
+    d.rectangle([0, band_y, W, band_y + 5], fill=maroon)
+    bw, bh = badge_size_for(W)
+    txt_w = W - bw - 56 - 44 - margin
+    by = band_y + BAND_PAD
+    for ln in wrap(scratch, "AI-generated reference — Aarohi Kapoor, fictional persona @aarohi.kapoor.diaries",
+                   font(F_BOLD, 26), txt_w):
+        d.text((margin, by), ln, font=font(F_BOLD, 26), fill=BAND_TITLE_INK)
+        by += 34
+    d.text((margin, by), INTERNAL_STR + "  ·  §7.1/§7.3 disclosure applied by the Creative Director",
+           font=f_small, fill=(112, 98, 86))
+    img.paste(badge_image(bw), (W - bw - 56, band_y + (band_h - bh) // 2))
+    img.save(out_path, "PNG", optimize=True)
+    return {"output": os.path.basename(out_path), "size": [W, H]}
+
+
+def verify_original_pixels(src_path, out_path, band_y):
+    """Prove the original sheet region is byte-identical inside the re-issued file."""
+    src = Image.open(src_path).convert("RGB")
+    out = Image.open(out_path).convert("RGB")
+    a = src.crop((0, 0, src.width, band_y)).tobytes()
+    b = out.crop((0, 0, src.width, band_y)).tobytes()
+    return a == b
+
+
+def main():
+    results = {}
+    char_out = os.path.join(HERE, "AAROHI_REFERENCE_PACK_v2_CHARACTER_SHEET.png")
+    fb_out = os.path.join(HERE, "AAROHI_REFERENCE_PACK_v2_FACE_BODY_SHEET.png")
+
+    results["character_sheet"] = append_disclosure_band(
+        SRC_CHAR, char_out,
+        "AI-generated reference — AAROHI CHARACTER SHEET v2.0 (re-issued v2.1)",
+        ["Reference pack §7.1 disclosure. The original character-sheet pixels are unmodified; this band is appended below them.",
+         "Usage: identity anchor for face, hair and expression. The 'Open Hair (default)' panel is a HAIR-ONLY reference — crop head and hair, never inherit its garment."])
+
+    results["face_body_sheet"] = append_disclosure_band(
+        SRC_FACEBODY, fb_out,
+        "AI-generated reference — AAROHI FACE & BODY REFERENCE (re-issued v2.1)",
+        ["Reference pack §7.1 disclosure. The original face-and-body pixels are unmodified; this band is appended below them.",
+         "Usage: primary face anchor plus supporting angles. Body proportions only — wardrobe is governed by the §7.3 wardrobe & modesty sheet."])
+
+    wardrobe_out = os.path.join(HERE, "AAROHI_WARDROBE_REFERENCE_v1.png")
+    results["wardrobe_sheet"] = build_wardrobe_sheet(wardrobe_out)
+
+    for k, v in results.items():
+        v["source"] = os.path.basename(SRC_CHAR if k == "character_sheet" else
+                                       SRC_FACEBODY if k == "face_body_sheet" else "(new composition)")
+    results["character_sheet"]["original_pixels_unmodified"] = verify_original_pixels(
+        SRC_CHAR, char_out, results["character_sheet"]["band_y"])
+    results["face_body_sheet"]["original_pixels_unmodified"] = verify_original_pixels(
+        SRC_FACEBODY, fb_out, results["face_body_sheet"]["band_y"])
+
+    for k, v in results.items():
+        p = os.path.join(HERE, v["output"])
+        v["sha256"] = hashlib.sha256(open(p, "rb").read()).hexdigest()
+        v["bytes"] = os.path.getsize(p)
+        print(k, v["output"], v["size"], v["sha256"][:16], v["bytes"],
+              "unmodified=" + str(v.get("original_pixels_unmodified", "n/a")))
+
+    with open(os.path.join(HERE, "build_reference_pack.result.json"), "w") as fh:
+        json.dump(results, fh, indent=1)
+
+
+if __name__ == "__main__":
+    main()

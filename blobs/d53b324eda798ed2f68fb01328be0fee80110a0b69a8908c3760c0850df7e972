@@ -1,0 +1,241 @@
+#!/usr/bin/env python3
+"""Aarohi Week 1 — scene frame generator.
+
+Identity conditioning on the approved anchor + §2 modesty + §3 exclusions.
+No label text is requested from the model; the exact `AI-generated` badge is
+composited deterministically downstream so §4 is measurable, not hoped for.
+"""
+import base64, json, os, sys, time, urllib.request, urllib.error, hashlib
+
+SCRATCH = os.environ["PAPERCLIP_SCRATCH_DIR"]
+OUT = os.path.join(SCRATCH, "frames")
+os.makedirs(OUT, exist_ok=True)
+
+KEY = os.environ["OPENROUTER_API_KEY"]
+MODEL = "google/gemini-3-pro-image"
+
+ANCHORS = ["anchor_front.png", "anchor_sl34.png", "anchor_lprof.png"]
+
+IDENTITY = (
+    "IDENTITY LOCK — this is non-negotiable. The supplied reference image is the approved identity anchor. "
+    "Render THIS EXACT SAME WOMAN: identical facial structure and proportions (oval soft face, same eyes, brows, "
+    "nose, lip shape, jawline, hairline), identical apparent age 22-26, identical wheatish North Indian complexion "
+    "and natural skin texture. Do NOT change her face. Do NOT produce a lookalike or similar-looking person. "
+)
+
+MARKERS = (
+    "She must show: a SMALL CENTRED MAROON BINDI on her forehead, SILVER JHUMKA earrings on both ears "
+    "(allow natural occlusion by hair or angle), and LONG DARK OPEN HAIR WORN FULLY DOWN with a centre/soft side "
+    "part — hair must read as naturally open, NEVER tied, braided, clipped up, in a bun, ponytail or updo. "
+)
+
+STYLE = (
+    "Realistic editorial diary photograph, warm daylight or soft practical light, truthful warm colour, "
+    "realistic skin texture, no beauty-filter plasticity, no hyper-gloss, no extreme blur, no voyeuristic "
+    "depth of field. Neutral eye-level camera, medium or three-quarter framing, comfortable ordinary posture, "
+    "respectful adult lifestyle editorial for an Instagram diary account. "
+)
+
+WARDROBE = (
+    "MODEST WARDROBE: opaque relaxed everyday clothing that securely covers chest, midriff, hips and upper thighs. "
+    "No sheer, skin-tight, plunging, strapless, lingerie-like, wet, transparent or bodycon styling. "
+)
+
+EXCLUDE = (
+    "STRICTLY EXCLUDE: any sexualised or suggestive styling, expression, pose or framing; seductive or sultry gaze; "
+    "lip-biting; reclining or arched-back poses; body-display; camera angles emphasising chest, waist, hips, legs or "
+    "lips; bedroom, bathroom, bed, shower, changing-room or poolside settings; glamour or high-fashion retouch; "
+    "any visible text, words, lettering, captions, watermarks or logos anywhere in the image. "
+)
+
+# (id, anchor, aspect, scene prompt)
+FRAMES = [
+    # ---- MONDAY reel: 10-minute morning movement (5 shots) ----
+    ("MON-S1", "anchor_front.png", "9:16",
+     "She stands beside a rolled-out yoga mat in a bright home living-room corner, facing the camera with a calm "
+     "warm smile, arms relaxed at her sides. " + WARDROBE + "Relaxed opaque long-sleeve cotton tee and straight-fit "
+     "track pants, barefoot on the mat."),
+    ("MON-S2", "anchor_sl34.png", "9:16",
+     "She performs a slow supported bodyweight squat on a yoga mat in a bright living room: feet hip-width apart, "
+     "chest lifted, hips pushed back, knees tracking in line with the toes, arms extended forward for balance, "
+     "upright neutral spine. Side-on medium shot showing correct knee tracking and safe neutral form. " + WARDROBE +
+     "Relaxed opaque long-sleeve tee and loose straight-fit track pants."),
+    ("MON-S3", "anchor_front.png", "9:16",
+     "She performs a wall incline push-up against a plain bright living-room wall: hands placed on the wall slightly "
+     "below shoulder height, body in one straight line from head to heel, core braced, elbows soft, no sagging hips, "
+     "safe controlled form. Three-quarter medium shot. " + WARDROBE + "Relaxed opaque long-sleeve tee and "
+     "straight-fit track pants."),
+    ("MON-S4", "anchor_sl34.png", "9:16",
+     "She performs an alternating step-back march on a yoga mat: standing tall, one leg stepping back with the heel "
+     "lifted, arms in a natural walking swing, upright posture, face relaxed and smiling. Medium eye-level shot. "
+     + WARDROBE + "Relaxed opaque long-sleeve tee and straight-fit track pants."),
+    ("MON-S5", "anchor_front.png", "9:16",
+     "She finishes the routine in a calm standing overhead reach and stretch on the mat, arms gently raised, "
+     "upright safe posture, smiling softly, an opaque steel water bottle resting on the floor beside the mat. "
+     + WARDROBE + "Relaxed opaque long-sleeve tee and straight-fit track pants."),
+
+    # ---- TUESDAY carousel: realistic active-day reset (5 slides) ----
+    ("TUE-S1", "anchor_front.png", "4:5",
+     "She sits at a sunlit home work-and-study desk with an open paper planner, a laptop closed to the side and an "
+     "opaque steel water bottle, pausing to look up at the camera with a light natural smile. Medium waist-up shot. "
+     + WARDROBE + "Opaque cotton kurta in a muted tone with relaxed trousers."),
+    ("TUE-S2", "anchor_sl34.png", "4:5",
+     "She fills an opaque steel water bottle at a bright kitchen counter, both hands occupied, glancing warmly toward "
+     "the camera. Medium waist-up shot from across the counter. " + WARDROBE + "Opaque cotton kurta with relaxed "
+     "trousers."),
+    ("TUE-S3", "anchor_front.png", "4:5",
+     "She walks along a leafy tree-lined park path in soft morning daylight carrying a plain canvas tote bag on her "
+     "shoulder, calm neutral walking posture, natural candid documentary framing. Three-quarter eye-level shot. "
+     + WARDROBE + "Opaque cotton kurta with relaxed trousers and clean everyday sneakers."),
+    ("TUE-S4", "anchor_sl34.png", "4:5",
+     "She stands at a bright kitchen counter placing a handful of almonds and sliced fruit into a small lunch box, "
+     "looking down at her hands with a composed, focused expression, ordinary everyday gesture. Medium shot. "
+     + WARDROBE + "Opaque cotton kurta with relaxed trousers."),
+    ("TUE-S5", "anchor_front.png", "4:5",
+     "She sits at a wooden table journaling, writing a short numbered list in an open notebook with a pen, calm "
+     "slight smile, a cup of chai beside her. Medium waist-up shot in soft daylight. " + WARDROBE + "Opaque cotton "
+     "kurta with relaxed trousers."),
+
+    # ---- WEDNESDAY reel: desk-to-dinner athleisure (3 shots) ----
+    ("WED-S1", "anchor_soft.png", "9:16",
+     "She sits at a small cafe work table beside a shuttered laptop, upright relaxed posture, hands resting on the "
+     "table, glancing up at the camera with a friendly everyday expression. Medium eye-level shot. " + WARDROBE +
+     "Relaxed long open cardigan over an opaque crew-neck tee, straight full-length trousers."),
+    ("WED-S2", "anchor_sl34.png", "9:16",
+     "She stands beside the cafe chair adjusting a soft woven scarf around her neck and settling a small crossbody "
+     "bag on her shoulder, both hands and face in frame, ordinary getting-ready gesture, warm daylight. Medium "
+     "eye-level shot. " + WARDROBE + "Relaxed long open cardigan over an opaque crew-neck tee, straight full-length "
+     "trousers."),
+    ("WED-S3", "anchor_front.png", "9:16",
+     "She walks toward the camera along a bright street past a bookshop window, mid-step, relaxed natural gait, "
+     "hands free, calm confident everyday expression. Three-quarter eye-level shot. " + WARDROBE + "Relaxed long "
+     "open cardigan over an opaque crew-neck tee, straight full-length trousers and clean everyday sneakers."),
+
+    # ---- THURSDAY reel: beginner lower-body strength (4 shots) ----
+    ("THU-S1", "anchor_front.png", "9:16",
+     "She stands ready on a yoga mat in a bright living room, feet hip-width apart, arms relaxed, softly smiling at "
+     "the camera before starting. Medium shot. " + WARDROBE + "Relaxed opaque long-sleeve tee and straight-fit "
+     "track pants, barefoot."),
+    ("THU-S2", "anchor_sl34.png", "9:16",
+     "She performs a beginner sit-to-stand from a stable sturdy dining chair, standing up with a lifted chest, "
+     "weight through the mid-foot, knees tracking over the toes, safe controlled tempo, side-on medium shot showing "
+     "correct lower-body form. " + WARDROBE + "Relaxed opaque long-sleeve tee and straight-fit track pants."),
+    ("THU-S3", "anchor_sl34.png", "9:16",
+     "She holds a supported static lunge on a yoga mat: front knee bent to roughly ninety degrees and stacked over "
+     "the ankle, back knee soft and lowered with control, torso upright, hands on hips, safe stable form. Side "
+     "medium shot. " + WARDROBE + "Relaxed opaque long-sleeve tee and straight-fit track pants."),
+    ("THU-S4", "anchor_front.png", "9:16",
+     "She finishes seated on a yoga mat in a gentle hip and hamstring cool-down stretch, one leg extended and the "
+     "other relaxed, upright spine, hands resting on the mat, calm relieved smile, water bottle nearby. Medium "
+     "shot. " + WARDROBE + "Relaxed opaque long-sleeve tee and straight-fit track pants."),
+
+    # ---- FRIDAY static: self-care (1 frame) ----
+    ("FRI-S1", "anchor_soft.png", "4:5",
+     "She sits by a bright window in a calm self-care moment, both hands cupping a warm cup of chai, a small "
+     "arrangement of fresh flowers and a closed journal on the table beside her, soft contemplative expression, "
+     "shoulders relaxed. Medium waist-up shot in soft daylight. " + WARDROBE + "Opaque relaxed cotton kurta with "
+     "relaxed trousers and a light cardigan."),
+
+    # ---- SATURDAY reel: festive kurta + sneakers (4 shots) ----
+    ("SAT-S1", "anchor_laugh.png", "9:16",
+     "She stands in a bright home hallway doing a final outfit check in front of a simple mirror edge, laughing "
+     "naturally with a happy open expression, hands adjusting the sleeve of her kurta. Three-quarter medium shot. "
+     + WARDROBE + "A festive opaque cotton kurta in a warm tone with secure drape, relaxed fit, and clean everyday "
+     "white sneakers."),
+    ("SAT-S2", "anchor_soft.png", "9:16",
+     "She walks through a bright colourful market lane in soft daylight, mid-step, relaxed natural gait, a plain "
+     "canvas tote on her shoulder, warm candid expression. Three-quarter eye-level shot. " + WARDROBE + "A festive "
+     "opaque cotton kurta with secure drape, relaxed fit, and clean everyday white sneakers."),
+    ("SAT-S3", "anchor_sl34.png", "9:16",
+     "She sits on a low step and ties the laces of her clean everyday white sneakers, bent forward with an easy "
+     "smile, both hands occupied, ordinary everyday gesture, bright daylight. Medium shot. " + WARDROBE + "A festive "
+     "opaque cotton kurta with secure drape, relaxed fit."),
+    ("SAT-S4", "anchor_front.png", "9:16",
+     "She stands and walks toward the camera on a bright street in full figure, relaxed natural stride, calm happy "
+     "expression, hands free, daylight editorial framing. Three-quarter eye-level shot. " + WARDROBE + "A festive "
+     "opaque cotton kurta with secure drape, relaxed fit, and clean everyday white sneakers."),
+
+    # ---- SUNDAY reel: desk-stiffness stretch (4 shots) ----
+    ("SUN-S1", "anchor_soft.png", "9:16",
+     "She sits upright at a home study desk doing a slow side-neck stretch, one hand resting lightly on the side of "
+     "her head, the other relaxed in her lap, eyes calm and open, safe gentle range of movement. Medium waist-up "
+     "shot. " + WARDROBE + "Relaxed opaque long-sleeve top with relaxed trousers."),
+    ("SUN-S2", "anchor_sl34.png", "9:16",
+     "She practices a seated chair side-bend on a stable sturdy chair, one arm reaching gently overhead while the "
+     "other rests on the chair, torso upright and safe, calm breathing expression. Medium eye-level shot. "
+     + WARDROBE + "Relaxed opaque long-sleeve top with relaxed trousers."),
+    ("SUN-S3", "anchor_front.png", "9:16",
+     "She stands and performs a gentle chest-opener stretch in a bright living room, hands clasped loosely behind "
+     "her back with shoulders relaxed and down, lifted sternum, safe comfortable posture, eyes open. Medium "
+     "eye-level shot. " + WARDROBE + "Relaxed opaque long-sleeve top with relaxed trousers."),
+    ("SUN-S4", "anchor_front.png", "9:16",
+     "She closes the desk-stiffness session by rolling her shoulders gently with a calm relieved smile, arms "
+     "relaxed by her sides, bright home study corner behind her, end-of-day soft light. Medium eye-level shot. "
+     + WARDROBE + "Relaxed opaque long-sleeve top with relaxed trousers."),
+]
+
+
+def load_anchor(name):
+    p = os.path.join(SCRATCH, name)
+    if not os.path.exists(p):
+        return None
+    return base64.b64encode(open(p, "rb").read()).decode()
+
+
+def generate(fid, anchor, aspect, scene, tries=3):
+    ref = load_anchor(anchor)
+    if ref is None:
+        return {"id": fid, "error": "missing anchor " + anchor}
+    prompt = ("Use the supplied reference image as the approved identity anchor.\n\n"
+              + IDENTITY + MARKERS + WARDROBE + STYLE + EXCLUDE + "\nSCENE: " + scene +
+              "\nAspect ratio: " + aspect + " vertical. Do not add any text or lettering to the image.")
+    body = {"model": MODEL, "modalities": ["image", "text"],
+            "messages": [{"role": "user", "content": [
+                {"type": "text", "text": prompt},
+                {"type": "image_url", "image_url": {"url": "data:image/png;base64," + ref}}]}]}
+    last = None
+    for attempt in range(tries):
+        try:
+            req = urllib.request.Request(
+                "https://openrouter.ai/api/v1/chat/completions",
+                data=json.dumps(body).encode(),
+                headers={"Authorization": "Bearer " + KEY, "Content-Type": "application/json"})
+            with urllib.request.urlopen(req, timeout=420) as r:
+                d = json.load(r)
+            imgs = d["choices"][0]["message"].get("images") or []
+            if not imgs:
+                last = "no image returned"
+                continue
+            url = imgs[0]["image_url"]["url"] if isinstance(imgs[0].get("image_url"), dict) else imgs[0]["image_url"]
+            raw = base64.b64decode(url.split(",", 1)[1])
+            fp = os.path.join(OUT, fid + ".png")
+            open(fp, "wb").write(raw)
+            return {"id": fid, "file": fp, "anchor": anchor, "aspect": aspect,
+                    "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw),
+                    "model": MODEL, "attempt": attempt + 1}
+        except urllib.error.HTTPError as e:
+            last = "HTTP %s %s" % (e.code, e.read().decode()[:300])
+        except Exception as e:
+            last = "%s: %s" % (type(e).__name__, e)
+        time.sleep(4)
+    return {"id": fid, "error": last, "anchor": anchor}
+
+
+def main():
+    only = sys.argv[1:] if len(sys.argv) > 1 else None
+    todo = [f for f in FRAMES if not only or f[0] in only]
+    results = []
+    for fid, anchor, aspect, scene in todo:
+        t0 = time.time()
+        res = generate(fid, anchor, aspect, scene)
+        res["seconds"] = round(time.time() - t0, 1)
+        results.append(res)
+        print(json.dumps(res), flush=True)
+        with open(os.path.join(SCRATCH, "gen_log.json"), "w") as fh:
+            json.dump(results, fh, indent=1)
+    ok = sum(1 for r in results if "file" in r)
+    print("DONE ok=%d fail=%d" % (ok, len(results) - ok), flush=True)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,61 @@
+{
+ "issue": "AAR-19",
+ "task": "Generate and QA first Sogni video using selected model",
+ "render": {
+  "provider": "Sogni API (creative-agent durable workflow)",
+  "workflow_id": "wf_durable_workflow_96549bad-a72c-48dd-bb1c-dec23bb0e1e9",
+  "workflow_status": "completed",
+  "project_id": "2B6F3A4D-82EC-4C67-AD6B-60C3C3A06F4A",
+  "project_sid": 17068659,
+  "settlement_tx": "1790062072466-0",
+  "model": "Seedance 2.5 (selector seedance2-5, model id seedance-2-5)",
+  "mode": "text-to-video, native audio",
+  "resolution": "1280x720 (720p)",
+  "duration_requested_s": 5,
+  "duration_actual_s": 5.056,
+  "fps": 24,
+  "video_codec": "h264",
+  "audio": "AAC stereo 32kHz, max volume -11.1 dB, mean -39.1 dB (non-silent)",
+  "token_type": "spark (premium)",
+  "network": "fast",
+  "cost_estimate_spark": "300.456",
+  "cost_estimate_usd": "1.50228",
+  "cost_actual_spark": "300.456",
+  "cost_actual_usd": "1.50228",
+  "submitted_with_confirm_cost": true,
+  "idempotency_key": "ddef6248-c13d-416f-b288-9d4c2fee41d4",
+  "created_utc_epoch_ms": 1790062064031,
+  "completed_utc_epoch_ms": 1790062272619
+ },
+ "pre_flight": {
+  "live_estimate_endpoint": "socket.sogni.ai/api/v1/job-video/estimate/spark/seedance-2-5/1280/720/121/24/0/1",
+  "live_estimate_spark": 300.456,
+  "premium_spark_balance_before": 394.99673932403243,
+  "premium_coverage_check": "300.456 <= 394.997 OK",
+  "account_balance_endpoint": "GET /v4/account/balance (HTTP 200)"
+ },
+ "qa": {
+  "frames_checked": "n=10, n=60, n=110 (start/mid/late)",
+  "brief_match": "PASS - golden retriever puppy, bubble lands on nose and pops with sparkle droplets, sunlit living room, warm window light, shallow DOF, slow push-in",
+  "embedded_text_or_watermark": "PASS - none found in any frame (clean-image standard)",
+  "anatomy_artifacts": "PASS - no visible warping, extra limbs, or glitch bands",
+  "identity_continuity": "PASS - same puppy across frames",
+  "native_audio": "PASS - AAC stream present with real content",
+  "container": "PASS - MP4 (h264 High, yuv420p), 5.06s, 24fps",
+  "file_sha256": "aab4487573c63a6a68bbf25bd31c946e7cf4da221bdf7858a9ccb2783d1907e5",
+  "file_bytes": 5118940,
+  "visual_standard_reviewer": "mechanical self-QA only (skill rule: identity/safety judgment reserved for second party; single-name test asset, no publish use)"
+ },
+ "asset": {
+  "local_durable_path": "/root/.hermes/profiles/ai_visual_producer/cache/scratch/aar19/aarohi_seedance25_5s_720p.mp4",
+  "board_attachment": "uploaded to AAR-19 (see attachment list)",
+  "note": "Vendor result URL is signed and expires in 48h; board attachment is the durable copy."
+ },
+ "evidence_files": [
+  "workflow_start.json",
+  "workflow_final.json",
+  "balance.json",
+  "render_facts.json",
+  "render_file_facts.json"
+ ]
+}

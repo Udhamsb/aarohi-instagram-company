@@ -1,0 +1,79 @@
+{
+ "issue": "AAR-19",
+ "brief": "Sogni Video Brief 01 (AAR-17 sogni-video-brief-01) + content context (AAR-18)",
+ "rendered_at": "2026-09-22T07:38-07:44Z",
+ "seedance_render": {
+  "workflowId": "wf_durable_workflow_e37f0073-4e16-4fd2-bcdc-b64e5d26921e",
+  "title": "AAR-19 first render \u2014 Sogni Video Brief 01 (Morning Chai, 5s 9:16 720p)",
+  "status": "completed",
+  "modelId": "seedance-2-5",
+  "width": 864,
+  "height": 496,
+  "fps": 24,
+  "duration": 5,
+  "generateAudio": true,
+  "promptExpansion": "seedance",
+  "artifactUrl": "https://complete-images-production.s3-accelerate.amazonaws.com/vendor/bytedance/seedance/2026-09-22/7A3DC07C-7F4B-4B47-B",
+  "artifactMimeType": "video/mp4",
+  "projectId": "7A3DC07C-7F4B-4B47-BCD4-956081326C7C",
+  "costActualUSD": "0.668201625",
+  "costActualSpark": "133.640325",
+  "postflightAudit": true,
+  "createTime": 1790062526435,
+  "updateTime": 1790062682530
+ },
+ "ltx_render": {
+  "workflowId": "wf_durable_workflow_79a7bc38-1723-4fcc-9d97-f61f0cb56374",
+  "title": "AAR-19 fallback render \u2014 Sogni Video Brief 01 (LTX-2.3, 5s 9:16 720p)",
+  "status": "completed",
+  "modelId": "ltx23-22b-fp8_t2v_distilled",
+  "width": 1920,
+  "height": 1088,
+  "fps": 24,
+  "duration": 5,
+  "generateAudio": true,
+  "promptExpansion": null,
+  "artifactUrl": "https://complete-images-production.s3-accelerate.amazonaws.com/video/2026-09-22/3A4D82EC-DC67-4D6B-A0C3-C3A06F4AE9AD/com",
+  "artifactMimeType": "video/mp4",
+  "projectId": "3A4D82EC-DC67-4D6B-A0C3-C3A06F4AE9AD",
+  "costActualUSD": "0.1921007616",
+  "costActualSpark": "38.42015232",
+  "postflightAudit": true,
+  "createTime": 1790062970785,
+  "updateTime": 1790063039138
+ },
+ "files": {
+  "seedance_raw_master": "seedance_raw_854x480.mp4",
+  "ltx_raw_master": "ltx_raw_1920x1088.mp4"
+ },
+ "qc": {
+  "seedance": {
+   "verdict": "REJECTED",
+   "reasons": [
+    "Aspect 16:9 landscape 854x480 \u2014 brief requires 9:16 portrait 720x1280 (ratio arg ignored by platform for seedance2-5)",
+    "Wardrobe drift: sari instead of kurta+trousers",
+    "Identity: no bindi, no visible jhumkas in most frames",
+    "Resolution below 720x1280 target"
+   ]
+  },
+  "ltx": {
+   "verdict": "PASS_WITH_FLAGS (not publishable as-is)",
+   "passes": [
+    "9:16-equivalent? NO \u2014 1920x1088 landscape; ratio arg ignored for ltx23 too",
+    "Identity: bindi present, jhumkas present, age-appropriate, consistent across frames",
+    "Wardrobe: modest kurta, full coverage",
+    "No legible text (all packaging text is pseudo-text blur at full resolution)",
+    "Hands/fingers anatomically plausible in sampled frames",
+    "Audio: ambient diegetic only (spectrogram shows broadband bursts, no harmonic music stacks, no speech formants)",
+    "Duration 5.04s @24fps, single continuous shot"
+   ],
+   "fails": [
+    "Aspect: 1920x1088 landscape \u2014 brief mandates 9:16 portrait",
+    "Hair: small silver hair clip visible top-left in early frames (brief: no clip)",
+    "Resolution below 720x1280 portrait target for portrait master"
+   ]
+  }
+ },
+ "disclosure": "Not applied \u2014 raw renders are internal work files (brief \u00a79); AI-generated overlay required on the outward-facing deliverable in the edit step.",
+ "credential_handling": "SOGNI_API_KEY held as Paperclip company secret sogni/api-key (id 70cf7f7e), bound to agent env.SOGNI_API_KEY; resolved at runtime via run-bound API; never written to comments/logs/repo files."
+}

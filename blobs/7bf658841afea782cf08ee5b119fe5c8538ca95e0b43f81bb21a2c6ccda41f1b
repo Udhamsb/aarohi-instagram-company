@@ -1,0 +1,491 @@
+{
+ "issue": "AAR-5",
+ "title": "Aarohi Week 1 insights — measurement artifact",
+ "run_id": "aa8c445e-081f-4f15-9992-6fcc93e85847",
+ "produced_at_utc": "2026-09-22T06:26Z",
+ "verdict": "PARTIAL — the 24-hour Week 1 metrics the objective requires do not exist yet",
+ "source": {
+  "path": "Paperclip tool gateway -> Zernio MCP -> Instagram Graph insights API",
+  "paperclip_connection": "mcp.zernio.com/mcp for the company (id 4049f71c-ee8e-46bb-bab2-c4d3a2bc24f1, authKind api_key)",
+  "account": "@aarohi.kapoor.diaries",
+  "zernio_account_id": "6aab7e688d284ffb210ca690",
+  "zernio_profile_id": "6aab7b2a184320f175383344",
+  "tools_called": [
+   "accounts_list",
+   "accounts_get_account_health",
+   "accounts_get_follower_stats",
+   "posts_list",
+   "posts_get",
+   "analytics_get_analytics",
+   "analytics_get_post_timeline",
+   "analytics_sync_external_posts",
+   "analytics_get_daily_metrics",
+   "analytics_get_best_time_to_post",
+   "comments_list_inbox_comments",
+   "comments_get_inbox_post_comments",
+   "docs_search"
+  ],
+  "analytics_access": "hasAnalyticsAccess true; health reports canFetchAnalytics true, analyticsSupported true, scope instagram_business_manage_insights granted"
+ },
+ "measurement_window": {
+  "read_at_utc": "2026-09-22T06:24:15Z",
+  "feed_last_sync_utc": "2026-09-22T06:24:15.296Z",
+  "per_post_metrics_last_updated": "2026-09-22 05:57:10",
+  "forced_live_sync": "analytics_sync_external_posts called at 06:24Z and 06:26Z; refreshed the feed (lastSync advanced) but produced no analytics row for the live Week 1 Tuesday post",
+  "objective_window": "24 hours after each Week 1 post is live",
+  "window_status": "NOT REACHED"
+ },
+ "week1_publish_state": {
+  "posts_live": 1,
+  "posts_scheduled": 6,
+  "live_post": {
+   "day": "Tuesday",
+   "format": "carousel x5",
+   "zernio_post_id": "6ab21c1013e2cd514b3d63d7",
+   "published_at_utc": "2026-09-22T06:11:25Z",
+   "age_at_measurement_minutes": 13,
+   "analytics_row_present": false
+  },
+  "scheduled": [
+   {
+    "day": "Tuesday",
+    "date": "2026-09-22",
+    "format": "carousel x5",
+    "post_id": "6ab21c1013e2cd514b3d63d7",
+    "status": "published",
+    "scheduled_for": "2026-09-22 06:11:25.669000+00:00"
+   },
+   {
+    "day": "Wednesday",
+    "date": "2026-09-23",
+    "format": "reel",
+    "post_id": "6ab21c5bea3a3c8c1e37346b",
+    "status": "scheduled",
+    "scheduled_for": "2026-09-23 14:30:00+00:00"
+   },
+   {
+    "day": "Thursday",
+    "date": "2026-09-24",
+    "format": "reel",
+    "post_id": "6ab21c60fe66fba341815bf4",
+    "status": "scheduled",
+    "scheduled_for": "2026-09-24 14:30:00+00:00"
+   },
+   {
+    "day": "Friday",
+    "date": "2026-09-25",
+    "format": "static 4:5",
+    "post_id": "6ab21c63a5cf35afa3c9795f",
+    "status": "scheduled",
+    "scheduled_for": "2026-09-25 14:30:00+00:00"
+   },
+   {
+    "day": "Saturday",
+    "date": "2026-09-26",
+    "format": "reel",
+    "post_id": "6ab21c678947239137dc5b33",
+    "status": "scheduled",
+    "scheduled_for": "2026-09-26 14:30:00+00:00"
+   },
+   {
+    "day": "Sunday",
+    "date": "2026-09-27",
+    "format": "reel",
+    "post_id": "6ab21c6bea3a3c8c1e373723",
+    "status": "scheduled",
+    "scheduled_for": "2026-09-27 14:30:00+00:00"
+   },
+   {
+    "day": "Monday",
+    "date": "2026-09-28",
+    "format": "reel",
+    "post_id": "6ab21c708947239137dc5c1a",
+    "status": "scheduled",
+    "scheduled_for": "2026-09-28 14:30:00+00:00"
+   }
+  ],
+  "first_24h_window_closes_utc": "2026-09-23T06:11:25Z",
+  "all_week1_24h_windows_close_utc": "2026-09-29T14:30:00Z"
+ },
+ "measured_population": {
+  "what_it_is": "the account's 6 pre-existing external posts, imported from Instagram and published 2026-09-17..2026-09-20 - these are NOT Week 1 calendar posts",
+  "why_used": "they are the only posts on this account old enough to carry settled metrics",
+  "n": 6,
+  "totals": {
+   "reach": 333,
+   "impressions": 409,
+   "likes": 25,
+   "comments": 2,
+   "saves": 0,
+   "shares": 0
+  },
+  "by_format": [
+   {
+    "label": "reel",
+    "post_count": 2,
+    "reach_total": 261,
+    "impressions_total": 296,
+    "likes_total": 8,
+    "comments_total": 2,
+    "saves_total": 0,
+    "shares_total": 0,
+    "reach_per_post": 130.5,
+    "likes_per_reach_pct": 3.07,
+    "mean_engagement_rate_pct": 3.34,
+    "reels_avg_watch_pct_of_duration": [
+     23.3,
+     32.9
+    ],
+    "reels_skip_rate_pct": [
+     90.2,
+     65
+    ]
+   },
+   {
+    "label": "static/carousel",
+    "post_count": 4,
+    "reach_total": 72,
+    "impressions_total": 113,
+    "likes_total": 17,
+    "comments_total": 0,
+    "saves_total": 0,
+    "shares_total": 0,
+    "reach_per_post": 18.0,
+    "likes_per_reach_pct": 23.61,
+    "mean_engagement_rate_pct": 16.39,
+    "reels_avg_watch_pct_of_duration": [],
+    "reels_skip_rate_pct": []
+   }
+  ],
+  "posts": [
+   {
+    "zernio_post_id": "6aaba137fdaad2c11edbc3c4",
+    "platform_post_id": "18186132940409827",
+    "permalink": "https://www.instagram.com/p/DdYaDNrDZVf/",
+    "published_at_utc": "2026-09-17T08:14:40.000Z",
+    "is_external_import": true,
+    "is_week1_calendar_post": false,
+    "media_type": "static/carousel",
+    "impressions": 26,
+    "reach": 18,
+    "likes": 5,
+    "comments": 0,
+    "shares": 0,
+    "saves": 0,
+    "follows": 0,
+    "engagement_rate_pct": 19.23,
+    "completion_rate_field_value": 0,
+    "ig_reels_avg_watch_time_ms": 0,
+    "ig_reels_video_view_total_time_ms": 0,
+    "video_duration_s": null,
+    "avg_watch_pct_of_duration": null,
+    "reels_skip_rate_pct": 0,
+    "metrics_last_updated": "2026-09-22 05:57:10"
+   },
+   {
+    "zernio_post_id": "6aabb366ab9502fd6307951d",
+    "platform_post_id": "17922496218425044",
+    "permalink": "https://www.instagram.com/reel/DdYi2lngZ70/",
+    "published_at_utc": "2026-09-17T09:31:55.000Z",
+    "is_external_import": true,
+    "is_week1_calendar_post": false,
+    "media_type": "reel",
+    "impressions": 137,
+    "reach": 124,
+    "likes": 4,
+    "comments": 0,
+    "shares": 0,
+    "saves": 0,
+    "follows": null,
+    "engagement_rate_pct": 2.92,
+    "completion_rate_field_value": 0,
+    "ig_reels_avg_watch_time_ms": 2327,
+    "ig_reels_video_view_total_time_ms": 321149,
+    "video_duration_s": 10,
+    "avg_watch_pct_of_duration": 23.3,
+    "reels_skip_rate_pct": 90.2,
+    "metrics_last_updated": "2026-09-22 05:57:10"
+   },
+   {
+    "zernio_post_id": "6aad052cca2c8f78ed0346f4",
+    "platform_post_id": "18113760095071002",
+    "permalink": "https://www.instagram.com/p/DdbH6LSCLrz/",
+    "published_at_utc": "2026-09-18T09:33:54.000Z",
+    "is_external_import": true,
+    "is_week1_calendar_post": false,
+    "media_type": "static/carousel",
+    "impressions": 43,
+    "reach": 23,
+    "likes": 5,
+    "comments": 0,
+    "shares": 0,
+    "saves": 0,
+    "follows": 0,
+    "engagement_rate_pct": 11.63,
+    "completion_rate_field_value": 0,
+    "ig_reels_avg_watch_time_ms": 0,
+    "ig_reels_video_view_total_time_ms": 0,
+    "video_duration_s": null,
+    "avg_watch_pct_of_duration": null,
+    "reels_skip_rate_pct": 0,
+    "metrics_last_updated": "2026-09-22 05:57:10"
+   },
+   {
+    "zernio_post_id": "6aad066b744c85bf89722629",
+    "platform_post_id": "18028441214906795",
+    "permalink": "https://www.instagram.com/reel/DdbIZCMAMLd/",
+    "published_at_utc": "2026-09-18T09:38:27.000Z",
+    "is_external_import": true,
+    "is_week1_calendar_post": false,
+    "media_type": "reel",
+    "impressions": 159,
+    "reach": 137,
+    "likes": 4,
+    "comments": 2,
+    "shares": 0,
+    "saves": 0,
+    "follows": null,
+    "engagement_rate_pct": 3.77,
+    "completion_rate_field_value": 0,
+    "ig_reels_avg_watch_time_ms": 3285,
+    "ig_reels_video_view_total_time_ms": 502678,
+    "video_duration_s": 10,
+    "avg_watch_pct_of_duration": 32.9,
+    "reels_skip_rate_pct": 65,
+    "metrics_last_updated": "2026-09-22 05:57:10"
+   },
+   {
+    "zernio_post_id": "6aada47395e2e8e76085a112",
+    "platform_post_id": "18125910346865108",
+    "permalink": "https://www.instagram.com/p/DdcVrcKCLAF/",
+    "published_at_utc": "2026-09-18T20:53:30.000Z",
+    "is_external_import": true,
+    "is_week1_calendar_post": false,
+    "media_type": "static/carousel",
+    "impressions": 34,
+    "reach": 26,
+    "likes": 5,
+    "comments": 0,
+    "shares": 0,
+    "saves": 0,
+    "follows": 0,
+    "engagement_rate_pct": 14.71,
+    "completion_rate_field_value": 0,
+    "ig_reels_avg_watch_time_ms": 0,
+    "ig_reels_video_view_total_time_ms": 0,
+    "video_duration_s": null,
+    "avg_watch_pct_of_duration": null,
+    "reels_skip_rate_pct": 0,
+    "metrics_last_updated": "2026-09-22 05:57:10"
+   },
+   {
+    "zernio_post_id": "6aafcebb6b41635e50b4435a",
+    "platform_post_id": "18145470667496817",
+    "permalink": "https://www.instagram.com/p/DdgkRl_jZ4A/",
+    "published_at_utc": "2026-09-20T12:17:57.000Z",
+    "is_external_import": true,
+    "is_week1_calendar_post": false,
+    "media_type": "static/carousel",
+    "impressions": 10,
+    "reach": 5,
+    "likes": 2,
+    "comments": 0,
+    "shares": 0,
+    "saves": 0,
+    "follows": 0,
+    "engagement_rate_pct": 20,
+    "completion_rate_field_value": 0,
+    "ig_reels_avg_watch_time_ms": 0,
+    "ig_reels_video_view_total_time_ms": 0,
+    "video_duration_s": null,
+    "avg_watch_pct_of_duration": null,
+    "reels_skip_rate_pct": 0,
+    "metrics_last_updated": "2026-09-22 05:57:10"
+   }
+  ]
+ },
+ "followers": {
+  "source": "accounts_get_follower_stats",
+  "measured_at_utc": "2026-09-22T06:00:55.840Z",
+  "current_followers": 22,
+  "daily_series": [
+   {
+    "date": "2026-09-17",
+    "followers": 0
+   },
+   {
+    "date": "2026-09-18",
+    "followers": 0
+   },
+   {
+    "date": "2026-09-19",
+    "followers": 7
+   },
+   {
+    "date": "2026-09-20",
+    "followers": 15
+   },
+   {
+    "date": "2026-09-21",
+    "followers": 19
+   },
+   {
+    "date": "2026-09-22",
+    "followers": 22
+   }
+  ],
+  "per_post_follows_usable": false,
+  "per_post_follows_evidence": "follows is null on both reels and 0 on the 4 statics; Zernio docs: 'Null on Instagram Reels and non-Reels video, where Meta does not expose this metric for the media'"
+ },
+ "comments": {
+  "source": "comments_list_inbox_comments + comments_get_inbox_post_comments",
+  "account_total": 2,
+  "audience_authored": 1,
+  "owner_authored": 1,
+  "week1_post_comments": 0,
+  "rows": [
+   {
+    "post": "pani puri reel (pre-existing)",
+    "author": "aidosthindi",
+    "text": "I love goolgapa",
+    "sentiment": "positive",
+    "created_utc": "2026-09-18T19:59:45Z"
+   },
+   {
+    "post": "pani puri reel (pre-existing)",
+    "author": "aarohi.kapoor.diaries (owner reply)",
+    "text": "Golgappe lovers unite! spicy wali ya sweet wali, tumhari pick kya hai?",
+    "created_utc": "2026-09-18T20:00:15Z"
+   }
+  ],
+  "positive_themes": [
+   "enthusiastic reaction to street-food content (n=1)"
+  ],
+  "negative_themes": [],
+  "theme_analysis_valid": false,
+  "theme_analysis_invalid_because": "1 audience comment is not a theme set; 6 of 7 inbox rows have commentCount 0"
+ },
+ "data_gaps": [
+  {
+   "gap": "no 24-hour metrics exist for any Week 1 calendar post",
+   "because": "6 of 7 Week 1 posts are still scheduled; the 1 live post was 13 minutes old at measurement",
+   "evidence": "analytics_get_analytics returns 6 posts all is_external_import=true, none a Week 1 id; posts_list status=scheduled returns the 6 remaining Week 1 ids; posts_get on the live id returns Scheduled for 2026-09-22 06:11:25Z",
+   "closes_when": "each post has been live >=24h; last closes 2026-09-29T14:30Z"
+  },
+  {
+   "gap": "the live Week 1 Tuesday post has no analytics row at all",
+   "because": "not ingestion staleness (feed lastSync 06:24:15Z is newer than the post's platform createdTime 06:12:19Z) but scope: the analytics feed did not add the post even after a forced sync",
+   "evidence": "analytics_get_post_timeline by Zernio id 6ab21c1013e2cd514b3d63d7 -> null; by the id returned from analytics_sync_external_posts (6ab21f0f784f8eebd68a33eb) -> null on the last read; by platform post id 18095719958399390 -> a single 2026-09-22 row with impressions 0, reach 0, saves 0, shares 0, completionRate 0",
+   "closes_when": "platform reports first-day insight values for the post"
+  },
+  {
+   "gap": "reel completion is NOT available: completionRate is 0 on every post, including reels that do have watch-time data",
+   "because": "the field is unpopulated on this connection's Instagram path",
+   "evidence": "completionRate=0 on both reels while ig_reels_avg_watch_time_ms=3285 on a 10s reel (32.9% of duration) and 2327 on a 10s reel (23.3%); igReelsVideoViewTotalTime reported non-zero (502678ms) on one of them",
+   "surrogate_used": "avg watch time as a percentage of reported duration, plus reelsSkipRate",
+   "closes_when": "never expected on this path - treat watch% + skip rate as the completion proxy for Week 2"
+  },
+  {
+   "gap": "saves are 0 on every post in every window",
+   "because": "not separable from Meta's privacy floor at this audience size",
+   "evidence": "saves=0 on all 6 measured posts and on the live post's timeline row; Zernio docs: 'Counts below 5 may be returned as 0 due to Meta's privacy floor on small audiences'",
+   "closes_when": "post-level saves exceed the floor; otherwise save-rate ranking is untestable at this volume"
+  },
+  {
+   "gap": "shares are 0 on every post in every window",
+   "because": "same privacy floor as saves",
+   "evidence": "shares=0 on all 6 measured posts and on the live post's timeline row",
+   "closes_when": "shares exceed the floor"
+  },
+  {
+   "gap": "per-post follows are unusable",
+   "because": "Meta does not expose the metric for Reels, and Zernio returns null there",
+   "evidence": "follows=null on both reels, 0 on the 4 statics",
+   "closes_when": "not on this path; use the account-level daily follower series instead"
+  },
+  {
+   "gap": "no Week 1 reel completion evidence exists",
+   "because": "all five Week 1 reels are still scheduled",
+   "evidence": "posts_list status=scheduled returns Wed/Thu/Sat/Sun/Mon reels unpublished; the only reels with watch data are pre-existing imports",
+   "closes_when": "Week 1 reels publish (first Wed 2026-09-23T14:30Z)"
+  },
+  {
+   "gap": "comment themes cannot be compiled",
+   "because": "the account has 2 comments total, one of them the owner's own reply",
+   "evidence": "comments_list_inbox_comments returns 7 rows; commentCount 0 on 6, 2 on the pani puri reel; comments_get_inbox_post_comments returns [] for the live Week 1 post",
+   "closes_when": "enough audience comments accumulate to form themes"
+  },
+  {
+   "gap": "best-time-to-post evidence is too thin to act on",
+   "because": "the slots are computed from 1-2 posts each",
+   "evidence": "analytics_get_best_time_to_post returns 5 slots with post_count 1 or 2; top slot is day_of_week 4 hour 9 at avg_engagement 5.5 over 2 posts",
+   "closes_when": "more posts accumulate per slot"
+  }
+ ],
+ "recommendations": [
+  {
+   "rank": 1,
+   "series": "Episodic street-food / daily-life REEL series (one numbered episode per slot)",
+   "repeatable_form": "same account, same hook formula, numbered episodes, Reels format, 20:00 IST slot",
+   "basis": "reach, not saves or completion (PROVISIONAL)",
+   "evidence": [
+    "reels averaged 130.5 reach per post vs 18.0 for static/carousel on the same account (7.25x)",
+    "the two highest-reach posts on the account are both reels (137 and 124 reach, permalink /reel/)",
+    "both reels carry a 'pani puri' street-food hook and a two-option question CTA"
+   ],
+   "caveat": [
+    "reels convert depth far worse: 3.07% likes per reach vs 23.61% for static/carousel",
+    "reel watch is shallow: avg watch was 32.9% and 23.3% of a 10s duration, with reelsSkipRate 65% and 90.2% -> the reach is not translating into viewing",
+    "saves=0 and completion=0 on these reels, so the objective's own success test cannot confirm this series yet",
+    "n=2 reels"
+   ],
+   "what_would_falsify_it": "if Week 1 reels land at or below static/carousel reach per post, or if the Week 1 Tuesday carousel records higher saves than the reels",
+   "caption_first_execution": "Caption carries the hook, the episode framing and the two-option question; no text in the reel frames. Reel-native text layer only if approved.",
+   "status": "PROVISIONAL - to be re-scored against saves and completion at 2026-09-29T15:00Z"
+  },
+  {
+   "rank": 2,
+   "series": "Save-oriented utility CAROUSEL series (swipe-and-save, one checklist per slot)",
+   "repeatable_form": "same account, 4:5 carousel, an explicitly savable checklist or routine, 'Swipe, save' CTA, weekday 20:00 IST slot",
+   "basis": "depth engagement by format + the Week 1 Tuesday design, NOT observed saves (PROVISIONAL)",
+   "evidence": [
+    "static/carousel averaged 23.61% likes per reach vs 3.07% for reels, and a higher mean engagement rate (16.39% vs 3.34%)",
+    "Week 1's only carousel is the Tuesday post and it is built for this exactly ('Swipe, save, aur apna one non-negotiable reset comment karo')",
+    "every measured post already asks a two-option question CTA and none has a save CTA, so save-oriented design is untested on this account, not disproven"
+   ],
+   "caveat": [
+    "saves are 0 everywhere and Meta's privacy floor returns sub-5 counts as 0, so this series is a hypothesis about depth, not a measured result",
+    "n=4 statics, and none of them is a checklist carousel"
+   ],
+   "what_would_falsify_it": "if the Week 1 Tuesday carousel records saves=0 after its 24h window while reels record non-zero saves",
+   "caption_first_execution": "The save ask moves into the caption (e.g. 'save this for Monday'), never onto the slides; slides stay clean and text-free per AAR-12/13.",
+   "status": "PROVISIONAL - to be re-scored against saves and completion at 2026-09-29T15:00Z"
+  }
+ ],
+ "recommendation_method": "The objective asks for two series based on saves and completion. Both are unavailable (see data_gaps). The two series below are therefore based on the only settled evidence on this account - reach and depth engagement by format - and are labelled PROVISIONAL. They must be re-scored against saves and completion on the re-wake at 2026-09-29T14:30Z.",
+ "revalidation_plan": {
+  "earliest_tuesday_only_24h": "2026-09-23T06:11:25Z",
+  "all_week1_24h_windows_close": "2026-09-29T14:30:00Z",
+  "recommended_recheck": "2026-09-29T15:00:00Z",
+  "then_re_score": [
+   "saves per post",
+   "completion proxy (avg watch % + reelsSkipRate) per reel",
+   "shares per post",
+   "reach per post by format",
+   "account follower delta across the Week 1 window",
+   "comment themes once volume exists"
+  ],
+  "decision_rule": "keep the series that wins on saves-per-reach and watch% ; drop or reshape the one that does not"
+ },
+ "standards_compliance": {
+  "adopted_after_week_1_published": [
+   "AAR-12",
+   "AAR-13",
+   "AAR-14",
+   "AAR-15"
+  ],
+  "summary": "Images text-free by default (no baked-in headings, quotes, labels, watermarks, captions, CTAs or hashtags); full story and the single CTA live in the caption; caption wording traceable to the visual; 3-6 specific hashtags.",
+  "effect_on_these_recommendations": "Both series must be executed caption-first. Any on-image save nudge or on-image CTA is non-compliant.",
+  "week_1_assets_note": "Week 1 visuals predate these standards and carry a baked-in AI-generated disclosure badge; they are not exemplars of the new standard and must not be imitated."
+ }
+}

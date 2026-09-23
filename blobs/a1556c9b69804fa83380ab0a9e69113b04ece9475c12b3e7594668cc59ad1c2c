@@ -1,0 +1,41 @@
+{
+ "issue": "AAR-20",
+ "task": "Re-render approved Aarohi morning-chai creative after QA mismatch",
+ "authorization": "charge gate e037cc3e-f2f4-4678-a38d-351a807d87e5 accepted by board (revised-prompt Seedance retry per brief rev 2, \u00a711a path step 1)",
+ "render": {
+  "provider": "Sogni API (creative-agent durable workflow)",
+  "workflow_id": "wf_durable_workflow_64f340ff-1674-4e3c-ab74-4c0be1a26cf9",
+  "workflow_status": "completed",
+  "model": "Seedance 2.5 (seedance2-5) \u2014 brief rev 2, wardrobe-revised prompt",
+  "mode": "text-to-video, native audio",
+  "resolution": "720x1280 (explicit width/height; ratio args proven ignored)",
+  "duration_requested_s": 5,
+  "duration_actual_s": "5.056000",
+  "fps": "24/1",
+  "codec": "h264",
+  "prompt_source": "sogni-video-brief-01 REV 2 \u00a79 verbatim (1312 chars, salwar-kameez wardrobe lock)",
+  "negative_prompt": "sogni-video-brief-01 REV 2 \u00a710 verbatim (1395 chars, anti-drape front-loaded)",
+  "confirm_cost": true,
+  "idempotency_key": "6b5cbcb4-75b2-4327-a1db-d1f9b5fe4c73"
+ },
+ "cost": {
+  "live_estimate_spark": "300.456",
+  "live_estimate_usd": "1.50228",
+  "balance_preflight": {
+   "settled": "997.237622004032427701",
+   "premiumCredit": "550"
+  },
+  "idempotent_retry_safe": true
+ },
+ "deliverables": {
+  "raw_master": "aarohi_seedance_portrait.mp4",
+  "outward_facing": "aarohi_seedance_portrait_overlaid.mp4 (carries AI-generated overlay, lower-right, >=24px margins, full duration)",
+  "sha256_raw": "8ffd9c3bb8d82f6a8658019b9dac182c6c6e32071ca02b58801625a5c6ccba1d",
+  "sha256_overlaid": "d4c2b042123d45b652a746ac006fa8b53656fc8a029e5989340a57d335ecb597"
+ },
+ "qa": {
+  "verdict": "PASS \u2014 all 12 brief \u00a712 criteria met including the tightened \u00a712.5 per-frame wardrobe gate: stitched two-piece salwar-kameez (kurta with visible placket/cuffs and straight mid-thigh hem + separate over-shoulder dupatta) in ALL 10 sampled frames, zero sari/pallu/drape reads (the rev-2 wardrobe revision worked where the verbatim rev-1 blocks failed twice). Also PASS: identity markers (bindi, silver jhumkas, long open dark hair, wheatish skin, age-appropriate) stable across all frames; action beats match \u00a75 (lift/pour 0-3s, set down + glance to camera with natural smile 3-5s); 720x1280 portrait via explicit width/height; single continuous shot; zero readable text (stove-front red mark verified as illegible pseudo-text at 4x zoom); no anatomy artifacts; warm consistent morning daylight; native diegetic audio (AAC 32kHz, max -1.0 dB, mean -29.3 dB). Raw master + overlaid master (AI-generated badge verified visually) attached and byte-verified. This render satisfies the AAR-20 re-render objective as the outward-facing deliverable.",
+  "frames": "10 evenly-spaced frames extracted and visually inspected (qc2_*_frame_*.jpg)",
+  "brief_sections_checked": "\u00a712 criteria 1-12 + rev-2 additive gates"
+ }
+}

@@ -1,0 +1,134 @@
+#!/usr/bin/env python3
+"""Aarohi Week 1 — reel builder (v2).
+
+Fixes a real defect found in v1 QA: applying zoompan to a frame that already
+carried the burnt text moved the disclosure out of the §4 safe area on some
+frames (measured contrast fell to 2.36:1 because the badge was being cropped).
+
+Now the motion is applied to the CLEAN generated frame, and the on-image copy
+plus the exact `AI-generated` badge are overlaid as a fixed alpha layer. The
+disclosure therefore sits at identical, unclipped coordinates on every frame
+of the encode.
+"""
+import hashlib, json, os, subprocess
+from PIL import Image, ImageDraw, ImageFont
+
+SCRATCH = os.environ["PAPERCLIP_SCRATCH_DIR"]
+FRAMES = os.path.join(SCRATCH, "frames")
+ASSETS = os.path.join(SCRATCH, "assets")
+REELS = os.path.join(SCRATCH, "reels")
+TMP = os.path.join(SCRATCH, "vidparts")
+for d in (ASSETS, REELS, TMP):
+    os.makedirs(d, exist_ok=True)
+
+LABEL = "AI-generated"
+FB = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+W, H = 1080, 1920
+FPS = 30
+PER = 4.0
+
+import compose_assets as CA   # reuse POSTS / POST / wrap
+
+
+def wrap(d, text, font, maxw):
+    words, lines, cur = text.split(), [], ""
+    for w in words:
+        t = (cur + " " + w).strip()
+        if d.textlength(t, font=font) <= maxw:
+            cur = t
+        else:
+            if cur:
+                lines.append(cur)
+            cur = w
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def overlay_png(onscreen, headline, out):
+    """Transparent 1080x1920 layer: headline, on-screen copy, exact badge."""
+    ov = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(ov)
+    if headline:
+        f = ImageFont.truetype(FB, 52)
+        y = 150
+        for ln in wrap(d, headline, f, W - 200):
+            tb = d.textbbox((0, 0), ln, font=f)
+            w = tb[2] - tb[0]
+            x = (W - w) // 2
+            d.rectangle([x - 18, y - 10, x + w + 18, y + tb[3] - tb[1] + 14], fill=(18, 18, 18, 235))
+            d.text((x - tb[0], y - tb[1]), ln, font=f, fill=(255, 255, 255, 255))
+            y += (tb[3] - tb[1]) + 42
+    if onscreen:
+        f = ImageFont.truetype(FB, 44)
+        lines = wrap(d, onscreen, f, W - 180)
+        lh, y = 60, H - 110 - 40 - 60 * len(lines)
+        for ln in lines:
+            tb = d.textbbox((0, 0), ln, font=f)
+            w = tb[2] - tb[0]
+            x = (W - w) // 2
+            d.rectangle([x - 16, y - 8, x + w + 16, y + tb[3] - tb[1] + 10], fill=(18, 18, 18, 235))
+            d.text((x - tb[0], y - tb[1]), ln, font=f, fill=(255, 255, 255, 255))
+            y += lh
+    # ---- exact §4 badge, fixed at the lower-right safe area ----
+    fs = 34
+    f = ImageFont.truetype(FB, fs)
+    tb = d.textbbox((0, 0), LABEL, font=f)
+    tw, th = tb[2] - tb[0], tb[3] - tb[1]
+    x1, y1 = W - 56, H - 110
+    x0, y0 = x1 - (tw + 40), y1 - (th + 24)
+    d.rectangle([x0, y0, x1, y1], fill=(18, 18, 18, 255))
+    d.text((x0 + 20 - tb[0], y0 + 12 - tb[1]), LABEL, font=f, fill=(255, 255, 255, 255))
+    ov.save(out)
+    return [x0, y0, x1 - x0, y1 - y0], len(lines)
+
+
+def build(day, shots, copy_lines, headline, out_mp4):
+    parts, bbox = [], None
+    for i, sid in enumerate(shots):
+        clean = os.path.join(FRAMES, sid + ".png")
+        ovp = os.path.join(TMP, "%s_%d.ov.png" % (day, i + 1))
+        bb, _ = overlay_png(copy_lines[i], headline if i == 0 else None, ovp)
+        bbox = bb
+        p = os.path.join(TMP, "%s_%d.mp4" % (day, i + 1))
+        vf = ("scale=%d:%d,zoompan=z='min(zoom+0.0009,1.10)':d=%d:"
+              "x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=%dx%d:fps=%d,format=yuv420p"
+              % (W * 2, H * 2, int(PER * FPS), W, H, FPS))
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error",
+                        "-loop", "1", "-i", clean, "-i", ovp,
+                        "-filter_complex", "[0:v]%s[bg];[bg][1:v]overlay=0:0:format=auto,format=yuv420p" % vf,
+                        "-t", str(PER), "-r", str(FPS), "-c:v", "libx264", "-preset", "medium",
+                        "-crf", "18", "-pix_fmt", "yuv420p", p], check=True)
+        parts.append(p)
+    lst = os.path.join(TMP, day + ".txt")
+    with open(lst, "w") as fh:
+        for p in parts:
+            fh.write("file '%s'\n" % p)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", lst,
+                    "-c", "copy", "-movflags", "+faststart", out_mp4], check=True)
+    return out_mp4, bbox
+
+
+if __name__ == "__main__":
+    manifest = json.load(open(os.path.join(SCRATCH, "manifest.json")))
+    reg = {}
+    for day, aspect, shots in CA.POSTS:
+        if day in ("TUE", "FRI"):
+            continue
+        meta = CA.POST[day]
+        mp4 = os.path.join(REELS, "AAR-W1-%s-REEL.mp4" % day)
+        mp4, bb = build(day, shots, meta["shots"], meta["head"], mp4)
+        reg[day] = {"id": "AAR-W1-%s-REEL" % day, "file": mp4, "bbox": bb,
+                    "seconds": round(PER * len(shots), 2),
+                    "bytes": os.path.getsize(mp4),
+                    "sha256": hashlib.sha256(open(mp4, "rb").read()).hexdigest(),
+                    "shots": ["%s_REEL_S%d" % (day, i + 1) for i in range(len(shots))]}
+        # refresh reel_shot bboxes (now the overlay geometry, not the pre-zoom one)
+        for i in range(len(shots)):
+            fid = "%s_REEL_S%d" % (day, i + 1)
+            for m in manifest:
+                if m["id"] == fid:
+                    m["bbox"] = bb
+        print("built", day, os.path.getsize(mp4), "bytes   badge", bb)
+    json.dump({"reels": reg}, open(os.path.join(SCRATCH, "reel_registry.json"), "w"), indent=1)
+    json.dump(manifest, open(os.path.join(SCRATCH, "manifest.json"), "w"), indent=1)

@@ -1,0 +1,231 @@
+{
+ "generated_by": "Creative Director (Aarohi_Instagram_company)",
+ "standard": "Aarohi Persona Bible \u00a74 (disclosure), \u00a77.1 (reference pack), \u00a77.3 (wardrobe)",
+ "badge_convention": {
+  "plate_hex": "#1f1f1f",
+  "ink": "#ffffff",
+  "reference_size_px": [
+   300,
+   66
+  ],
+  "reference_canvas_width_px": 1080
+ },
+ "files": 3,
+ "pass": 3,
+ "reject": 0,
+ "results": [
+  {
+   "file": "AAROHI_REFERENCE_PACK_v2_CHARACTER_SHEET.png",
+   "size": [
+    1536,
+    1346
+   ],
+   "sha256": "2b57257e59a0164dab661649bed7bd823bb594cd47c4b92235a30583121bbd79",
+   "bytes": 2017425,
+   "checks": {
+    "badge_present": {
+     "pass": true,
+     "bbox": [
+      1053,
+      1138,
+      427,
+      94
+     ]
+    },
+    "exact_string_present": {
+     "pass": true,
+     "template": "AI-generated",
+     "mismatched_pixels": 0,
+     "note": "pixel-exact match to a template rendered from the literal string; proves the exact hyphenated string is burned in"
+    },
+    "contrast": {
+     "pass": true,
+     "delivered_asset_convention": 7.22,
+     "wcag21_relative_luminance": 16.48,
+     "measured_min_lum": 31.0,
+     "measured_max_lum": 255.0,
+     "min_lum_source": "darkest non-plate pixel in the badge crop (plate = 31.0)",
+     "wcag_aa_needs": 4.5
+    },
+    "placement": {
+     "pass": true,
+     "lower_right": true,
+     "fully_inside_canvas": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 114,
+     "badge_share_of_width": 0.278
+    },
+    "phone_roundtrip": {
+     "pass": true,
+     "phone_canvas_width": 420,
+     "jpeg_quality": 26,
+     "contrast_convention_after_jpeg": 52.0,
+     "glyph_pixel_coverage_after_jpeg": 0.093,
+     "plate_lum_after_jpeg": 31.1
+    },
+    "source_integrity": {
+     "pass": true,
+     "source": "sheet_char.png",
+     "original_height": 1024,
+     "note": "original sheet region is byte-identical; the disclosure band is appended only"
+    },
+    "badge_text_separation": {
+     "pass": true,
+     "guard_band_px": 30,
+     "dark_pixels_in_guard_band": 0,
+     "note": "no text ink within the guard band immediately left of the badge plate"
+    },
+    "band_margins": {
+     "pass": true,
+     "margin_px": 24,
+     "dark_pixels_inside_band_margin": 0,
+     "band_start_y": 1024,
+     "declared_full_bleed_element": "maroon accent hairline (top 5 px of band)",
+     "note": "no appended text ink inside the hard margin; the full-bleed accent hairline is declared"
+    }
+   },
+   "failures": [],
+   "pass": true
+  },
+  {
+   "file": "AAROHI_REFERENCE_PACK_v2_FACE_BODY_SHEET.png",
+   "size": [
+    1222,
+    1639
+   ],
+   "sha256": "23364dba7cb291594503b0ad7374ead7a9174bffce1ef5dc76992a06e857bc81",
+   "bytes": 2374324,
+   "checks": {
+    "badge_present": {
+     "pass": true,
+     "bbox": [
+      827,
+      1425,
+      339,
+      75
+     ]
+    },
+    "exact_string_present": {
+     "pass": true,
+     "template": "AI-generated",
+     "mismatched_pixels": 0,
+     "note": "pixel-exact match to a template rendered from the literal string; proves the exact hyphenated string is burned in"
+    },
+    "contrast": {
+     "pass": true,
+     "delivered_asset_convention": 7.22,
+     "wcag21_relative_luminance": 16.48,
+     "measured_min_lum": 31.0,
+     "measured_max_lum": 255.0,
+     "min_lum_source": "darkest non-plate pixel in the badge crop (plate = 31.0)",
+     "wcag_aa_needs": 4.5
+    },
+    "placement": {
+     "pass": true,
+     "lower_right": true,
+     "fully_inside_canvas": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 139,
+     "badge_share_of_width": 0.2774
+    },
+    "phone_roundtrip": {
+     "pass": true,
+     "phone_canvas_width": 420,
+     "jpeg_quality": 26,
+     "contrast_convention_after_jpeg": 52.0,
+     "glyph_pixel_coverage_after_jpeg": 0.0917,
+     "plate_lum_after_jpeg": 33.0
+    },
+    "source_integrity": {
+     "pass": true,
+     "source": "sheet_facebody.png",
+     "original_height": 1287,
+     "note": "original sheet region is byte-identical; the disclosure band is appended only"
+    },
+    "badge_text_separation": {
+     "pass": true,
+     "guard_band_px": 30,
+     "dark_pixels_in_guard_band": 0,
+     "note": "no text ink within the guard band immediately left of the badge plate"
+    },
+    "band_margins": {
+     "pass": true,
+     "margin_px": 24,
+     "dark_pixels_inside_band_margin": 0,
+     "band_start_y": 1287,
+     "declared_full_bleed_element": "maroon accent hairline (top 5 px of band)",
+     "note": "no appended text ink inside the hard margin; the full-bleed accent hairline is declared"
+    }
+   },
+   "failures": [],
+   "pass": true
+  },
+  {
+   "file": "AAROHI_WARDROBE_REFERENCE_v1.png",
+   "size": [
+    1536,
+    1940
+   ],
+   "sha256": "f09bcea5ccd12729651bc59b86db8b524193b2cc6983609fc3586e400b891d08",
+   "bytes": 318264,
+   "checks": {
+    "badge_present": {
+     "pass": true,
+     "bbox": [
+      1053,
+      1795,
+      427,
+      94
+     ]
+    },
+    "exact_string_present": {
+     "pass": true,
+     "template": "AI-generated",
+     "mismatched_pixels": 0,
+     "note": "pixel-exact match to a template rendered from the literal string; proves the exact hyphenated string is burned in"
+    },
+    "contrast": {
+     "pass": true,
+     "delivered_asset_convention": 7.22,
+     "wcag21_relative_luminance": 16.48,
+     "measured_min_lum": 31.0,
+     "measured_max_lum": 255.0,
+     "min_lum_source": "darkest non-plate pixel in the badge crop (plate = 31.0)",
+     "wcag_aa_needs": 4.5
+    },
+    "placement": {
+     "pass": true,
+     "lower_right": true,
+     "fully_inside_canvas": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 51,
+     "badge_share_of_width": 0.278
+    },
+    "phone_roundtrip": {
+     "pass": true,
+     "phone_canvas_width": 420,
+     "jpeg_quality": 26,
+     "contrast_convention_after_jpeg": 52.0,
+     "glyph_pixel_coverage_after_jpeg": 0.1305,
+     "plate_lum_after_jpeg": 34.0
+    },
+    "badge_text_separation": {
+     "pass": true,
+     "guard_band_px": 30,
+     "dark_pixels_in_guard_band": 0,
+     "note": "no text ink within the guard band immediately left of the badge plate"
+    },
+    "band_margins": {
+     "pass": true,
+     "margin_px": 24,
+     "dark_pixels_inside_band_margin": 0,
+     "band_start_y": 1744,
+     "declared_full_bleed_element": "maroon accent hairline (top 5 px of band)",
+     "note": "no appended text ink inside the hard margin; the full-bleed accent hairline is declared"
+    }
+   },
+   "failures": [],
+   "pass": true
+  }
+ ]
+}

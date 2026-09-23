@@ -1,0 +1,530 @@
+{
+ "generated_by": "community_insights_manager/AAR-4 run 27fa9973",
+ "review_source": "43 files re-downloaded from AAR-3 (d1f11deb); 41/41 matched the AAR-3 attachment registry by sha256+byteSize",
+ "criteria_source": "AAROHI_PERSONA_BIBLE.md (attachment 7a69b57b) sections 1,2,3,4,5,6",
+ "verdict": "QA COMPLETE; PUBLISH BLOCKED (no Instagram connection, no publishing authority)",
+ "posts": [
+  {
+   "post": 1,
+   "day": "Mon",
+   "title": "10-minute morning movement",
+   "format": "reel 20.0 s",
+   "category": "fitness",
+   "assets_reviewed": [
+    "MON_REEL_S1.png",
+    "MON_REEL_S2.png",
+    "MON_REEL_S3.png",
+    "MON_REEL_S4.png",
+    "MON_REEL_S5.png",
+    "AAR-W1-MON-REEL-COVER.png",
+    "AAR-W1-MON-REEL.mp4"
+   ],
+   "identity": {
+    "same_face_age_complexion": "PASS",
+    "hair_fully_down": "PASS",
+    "maroon_bindi_centred": "PASS",
+    "silver_jhumkas": "PASS* (see NOTE-1 / NOTE-2 where applicable)"
+   },
+   "modesty_pose_setting_copy": "PASS",
+   "exercise_safety": "PASS",
+   "hinglish_caption_cta_hashtags": "PASS",
+   "ai_label": {
+    "exact_string_hyphenated": "PASS",
+    "in_frame_contrast": "PASS (measured 18.73:1; 21.0:1 after 420px + JPEG q26; producer metric 5.04-5.33:1 also clears AA)",
+    "placement": "FAIL (see BLK-2)",
+    "survives_4x5_profile_grid_crop": "FAIL"
+   },
+   "audio": "FAIL - master has no audio stream (BLK-3)",
+   "account_native_upload_readiness": "BLOCKED - no authorised account connection (BLK-1); container/format otherwise compliant (moov before mdat, 9:16 H.264 MP4, 4:5 PNG, sizes within limits)",
+   "publish_decision": "HOLD - not published",
+   "measured_label_geometry": [
+    {
+     "asset": "MON_REEL_S1.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "MON_REEL_S2.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "MON_REEL_S3.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "MON_REEL_S4.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "MON_REEL_S5.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "AAR-W1-MON-REEL-COVER.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    }
+   ]
+  },
+  {
+   "post": 2,
+   "day": "Tue",
+   "title": "Realistic active-day reset",
+   "format": "carousel 4:5 x5",
+   "category": "lifestyle",
+   "assets_reviewed": [
+    "AAR-W1-TUE-CAR-S1.png",
+    "AAR-W1-TUE-CAR-S2.png",
+    "AAR-W1-TUE-CAR-S3.png",
+    "AAR-W1-TUE-CAR-S4.png",
+    "AAR-W1-TUE-CAR-S5.png"
+   ],
+   "identity": {
+    "same_face_age_complexion": "PASS",
+    "hair_fully_down": "PASS",
+    "maroon_bindi_centred": "PASS",
+    "silver_jhumkas": "PASS* (see NOTE-1 / NOTE-2 where applicable)"
+   },
+   "modesty_pose_setting_copy": "PASS",
+   "exercise_safety": "n/a (no exercise)",
+   "hinglish_caption_cta_hashtags": "PASS",
+   "ai_label": {
+    "exact_string_hyphenated": "PASS",
+    "in_frame_contrast": "PASS (measured 18.73:1; 21.0:1 after 420px + JPEG q26; producer metric 5.04-5.33:1 also clears AA)",
+    "placement": "FAIL (see BLK-2)",
+    "survives_4x5_profile_grid_crop": "FAIL"
+   },
+   "audio": "n/a (still/carousel carries no audio)",
+   "account_native_upload_readiness": "BLOCKED - no authorised account connection (BLK-1); container/format otherwise compliant (moov before mdat, 9:16 H.264 MP4, 4:5 PNG, sizes within limits)",
+   "publish_decision": "HOLD - not published",
+   "measured_label_geometry": [
+    {
+     "asset": "AAR-W1-TUE-CAR-S1.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 86,
+     "pct_in_bottom672_band": null,
+     "pct_in_grid_trim_band": null
+    },
+    {
+     "asset": "AAR-W1-TUE-CAR-S2.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 86,
+     "pct_in_bottom672_band": null,
+     "pct_in_grid_trim_band": null
+    },
+    {
+     "asset": "AAR-W1-TUE-CAR-S3.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 86,
+     "pct_in_bottom672_band": null,
+     "pct_in_grid_trim_band": null
+    },
+    {
+     "asset": "AAR-W1-TUE-CAR-S4.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 86,
+     "pct_in_bottom672_band": null,
+     "pct_in_grid_trim_band": null
+    },
+    {
+     "asset": "AAR-W1-TUE-CAR-S5.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 86,
+     "pct_in_bottom672_band": null,
+     "pct_in_grid_trim_band": null
+    }
+   ]
+  },
+  {
+   "post": 3,
+   "day": "Wed",
+   "title": "Desk-to-dinner athleisure",
+   "format": "reel 12.0 s",
+   "category": "fashion",
+   "assets_reviewed": [
+    "WED_REEL_S1.png",
+    "WED_REEL_S2.png",
+    "WED_REEL_S3.png",
+    "AAR-W1-WED-REEL-COVER.png",
+    "AAR-W1-WED-REEL.mp4"
+   ],
+   "identity": {
+    "same_face_age_complexion": "PASS",
+    "hair_fully_down": "PASS",
+    "maroon_bindi_centred": "PASS",
+    "silver_jhumkas": "PASS* (see NOTE-1 / NOTE-2 where applicable)"
+   },
+   "modesty_pose_setting_copy": "PASS",
+   "exercise_safety": "n/a (no exercise)",
+   "hinglish_caption_cta_hashtags": "PASS",
+   "ai_label": {
+    "exact_string_hyphenated": "PASS",
+    "in_frame_contrast": "PASS (measured 18.73:1; 21.0:1 after 420px + JPEG q26; producer metric 5.04-5.33:1 also clears AA)",
+    "placement": "FAIL (see BLK-2)",
+    "survives_4x5_profile_grid_crop": "FAIL"
+   },
+   "audio": "FAIL - master has no audio stream (BLK-3)",
+   "account_native_upload_readiness": "BLOCKED - no authorised account connection (BLK-1); container/format otherwise compliant (moov before mdat, 9:16 H.264 MP4, 4:5 PNG, sizes within limits)",
+   "publish_decision": "HOLD - not published",
+   "measured_label_geometry": [
+    {
+     "asset": "WED_REEL_S1.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "WED_REEL_S2.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "WED_REEL_S3.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "AAR-W1-WED-REEL-COVER.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    }
+   ]
+  },
+  {
+   "post": 4,
+   "day": "Thu",
+   "title": "Beginner lower-body strength",
+   "format": "reel 16.0 s",
+   "category": "fitness",
+   "assets_reviewed": [
+    "THU_REEL_S1.png",
+    "THU_REEL_S2.png",
+    "THU_REEL_S3.png",
+    "THU_REEL_S4.png",
+    "AAR-W1-THU-REEL-COVER.png",
+    "AAR-W1-THU-REEL.mp4"
+   ],
+   "identity": {
+    "same_face_age_complexion": "PASS",
+    "hair_fully_down": "PASS",
+    "maroon_bindi_centred": "PASS",
+    "silver_jhumkas": "PASS* (see NOTE-1 / NOTE-2 where applicable)"
+   },
+   "modesty_pose_setting_copy": "PASS",
+   "exercise_safety": "PASS",
+   "hinglish_caption_cta_hashtags": "PASS",
+   "ai_label": {
+    "exact_string_hyphenated": "PASS",
+    "in_frame_contrast": "PASS (measured 18.73:1; 21.0:1 after 420px + JPEG q26; producer metric 5.04-5.33:1 also clears AA)",
+    "placement": "FAIL (see BLK-2)",
+    "survives_4x5_profile_grid_crop": "FAIL"
+   },
+   "audio": "FAIL - master has no audio stream (BLK-3)",
+   "account_native_upload_readiness": "BLOCKED - no authorised account connection (BLK-1); container/format otherwise compliant (moov before mdat, 9:16 H.264 MP4, 4:5 PNG, sizes within limits)",
+   "publish_decision": "HOLD - not published",
+   "measured_label_geometry": [
+    {
+     "asset": "THU_REEL_S1.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "THU_REEL_S2.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "THU_REEL_S3.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "THU_REEL_S4.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "AAR-W1-THU-REEL-COVER.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    }
+   ]
+  },
+  {
+   "post": 5,
+   "day": "Fri",
+   "title": "Friday self-care",
+   "format": "static 4:5",
+   "category": "lifestyle",
+   "assets_reviewed": [
+    "AAR-W1-FRI-STATIC.png"
+   ],
+   "identity": {
+    "same_face_age_complexion": "PASS",
+    "hair_fully_down": "PASS",
+    "maroon_bindi_centred": "PASS",
+    "silver_jhumkas": "PASS* (see NOTE-1 / NOTE-2 where applicable)"
+   },
+   "modesty_pose_setting_copy": "PASS",
+   "exercise_safety": "n/a (no exercise)",
+   "hinglish_caption_cta_hashtags": "PASS",
+   "ai_label": {
+    "exact_string_hyphenated": "PASS",
+    "in_frame_contrast": "PASS (measured 18.73:1; 21.0:1 after 420px + JPEG q26; producer metric 5.04-5.33:1 also clears AA)",
+    "placement": "FAIL (see BLK-2)",
+    "survives_4x5_profile_grid_crop": "n/a (native 4:5)"
+   },
+   "audio": "n/a (still/carousel carries no audio)",
+   "account_native_upload_readiness": "BLOCKED - no authorised account connection (BLK-1); container/format otherwise compliant (moov before mdat, 9:16 H.264 MP4, 4:5 PNG, sizes within limits)",
+   "publish_decision": "HOLD - not published",
+   "measured_label_geometry": [
+    {
+     "asset": "AAR-W1-FRI-STATIC.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 86,
+     "pct_in_bottom672_band": null,
+     "pct_in_grid_trim_band": null
+    }
+   ]
+  },
+  {
+   "post": 6,
+   "day": "Sat",
+   "title": "Festive kurta + sneakers",
+   "format": "reel 16.0 s",
+   "category": "fashion",
+   "assets_reviewed": [
+    "SAT_REEL_S1.png",
+    "SAT_REEL_S2.png",
+    "SAT_REEL_S3.png",
+    "SAT_REEL_S4.png",
+    "AAR-W1-SAT-REEL-COVER.png",
+    "AAR-W1-SAT-REEL.mp4"
+   ],
+   "identity": {
+    "same_face_age_complexion": "PASS",
+    "hair_fully_down": "PASS",
+    "maroon_bindi_centred": "PASS",
+    "silver_jhumkas": "PASS* (see NOTE-1 / NOTE-2 where applicable)"
+   },
+   "modesty_pose_setting_copy": "PASS",
+   "exercise_safety": "n/a (no exercise)",
+   "hinglish_caption_cta_hashtags": "PASS",
+   "ai_label": {
+    "exact_string_hyphenated": "PASS",
+    "in_frame_contrast": "PASS (measured 18.73:1; 21.0:1 after 420px + JPEG q26; producer metric 5.04-5.33:1 also clears AA)",
+    "placement": "FAIL (see BLK-2)",
+    "survives_4x5_profile_grid_crop": "FAIL"
+   },
+   "audio": "FAIL - master has no audio stream (BLK-3)",
+   "account_native_upload_readiness": "BLOCKED - no authorised account connection (BLK-1); container/format otherwise compliant (moov before mdat, 9:16 H.264 MP4, 4:5 PNG, sizes within limits)",
+   "publish_decision": "HOLD - not published",
+   "measured_label_geometry": [
+    {
+     "asset": "SAT_REEL_S1.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "SAT_REEL_S2.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "SAT_REEL_S3.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "SAT_REEL_S4.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "AAR-W1-SAT-REEL-COVER.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    }
+   ]
+  },
+  {
+   "post": 7,
+   "day": "Sun",
+   "title": "Desk-stiffness stretch",
+   "format": "reel 16.0 s",
+   "category": "fitness",
+   "assets_reviewed": [
+    "SUN_REEL_S1.png",
+    "SUN_REEL_S2.png",
+    "SUN_REEL_S3.png",
+    "SUN_REEL_S4.png",
+    "AAR-W1-SUN-REEL-COVER.png",
+    "AAR-W1-SUN-REEL.mp4"
+   ],
+   "identity": {
+    "same_face_age_complexion": "PASS",
+    "hair_fully_down": "PASS",
+    "maroon_bindi_centred": "PASS",
+    "silver_jhumkas": "PASS* (see NOTE-1 / NOTE-2 where applicable)"
+   },
+   "modesty_pose_setting_copy": "PASS",
+   "exercise_safety": "PASS",
+   "hinglish_caption_cta_hashtags": "PASS (see MED-1 on Sun on-screen numbering)",
+   "ai_label": {
+    "exact_string_hyphenated": "PASS",
+    "in_frame_contrast": "PASS (measured 18.73:1; 21.0:1 after 420px + JPEG q26; producer metric 5.04-5.33:1 also clears AA)",
+    "placement": "FAIL (see BLK-2)",
+    "survives_4x5_profile_grid_crop": "FAIL"
+   },
+   "audio": "FAIL - master has no audio stream (BLK-3)",
+   "account_native_upload_readiness": "BLOCKED - no authorised account connection (BLK-1); container/format otherwise compliant (moov before mdat, 9:16 H.264 MP4, 4:5 PNG, sizes within limits)",
+   "publish_decision": "HOLD - not published",
+   "measured_label_geometry": [
+    {
+     "asset": "SUN_REEL_S1.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "SUN_REEL_S2.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "SUN_REEL_S3.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "SUN_REEL_S4.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    },
+    {
+     "asset": "AAR-W1-SUN-REEL-COVER.png",
+     "contrast": 18.73,
+     "bottom_gap_px": 110,
+     "pct_in_bottom672_band": 100.0,
+     "pct_in_grid_trim_band": 100.0
+    }
+   ]
+  }
+ ],
+ "blocking_findings": [
+  {
+   "id": "BLK-1",
+   "severity": "blocker",
+   "area": "publishing path",
+   "detail": "No Instagram/Meta/social connection among the 7 company tool connections and no such app in the 46-app gallery; the live Zapier connection has 17 MCP tools but no Instagram account authenticated. No publishing authority granted for @aarohi.kapoor.diaries.",
+   "raised_as": "AAR-10 (7cba61e5-71d5-4b06-80bb-c6939f1f206c)"
+  },
+  {
+   "id": "BLK-2",
+   "severity": "blocker",
+   "area": "persona bible section 4 disclosure placement",
+   "detail": "Badge at x=733,y=1753,291x57 is 100% inside Instagram's reserved bottom 672 px caption/audio band on all 25 9:16 assets and 100% inside the band deleted by the 4:5 profile-grid crop (trims y>=1635); right edge x=1024 overlaps the reserved action rail (x>=853 below y=1150).",
+   "recommended_fix": "x=700,y=1210,291x57 - fully above y=1248 and inside x<=853; keeps the plate and type, no regeneration"
+  },
+  {
+   "id": "BLK-3",
+   "severity": "blocker",
+   "area": "reel-native upload",
+   "detail": "All five masters are video-only (h264, no audio stream). Instagram treats a silent 9:16 MP4 as a photo/clip upload, not a Reel; the specified Hinglish voiceover is absent."
+  },
+  {
+   "id": "BLK-4",
+   "severity": "blocker",
+   "area": "operational",
+   "detail": "The superseded 18:47 build is still attached to AAR-3 under the same filenames as the 19:26 deliverables (FRI static, all five TUE carousel slides, five *-REEL.png v2 masters). Picking by filename can publish the superseded asset."
+  },
+  {
+   "id": "MED-1",
+   "severity": "medium",
+   "area": "copy sequencing",
+   "detail": "Sun on-screen numbering: shot 1 caption 'Desk-stiff? 3 gentle moves.', shot 2 '1. 5 slow shoulder rolls', shot 3 '3. Easy chest opener' - step 2 is skipped although the side-bend shown is that step."
+  },
+  {
+   "id": "MED-2",
+   "severity": "medium",
+   "area": "cover crop",
+   "detail": "MON and SUN cover headlines extend past y=1635 (glyph pixels reach 1919/1910) and are partly deleted by the 4:5 grid crop."
+  },
+  {
+   "id": "NOTE-1",
+   "severity": "note",
+   "area": "identify markers",
+   "detail": "Five frames show only one earring (strong three-quarter/profile turns): MON_REEL_S3, WED_REEL_S1, SAT_REEL_S1, SAT_REEL_S3, SAT_REEL_S4. Bible section 1 permits natural occlusion by hair or angle; recorded as a pass with caveat."
+  },
+  {
+   "id": "NOTE-2",
+   "severity": "note",
+   "area": "identify markers",
+   "detail": "Earrings read as a dangling silver dangle/hook at native resolution; the bell-shaped jhumka silhouette is only clearly legible at smaller render sizes. Silver dangle earring satisfies the marker lock; an art-direction call for the Creative Director if the jhumka silhouette must be unmistakable at thumbnail size."
+  }
+ ],
+ "evidence": {
+  "independent_qa.json": {
+   "stills_measured": 31,
+   "reels_decoded": 5,
+   "note": "disclosure re-measured off delivered pixels including frames decoded back out of the encoded MP4s"
+  },
+  "badge_uizone.json": {
+   "assets": 33
+  },
+  "label_survival.json": {
+   "covers": 5,
+   "stills": 28
+  }
+ }
+}

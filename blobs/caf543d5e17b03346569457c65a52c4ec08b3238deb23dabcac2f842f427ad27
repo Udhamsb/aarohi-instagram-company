@@ -1,0 +1,86 @@
+# AAR-14 — Clean-image generation & QC standard (applied + verified)
+
+**Issue:** AAR-14 · **Producer:** AI Visual Producer · **Date:** 2026-09-22
+**Baseline:** [AAR-12](/AAR/issues/AAR-12#document-visual-copy-template) (clean-image + caption-first standard), AAR-3 identity-lock practice.
+**Evidence bundle:** this manifest + 2 generated assets (clean no-text; approved-text pair).
+
+## 1. Selected model & resolution (documented per handoff — standing default)
+
+| Model | Verdict | Native out | Latency | Cost/image |
+|---|---|---|---|---|
+| `google/gemini-3-pro-image` | **SELECTED — default** | 928×1152 (4:5) | ~23–44 s | ~$0.14 |
+| `google/gemini-3.1-flash-image` | budget alternative (passed same QC) | 928×1152 (4:5) | ~12 s | ~$0.07 |
+| `openai/gpt-5.4-image-2` | rejected: square-only, ~148 s, needs crop | 1024×1024 | ~148 s | ~$0.23 |
+
+Provider: OpenRouter (approved profile credential; key never exposed or copied —
+sourced from profile env at call time only). Key validated via `GET /api/v1/key`
+before batch generation. Re-verify the model leaderboard before each batch:
+`GET /api/v1/models`, filter `architecture.output_modalities ∋ image`.
+
+Default handoff resolution: generator-native 928×1152 (4:5); upsample/crop to
+1080×1350 in deterministic post only when a format requires it. 9:16 reels are
+composed from generated 4:5 frames in post (established AAR-3 pipeline).
+
+## 2. Operational checklist (applied to every new visual asset)
+
+1. **Prompt baseline (AAR-12):** scene described concretely; identity-conditioned
+   on an approved anchor crop (face + hair, above shoulders — no garment
+   inheritance) whenever the Aarohi persona appears. Identity lock + marker lock
+   (bindi, open hair) verbatim from Persona Bible §1.
+2. **Negative constraints — mandatory block, verbatim in every prompt:**
+   "Strictly exclude: any text, letters, numbers, words, captions, subtitles,
+   signage, labels, typography of any kind; logos, brand marks, watermarks,
+   stamps; user-interface elements, app frames, phone screen UI, fake quotes or
+   speech bubbles; irrelevant decorative elements (random patterns, clutter,
+   glitch artifacts). The image contains zero written characters."
+   Plus surface exclusions when the scene implies boards/screens (cafés, desks,
+   shops): "no chalkboards, menu boards, posters, signs, labelled products."
+3. **Default deliverable: clean, text-free image.** No embedded copy — story,
+   CTA, disclosure and hashtags live in the caption / native reel text layer
+   (AAR-12 close-out; supersedes burned-in badge convention for new assets).
+4. **Approved-text exception:** only with explicit approval. Deliver BOTH the
+   approved-text asset AND a clean no-text variant of the same scene. Prompt
+   pins the exact string ("spell it exactly, letter for letter"), the style,
+   placement, and excludes every other text source.
+5. **Final QC pass before handoff (all gates):** anatomy (hands/fingers),
+   identity consistency vs anchor, lighting, skin/texture realism, artifacts,
+   scene relevance to the brief, output resolution/aspect vs format spec, and a
+   zero-text check across every region (surfaces, cup, walls, clothing).
+6. **Document per asset:** model id, output resolution, anchor crop id + SHA-256,
+   final asset SHA-256, prompt/exclusion blocks, QC verdict.
+7. **Rejection loop:** any failed gate → regenerate with the named fix, re-run
+   the FULL QC pass, log rule/finding/remedy/verdict. Never hand off a known
+   violation.
+
+## 3. Applied evidence — this issue's generated pair
+
+Scene: sunlit café window bench, chai, sage-green sweater (4:5 lifestyle post).
+Anchor: `anchor_front_v2.png`, tight front-panel crop of character sheet v2.1,
+SHA-256 `509936004fcf9c59dfe4f9da02a5718240508126daf4fd5a3b7b75e85e422441`.
+
+| Asset | File | SHA-256 (head) | Dims | QC verdict |
+|---|---|---|---|---|
+| Clean no-text (default) | `AAR14_STANDARD_CLEAN.png` | `fbf9e0715c3a8c78…` | 928×1152 | PASS all gates |
+| Approved-text variant | `AAR14_STANDARD_TEXT.png` | `e2050277b42caf36…` | 928×1152 | PASS all gates |
+
+Approved string rendered exactly: `Slow mornings, strong starts.` — no other
+text present in either image.
+
+**Rejection loop actually exercised (proof the QC gate works):**
+- Pass 1 (both variants): QC found a background chalkboard menu with illegible
+  scribbles — violation of the no-signage rule, despite the generic exclusion
+  block. **Rejected.**
+- Remedy: explicit background-surface exclusions added (no chalkboards/menu
+  boards/posters/signs; every background surface plain).
+- Pass 2 (both variants): full QC re-run — zero text anywhere, anatomy correct
+  (hands on cup), identity consistent (bindi, long open dark hair), natural
+  skin texture under warm window light, no artifacts, 928×1152 as specified.
+  **PASS — delivered.**
+
+## 4. Cost & key hygiene
+
+- Key validated via `GET /api/v1/key` pre-batch; sourced only from the profile
+  `.env` at call time; never printed, logged, or copied into any file, prompt,
+  or comment.
+- This run's generation spend: ~$1.05 total (3-model probe + 4 evidence
+  generations + 1 rejection regeneration cycle).

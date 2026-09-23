@@ -1,0 +1,766 @@
+{
+ "stills": [
+  {
+   "contrast_ratio": 5.33,
+   "plate_mean_lum": 37.5,
+   "glyph_pixel_fraction": 0.14,
+   "inside_canvas": true,
+   "lower_right": true,
+   "right_margin_px": 56,
+   "bottom_margin_px": 86,
+   "bbox": [
+    762,
+    1211,
+    262,
+    53
+   ],
+   "id": "AAR-W1-TUE-CAR-S1",
+   "role": "carousel_slide",
+   "dims": [
+    1080,
+    1350
+   ],
+   "phone": {
+    "contrast_ratio": 6.52,
+    "plate_mean_lum": 28.3,
+    "glyph_pixel_fraction": 0.091,
+    "inside_canvas": true,
+    "lower_right": true,
+    "right_margin_px": 28,
+    "bottom_margin_px": 43,
+    "bbox": [
+     381,
+     606,
+     131,
+     26
+    ],
+    "preview_px": "540x675",
+    "label_px": "131x26"
+   },
+   "pass": true
+  },
+  {
+   "contrast_ratio": 5.33,
+   "plate_mean_lum": 37.5,
+   "glyph_pixel_fraction": 0.14,
+   "inside_canvas": true,
+   "lower_right": true,
+   "right_margin_px": 56,
+   "bottom_margin_px": 86,
+   "bbox": [
+    762,
+    1211,
+    262,
+    53
+   ],
+   "id": "AAR-W1-TUE-CAR-S2",
+   "role": "carousel_slide",
+   "dims": [
+    1080,
+    1350
+   ],
+   "phone": {
+    "contrast_ratio": 7.41,
+    "plate_mean_lum": 23.4,
+    "glyph_pixel_fraction": 0.091,
+    "inside_canvas": true,
+    "lower_right": true,
+    "right_margin_px": 28,
+    "bottom_margin_px": 43,
+    "bbox": [
+     381,
+     606,
+     131,
+     26
+    ],
+    "preview_px": "540x675",
+    "label_px": "131x26"
+   },
+   "pass": true
+  },
+  {
+   "contrast_ratio": 5.33,
+   "plate_mean_lum": 37.5,
+   "glyph_pixel_fraction": 0.14,
+   "inside_canvas": true,
+   "lower_right": true,
+   "right_margin_px": 56,
+   "bottom_margin_px": 86,
+   "bbox": [
+    762,
+    1211,
+    262,
+    53
+   ],
+   "id": "AAR-W1-TUE-CAR-S3",
+   "role": "carousel_slide",
+   "dims": [
+    1080,
+    1350
+   ],
+   "phone": {
+    "contrast_ratio": 6.9,
+    "plate_mean_lum": 26.0,
+    "glyph_pixel_fraction": 0.091,
+    "inside_canvas": true,
+    "lower_right": true,
+    "right_margin_px": 28,
+    "bottom_margin_px": 43,
+    "bbox": [
+     381,
+     606,
+     131,
+     26
+    ],
+    "preview_px": "540x675",
+    "label_px": "131x26"
+   },
+   "pass": true
+  },
+  {
+   "contrast_ratio": 5.33,
+   "plate_mean_lum": 37.5,
+   "glyph_pixel_fraction": 0.14,
+   "inside_canvas": true,
+   "lower_right": true,
+   "right_margin_px": 56,
+   "bottom_margin_px": 86,
+   "bbox": [
+    762,
+    1211,
+    262,
+    53
+   ],
+   "id": "AAR-W1-TUE-CAR-S4",
+   "role": "carousel_slide",
+   "dims": [
+    1080,
+    1350
+   ],
+   "phone": {
+    "contrast_ratio": 6.94,
+    "plate_mean_lum": 25.8,
+    "glyph_pixel_fraction": 0.091,
+    "inside_canvas": true,
+    "lower_right": true,
+    "right_margin_px": 28,
+    "bottom_margin_px": 43,
+    "bbox": [
+     381,
+     606,
+     131,
+     26
+    ],
+    "preview_px": "540x675",
+    "label_px": "131x26"
+   },
+   "pass": true
+  },
+  {
+   "contrast_ratio": 5.33,
+   "plate_mean_lum": 37.5,
+   "glyph_pixel_fraction": 0.14,
+   "inside_canvas": true,
+   "lower_right": true,
+   "right_margin_px": 56,
+   "bottom_margin_px": 86,
+   "bbox": [
+    762,
+    1211,
+    262,
+    53
+   ],
+   "id": "AAR-W1-TUE-CAR-S5",
+   "role": "carousel_slide",
+   "dims": [
+    1080,
+    1350
+   ],
+   "phone": {
+    "contrast_ratio": 7.27,
+    "plate_mean_lum": 24.1,
+    "glyph_pixel_fraction": 0.091,
+    "inside_canvas": true,
+    "lower_right": true,
+    "right_margin_px": 28,
+    "bottom_margin_px": 43,
+    "bbox": [
+     381,
+     606,
+     131,
+     26
+    ],
+    "preview_px": "540x675",
+    "label_px": "131x26"
+   },
+   "pass": true
+  },
+  {
+   "contrast_ratio": 5.33,
+   "plate_mean_lum": 37.5,
+   "glyph_pixel_fraction": 0.14,
+   "inside_canvas": true,
+   "lower_right": true,
+   "right_margin_px": 56,
+   "bottom_margin_px": 86,
+   "bbox": [
+    762,
+    1211,
+    262,
+    53
+   ],
+   "id": "AAR-W1-FRI-STATIC",
+   "role": "static",
+   "dims": [
+    1080,
+    1350
+   ],
+   "phone": {
+    "contrast_ratio": 7.31,
+    "plate_mean_lum": 23.9,
+    "glyph_pixel_fraction": 0.091,
+    "inside_canvas": true,
+    "lower_right": true,
+    "right_margin_px": 28,
+    "bottom_margin_px": 43,
+    "bbox": [
+     381,
+     606,
+     131,
+     26
+    ],
+    "preview_px": "540x675",
+    "label_px": "131x26"
+   },
+   "pass": true
+  }
+ ],
+ "reels": [
+  {
+   "id": "AAR-W1-MON-REEL",
+   "seconds": 20.0,
+   "sampled_frames": [
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 1.67
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 5.0
+    },
+    {
+     "contrast_ratio": 5.09,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 8.33
+    },
+    {
+     "contrast_ratio": 5.09,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 11.67
+    },
+    {
+     "contrast_ratio": 5.07,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.15,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 15.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 18.33
+    }
+   ],
+   "probe": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"codec_name\": \"h264\",\n            \"width\": 1080,\n            \"height\": 1920,\n            \"nb_frames\": \"600\"\n        }\n    ]\n}\n",
+   "pass": true
+  },
+  {
+   "id": "AAR-W1-WED-REEL",
+   "seconds": 12.0,
+   "sampled_frames": [
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 1.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 3.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 5.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 7.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 9.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 11.0
+    }
+   ],
+   "probe": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"codec_name\": \"h264\",\n            \"width\": 1080,\n            \"height\": 1920,\n            \"nb_frames\": \"360\"\n        }\n    ]\n}\n",
+   "pass": true
+  },
+  {
+   "id": "AAR-W1-THU-REEL",
+   "seconds": 16.0,
+   "sampled_frames": [
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 1.33
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 4.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 6.67
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 9.33
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 12.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 14.67
+    }
+   ],
+   "probe": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"codec_name\": \"h264\",\n            \"width\": 1080,\n            \"height\": 1920,\n            \"nb_frames\": \"480\"\n        }\n    ]\n}\n",
+   "pass": true
+  },
+  {
+   "id": "AAR-W1-SAT-REEL",
+   "seconds": 16.0,
+   "sampled_frames": [
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 1.33
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 4.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 6.67
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 9.33
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 12.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 40.0,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 14.67
+    }
+   ],
+   "probe": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"codec_name\": \"h264\",\n            \"width\": 1080,\n            \"height\": 1920,\n            \"nb_frames\": \"480\"\n        }\n    ]\n}\n",
+   "pass": true
+  },
+  {
+   "id": "AAR-W1-SUN-REEL",
+   "seconds": 16.0,
+   "sampled_frames": [
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 1.33
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 4.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 6.67
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 9.33
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 12.0
+    },
+    {
+     "contrast_ratio": 5.08,
+     "plate_mean_lum": 39.9,
+     "glyph_pixel_fraction": 0.149,
+     "inside_canvas": true,
+     "lower_right": true,
+     "right_margin_px": 56,
+     "bottom_margin_px": 110,
+     "bbox": [
+      733,
+      1753,
+      291,
+      57
+     ],
+     "t": 14.67
+    }
+   ],
+   "probe": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"codec_name\": \"h264\",\n            \"width\": 1080,\n            \"height\": 1920,\n            \"nb_frames\": \"480\"\n        }\n    ]\n}\n",
+   "pass": true
+  }
+ ],
+ "summary": {
+  "stills_checked": 6,
+  "stills_pass": 6,
+  "reels_checked": 5,
+  "reels_pass": 5
+ }
+}

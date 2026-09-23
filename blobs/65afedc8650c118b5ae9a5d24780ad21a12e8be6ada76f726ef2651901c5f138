@@ -1,0 +1,56 @@
+{
+  "request": {
+    "model": "seedance-2-5",
+    "name": "Seedance 2.5",
+    "width": 720,
+    "height": 1280,
+    "frames": 120,
+    "fps": 24,
+    "videoCount": 1,
+    "time": "2026-09-22T07:42:08.059Z",
+    "tokenType": "spark",
+    "hasVideoInput": false
+  },
+  "rate": {
+    "costPerBaseHQRenderInUSD": "0.005",
+    "costPerBaseVideoRenderInUSD": "0.25",
+    "marketUSDPriceSogni": "0.000547",
+    "costPerFrameMegapixelInSpark": "1.5456829692940803",
+    "costPerFrameMegapixelInUSD": "0.007728414846470402",
+    "network": "fast",
+    "networkCostMultiplier": "1"
+  },
+  "quote": {
+    "model": {
+      "type": "video",
+      "megapixels": "0.9216",
+      "frames": 120,
+      "fps": 24,
+      "width": 720,
+      "height": 1280
+    },
+    "job": {
+      "costInSpark": "300.456",
+      "costInUSD": "1.50228",
+      "costInToken": "300.456",
+      "costInSogni": "2746.398537477148080438",
+      "costInRenderSec": "96",
+      "vendorCostUSD": 1.1556,
+      "estimatedBillableTokens": 108000,
+      "unitPricePerThousandTokensUSD": 0.0107,
+      "pricingModelId": "seedance-2-5",
+      "pricingResolution": "720p",
+      "hasVideoInput": false,
+      "inputVideoDurationSeconds": 0,
+      "outputVideoDurationSeconds": 5
+    },
+    "project": {
+      "costInSpark": "300.456",
+      "costInUSD": "1.50228",
+      "costInToken": "300.456",
+      "costInSogni": "2746.398537477148080438",
+      "costInRenderSec": "96",
+      "vendorCostUSD": 1.1556
+    }
+  }
+}

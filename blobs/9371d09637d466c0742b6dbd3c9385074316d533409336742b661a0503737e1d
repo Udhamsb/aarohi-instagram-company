@@ -1,0 +1,1 @@
+{"status":"error","errorCode":123,"message":"This workflow requests vendor model(s) seedance2-5, which require credit-card-purchased Premium Spark Points or a VIP account. Top up Premium Spark or remove these models from the plan.","details":{"vendorModels":["seedance2-5"]}}

@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+"""Aarohi Week 1 — QA from delivered pixels.
+
+Verifies §4 disclosure on every delivered still AND on frames decoded back out
+of each encoded reel, then runs the §4 phone-preview legibility gate.
+"""
+import hashlib, json, os, subprocess, sys
+from PIL import Image
+
+SCRATCH = os.environ["PAPERCLIP_SCRATCH_DIR"]
+ASSETS = os.path.join(SCRATCH, "assets")
+REELS = os.path.join(SCRATCH, "reels")
+QA = os.path.join(SCRATCH, "qa")
+os.makedirs(QA, exist_ok=True)
+LABEL = "AI-generated"
+
+
+def _lum(px):
+    def c(v):
+        v = v / 255.0
+        return v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4
+    return 0.2126 * c(px[0]) + 0.7152 * c(px[1]) + 0.0722 * c(px[2])
+
+
+def contrast(a, b):
+    hi, lo = max(a, b), min(a, b)
+    return (hi + 0.05) / (lo + 0.05)
+
+
+def measure_badge(im, bbox):
+    px = im.load()
+    x0, y0, bw, bh = bbox
+    pts = [px[x, y] for y in range(int(y0), int(y0 + bh), 3) for x in range(int(x0), int(x0 + bw), 3)]
+    plate = sum(_lum(p) for p in pts) / len(pts)
+    thr = max(plate + 0.25, 0.5)
+    bright = sum(1 for p in pts if _lum(p) > thr)
+    W, H = im.size
+    return {"contrast_ratio": round(contrast(_lum((255, 255, 255)), plate), 2),
+            "plate_mean_lum": round(plate * 255, 1),
+            "glyph_pixel_fraction": round(bright / len(pts), 3),
+            "inside_canvas": x0 >= 0 and y0 >= 0 and x0 + bw <= W and y0 + bh <= H,
+            "lower_right": (x0 + bw / 2) > W * 0.5 and (y0 + bh / 2) > H * 0.5,
+            "right_margin_px": round(W - (x0 + bw)), "bottom_margin_px": round(H - (y0 + bh)),
+            "bbox": [round(v) for v in bbox]}
+
+
+def phone_gate(fp, bbox, q=26):
+    im = Image.open(fp).convert("RGB")
+    W, H = im.size
+    pw = 405 if (W, H) == (1080, 1920) else 540
+    ph = int(round(pw * H / W))
+    small = im.resize((pw, ph), Image.LANCZOS)
+    tmp = os.path.join(QA, os.path.basename(fp) + ".q26.jpg")
+    small.save(tmp, "JPEG", quality=q)
+    deg = Image.open(tmp).convert("RGB")
+    sx, sy = pw / W, ph / H
+    bb = [bbox[0] * sx, bbox[1] * sy, bbox[2] * sx, bbox[3] * sy]
+    m = measure_badge(deg, bb)
+    m["preview_px"] = "%dx%d" % (pw, ph)
+    m["label_px"] = "%dx%d" % (round(bb[2]), round(bb[3]))
+    return m
+
+
+def reel_frames(mp4, n=4):
+    """Decode n evenly spaced frames straight out of the encoded reel."""
+    import tempfile
+    out = []
+    dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                                "-of", "csv=p=0", mp4], capture_output=True, text=True).stdout.strip())
+    for i in range(n):
+        t = dur * (i + 0.5) / n
+        p = os.path.join(QA, os.path.basename(mp4) + ".f%d.png" % i)
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", "%.2f" % t, "-i", mp4,
+                        "-frames:v", "1", p], check=True)
+        out.append((round(t, 2), p))
+    return dur, out
+
+
+if __name__ == "__main__":
+    manifest = json.load(open(os.path.join(SCRATCH, "manifest.json")))
+    report = {"stills": [], "reels": [], "summary": {}}
+    for m in manifest:
+        if m["role"] in ("reel_shot", "reel_cover"):
+            continue
+        if m["role"] == "reel_master":
+            dur, frames = reel_frames(m["file"], n=6)
+            # badge geometry: read the REAL composed box off the shot frames
+            shot_bboxes = {tuple(s["bbox"]) for s in manifest
+                           if s.get("role") == "reel_shot" and s.get("day") == m["day"]}
+            assert len(shot_bboxes) == 1, "shot badge geometry not uniform: %s" % shot_bboxes
+            bb = list(shot_bboxes.pop())
+            entry = {"id": m["id"], "seconds": round(dur, 2), "sampled_frames": [],
+                     "probe": subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0",
+                                              "-show_entries", "stream=width,height,codec_name,nb_frames",
+                                              "-of", "json", m["file"]], capture_output=True,
+                                             text=True).stdout}
+            for t, p in frames:
+                im = Image.open(p).convert("RGB")
+                res = measure_badge(im, bb)
+                res["t"] = t
+                entry["sampled_frames"].append(res)
+            entry["pass"] = all(f["inside_canvas"] and f["lower_right"] and f["contrast_ratio"] >= 4.5
+                                and f["glyph_pixel_fraction"] > 0.02 for f in entry["sampled_frames"])
+            report["reels"].append(entry)
+        else:
+            fp = m["file"]
+            im = Image.open(fp).convert("RGB")
+            res = measure_badge(im, m["bbox"])
+            res["id"] = m["id"]
+            res["role"] = m["role"]
+            res["dims"] = im.size
+            res["phone"] = phone_gate(fp, m["bbox"])
+            res["pass"] = (res["inside_canvas"] and res["lower_right"] and res["contrast_ratio"] >= 4.5
+                           and res["glyph_pixel_fraction"] > 0.02
+                           and res["phone"]["contrast_ratio"] >= 4.5
+                           and res["phone"]["glyph_pixel_fraction"] > 0.02)
+            report["stills"].append(res)
+    report["summary"] = {
+        "stills_checked": len(report["stills"]),
+        "stills_pass": sum(1 for s in report["stills"] if s["pass"]),
+        "reels_checked": len(report["reels"]),
+        "reels_pass": sum(1 for r in report["reels"] if r["pass"]),
+    }
+    json.dump(report, open(os.path.join(SCRATCH, "qa_report.json"), "w"), indent=1)
+    print(json.dumps(report["summary"], indent=1))
+    for s in report["stills"]:
+        print("%-26s %-15s contrast %5.2f  glyph %.3f  phone %5.2f/%.3f  %s"
+              % (s["id"], s["role"], s["contrast_ratio"], s["glyph_pixel_fraction"],
+                 s["phone"]["contrast_ratio"], s["phone"]["glyph_pixel_fraction"],
+                 "PASS" if s["pass"] else "FAIL"))
+    for r in report["reels"]:
+        worst = min(f["contrast_ratio"] for f in r["sampled_frames"])
+        print("%-26s %-15s %5.2fs  %d frames  min contrast %5.2f  %s"
+              % (r["id"], "reel_master", r["seconds"], len(r["sampled_frames"]), worst,
+                 "PASS" if r["pass"] else "FAIL"))

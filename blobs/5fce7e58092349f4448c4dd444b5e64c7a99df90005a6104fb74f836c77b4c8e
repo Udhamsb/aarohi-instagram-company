@@ -1,0 +1,104 @@
+{
+ "reels": {
+  "MON": {
+   "id": "AAR-W1-MON-REEL",
+   "file": "reels/AAR-W1-MON-REEL.mp4",
+   "bbox": [
+    700,
+    1180,
+    291,
+    57
+   ],
+   "seconds": 20.0,
+   "bytes": 7577337,
+   "sha256": "55bfba900cd9d88710c040057e337bf1175075b726ae5dafb8f6bbcbd02e7d3b",
+   "shots": [
+    "MON_REEL_S1",
+    "MON_REEL_S2",
+    "MON_REEL_S3",
+    "MON_REEL_S4",
+    "MON_REEL_S5"
+   ],
+   "audio": "hi-IN female neural TTS voiceover (package script) + in-code synthesized pluck bed, AAC 160k, 44.1 kHz stereo"
+  },
+  "WED": {
+   "id": "AAR-W1-WED-REEL",
+   "file": "reels/AAR-W1-WED-REEL.mp4",
+   "bbox": [
+    700,
+    1180,
+    291,
+    57
+   ],
+   "seconds": 12.0,
+   "bytes": 4892225,
+   "sha256": "528ab5e2bb4d869de70519ded0949d941e3d6f68e370e10897ae0e2e25f09b9b",
+   "shots": [
+    "WED_REEL_S1",
+    "WED_REEL_S2",
+    "WED_REEL_S3"
+   ],
+   "audio": "hi-IN female neural TTS voiceover (package script) + in-code synthesized pluck bed, AAC 160k, 44.1 kHz stereo"
+  },
+  "THU": {
+   "id": "AAR-W1-THU-REEL",
+   "file": "reels/AAR-W1-THU-REEL.mp4",
+   "bbox": [
+    700,
+    1180,
+    291,
+    57
+   ],
+   "seconds": 16.0,
+   "bytes": 6526782,
+   "sha256": "d6e12292e04f489b8065cd25962f56f51654ef680834504b9349b231e32ed987",
+   "shots": [
+    "THU_REEL_S1",
+    "THU_REEL_S2",
+    "THU_REEL_S3",
+    "THU_REEL_S4"
+   ],
+   "audio": "hi-IN female neural TTS voiceover (package script) + in-code synthesized pluck bed, AAC 160k, 44.1 kHz stereo"
+  },
+  "SAT": {
+   "id": "AAR-W1-SAT-REEL",
+   "file": "reels/AAR-W1-SAT-REEL.mp4",
+   "bbox": [
+    700,
+    1180,
+    291,
+    57
+   ],
+   "seconds": 16.0,
+   "bytes": 8186353,
+   "sha256": "8a27ba0ac48d29c70963191e6a668fe3f094e32b6a7e8f096780bb605b4d7821",
+   "shots": [
+    "SAT_REEL_S1",
+    "SAT_REEL_S2",
+    "SAT_REEL_S3",
+    "SAT_REEL_S4"
+   ],
+   "audio": "hi-IN female neural TTS voiceover (package script) + in-code synthesized pluck bed, AAC 160k, 44.1 kHz stereo"
+  },
+  "SUN": {
+   "id": "AAR-W1-SUN-REEL",
+   "file": "reels/AAR-W1-SUN-REEL.mp4",
+   "bbox": [
+    700,
+    1180,
+    291,
+    57
+   ],
+   "seconds": 16.0,
+   "bytes": 7030084,
+   "sha256": "e7f7f041ddb096e984468eded3b4c8054a0b824e12c124e26a8077e98c02aad1",
+   "shots": [
+    "SUN_REEL_S1",
+    "SUN_REEL_S2",
+    "SUN_REEL_S3",
+    "SUN_REEL_S4"
+   ],
+   "audio": "hi-IN female neural TTS voiceover (package script) + in-code synthesized pluck bed, AAC 160k, 44.1 kHz stereo"
+  }
+ }
+}

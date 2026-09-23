@@ -1,0 +1,112 @@
+{
+ "harness": "aar38-2-verification",
+ "issue": "AAR-38",
+ "verifying_run": "26096d1d-2536-470b-8b5b-e970df2fd997",
+ "artifact_verified": {
+  "document": "schedule-reconciliation",
+  "revision_before": 2,
+  "revision_after": 3,
+  "body_sha256_before": "f5bf35e9518f1226",
+  "attachment": "aar38_schedule_reconciliation.json",
+  "attachment_id": "e55928d4-3d1c-4f4a-9d54-89897d2cf26f",
+  "attachment_sha256": "d0d2b06673f3ebb8f6d0aa578fec5f11ded41f3cf9d8223826cbcc777c928671",
+  "attachment_byteSize": 7092,
+  "produced_by_run": "913ff37b-0815-47e2-adde-4989805f6b96"
+ },
+ "independence": {
+  "level": "same agent, second run",
+  "is_independent_qa": false,
+  "note": "A second run of the same agent, not review by another owner. Figures were re-derived from the provider's live records, and the QA harness re-executed on bytes fetched independently of the first run's copies."
+ },
+ "claims": [
+  {
+   "claim": "six old-format slots cancelled, each absent on read-back",
+   "method": "posts_get_post per id",
+   "result": "reproduced",
+   "detail": "all six return [404] Post not found (code: post_not_found)"
+  },
+  {
+   "claim": "scheduled posts on any account: 0",
+   "method": "posts-list status=scheduled",
+   "result": "reproduced"
+  },
+  {
+   "claim": "drafts: 0",
+   "method": "posts-list status=draft",
+   "result": "reproduced"
+  },
+  {
+   "claim": "no queue slots",
+   "method": "queue-list-queue-slots / queue-preview-queue",
+   "result": "reproduced",
+   "detail": "exists=false, nextSlots=[]"
+  },
+  {
+   "claim": "failed posts: 50, all on the other account, 0 on Aarohi",
+   "method": "posts-list status=failed + per-post account attribution",
+   "result": "corrected",
+   "detail": "total is 74, not 50. 74/74 attribute to neuralwire.official (6a9c587b77555aae01e14409), 0 to aarohi.kapoor.diaries. The earlier 50 was the list page limit. Conclusion unchanged."
+  },
+  {
+   "claim": "six slots were 5 video reels + 1 single static",
+   "method": "posts_get_post mediaItems[].type",
+   "result": "reproduced",
+   "detail": "AAR-W1-WED/THU/SAT/SUN/MON-REEL.mp4 (video) + AAR-W1-FRI-STATIC.png (image)"
+  },
+  {
+   "claim": "Tuesday published, native 18095719958399390, 5 image slides",
+   "method": "posts_get_post 6ab21c1013e2cd514b3d63d7",
+   "result": "reproduced"
+  },
+  {
+   "claim": "account postable",
+   "method": "accounts-get-all-accounts-health",
+   "result": "reproduced",
+   "detail": "healthy, canPost=true, tokenValid=true, needsReconnect=false"
+  },
+  {
+   "claim": "attachment 7092 B sha d0d2b066...",
+   "method": "GET /api/attachments/{id}/content + sha256",
+   "result": "reproduced",
+   "detail": "raw-byte sha256 and byteSize match the registry"
+  },
+  {
+   "claim": "calibration provenance 6/6",
+   "method": "re-download 5 Tuesday slides + Friday static from the board",
+   "result": "reproduced",
+   "detail": "all 6 match on sha256 and byteSize"
+  },
+  {
+   "claim": "blocker edge AAR-38 -> AAR-36, unblock owner board",
+   "method": "GET issue + diagnostics/blockers",
+   "result": "reproduced",
+   "detail": "blockedBy names AAR-36 (blocked); blockerAttention.state=covered"
+  },
+  {
+   "claim": "AAR-35/AAR-37 done, AAR-36 blocked, with the named documents",
+   "method": "GET issue + documents per id",
+   "result": "reproduced"
+  },
+  {
+   "claim": "QA harness measures and discriminates",
+   "method": "re-executed carousel_qa.py on independently fetched bytes and on FAIL fixtures",
+   "result": "reproduced",
+   "detail": "real 5 slides: count PASS, geometry PASS 5/5 1080x1350, provenance 5/5, 0 blocking defects, verdict INCOMPLETE (visual reads outstanding). Fixtures: 1080x1920+1440x1440 -> FAIL; 2-slide set -> FAIL; caption without disclosure -> FAIL."
+  }
+ ],
+ "not_reverified": [
+  "outfit consistency, zero text in frame, no on-image mark (visual reads; also no carousel slides exist to measure)",
+  "the withdrawn carousel_set_signals.py proxies"
+ ],
+ "wording_precision": "The six slots are hard-deleted via the provider's documented cancel path, so none appears in posts-list status=cancelled (that holds 9 unrelated older posts). 'Cancelled' means cancelled-by-deletion confirmed by 404.",
+ "account_state_after_verification": {
+  "scheduled": 0,
+  "draft": 0,
+  "cancelled": 9,
+  "failed": 74,
+  "published": 303,
+  "aarohi_scheduled": 0,
+  "aarohi_failed": 0
+ },
+ "executed_utc": "2026-09-22T14:30:00Z"
+}

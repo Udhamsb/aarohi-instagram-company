@@ -1,0 +1,423 @@
+# Aarohi Week 1 — production package v3 (real scene assets + encoded reels)
+
+**Issue:** AAR-3 · **Producer:** AI Visual Producer · **Date:** 2026-09-21
+**Status:** 7 of 7 post packages delivered with **generated scene photography** and **five real encoded reels**.
+**Supersedes:** `AAROHI_WEEK_1_PRODUCTION_PACKAGE_v2.md` (composite masters, no generator).
+
+---
+
+## 0. What changed in v3 — and the correction that matters
+
+v2 shipped "composite masters": head crops of the reference sheet plus
+typography, on the stated premise that **no image-generation provider was
+reachable from this runtime**. That premise was **wrong**, and this version
+corrects it.
+
+The runtime does have an image provider:
+
+- Hermes' `image_gen` toolset is configured for this profile with
+  `provider: openrouter`.
+- The OpenRouter credential in this profile is live and valid (verified against
+  `/api/v1/key`).
+- Image-output models are available, including identity-conditioning models
+  that accept an input image: `google/gemini-3-pro-image`,
+  `openai/gpt-5-image`, `google/gemini-3.1-flash-image`.
+
+A separate, independent capability also landed: the **Hugging Face connection
+requested in the previous run was accepted** (`connectionId
+f924cb9e-e350-4b7f-b260-463b78769cae`, intent `3722c7f8`, status `accepted`,
+`outcome: connected`). A connection search now returns it as `ready`.
+
+So the honest v2 caveat — "the per-shot b-roll for the reels still needs a
+generator" — is **resolved**. v3 contains actual generated scene frames and
+actual encoded video.
+
+### What v3 delivers
+
+| Deliverable | Count | Notes |
+|---|---|---|
+| Encoded reel masters (1080×1920, H.264, faststart) | **5** | Mon 20.0 s · Wed 12.0 s · Thu 16.0 s · Sat 16.0 s · Sun 16.0 s |
+| Reel cover stills (1080×1920) | 5 | headline + the post's first script line |
+| Reel shot frames (1080×1920, labelled) | 20 | every shot carries its own §4 badge |
+| Carousel slides (1080×1350) | 5 | Tue |
+| Static (1080×1350) | 1 | Fri |
+| **Total labelled visual assets** | **31** | 20 shot frames + 5 covers + 5 slides + 1 static |
+
+Every one of the 31 carries the exact hyphenated `AI-generated` in the
+lower-right safe area, burned in deterministically and **measured back off the
+delivered pixels** (§3).
+
+---
+
+## 1. Identity lock applied (Persona Bible §1)
+
+Generation is **image-conditioned on the approved anchor**, not text-only, so
+identity is held by the same mechanism the bible prescribes ("use one approved
+reference image/set as the face anchor for every generation").
+
+**Anchor registry** — tight head crops (face + open hair, ending above the
+shoulders) taken from the owner-supplied character sheet v2.0 on this issue
+(attachment `dfcf7706`, 1222×1287):
+
+| Anchor ID | Source panel | Use |
+|---|---|---|
+| `anchor_front.png` | Angles & Views — Front View | frontal shots |
+| `anchor_sl34.png` | Angles & Views — Slight Left 3/4 | three-quarter / side-form shots |
+| `anchor_neutral.png` | Expressions — Neutral | neutral-frontal shots |
+| `anchor_soft.png` | Expressions — Soft Smile | warm/lifestyle shots |
+| `anchor_laugh.png` | Expressions — Big Smile | festive/celebratory shots |
+
+Each generation prompt carries the identity lock, the marker lock and the
+exclusion block verbatim:
+
+- **Identity lock:** identical facial structure and proportions (oval soft face,
+  same eyes, brows, nose, lip shape, jawline, hairline), identical apparent age
+  22–26, identical wheatish North Indian complexion and natural skin texture; no
+  lookalike.
+- **Marker lock:** small centred maroon bindi, silver jhumkas both ears, long
+  dark hair **worn fully down** — never tied, braided, clipped up, bun,
+  ponytail or updo.
+- **Exclusion block:** Persona Bible §3 negative prompt, plus "no visible text,
+  words, lettering, captions, watermarks or logos anywhere in the image" — so
+  the only lettering ever present is the disclosure *I* composite, at known
+  coordinates.
+
+### Wardrobe decision re-confirmed (§7.3)
+
+The supplied sheets still contain **no approved wardrobe/modesty reference**.
+The `hair_open` panel's thin camisole strap over a bare shoulder remains
+unapproved under §2/§5 and is **not** used. Anchors stay cropped above the
+shoulders; all wardrobe in v3 is generated under an explicit opaque/relaxed
+modesty instruction rather than inherited from an unapproved garment. This does
+not close the §7.3 gap — it contains it. See §6.
+
+---
+
+## 2. Per-post creative — now with real frames
+
+All seven posts keep the v2 written creative (treatment, shot list, script /
+voiceover, caption, CTA, hashtags, prompt + exclusion blocks) **unchanged**;
+that copy is the approved source of truth and is reproduced in §4 below with
+the delivered frames attached to it.
+
+| # | Post | Day | Category | Format | Delivered |
+|---|---|---|---|---|---|
+| 1 | 10-minute morning movement | Mon | fitness | reel 20.0 s | 5 shot frames + cover + MP4 |
+| 2 | Realistic active-day reset | Tue | lifestyle | carousel 4:5 ×5 | 5 slides |
+| 3 | Desk-to-dinner athleisure | Wed | fashion | reel 12.0 s | 3 shot frames + cover + MP4 |
+| 4 | Beginner lower-body strength | Thu | fitness | reel 16.0 s | 4 shot frames + cover + MP4 |
+| 5 | Friday self-care | Fri | lifestyle | static 4:5 | 1 static |
+| 6 | Festive kurta + sneakers | Sat | fashion | reel 16.0 s | 4 shot frames + cover + MP4 |
+| 7 | Desk-stiffness stretch | Sun | fitness | reel 16.0 s | 4 shot frames + cover + MP4 |
+
+**Mix check:** fitness Mon/Thu/Sun = **3** · lifestyle Tue/Fri = **2** ·
+fashion Wed/Sat = **2**. ✔
+**Format check:** five reels + one 5-slide carousel + one static. ✔
+
+Scene content per shot follows the v2 shot lists exactly — bright home corners,
+balconies, park paths, café/bookshop exteriors and work desks. No bedroom,
+bathroom, bed, shower, changing-room or poolside setting is used anywhere.
+
+---
+
+## 3. AI-generated disclosure standard (§4) — measured on the delivered pixels
+
+**Method.** The badge is composited as a fixed layer (not requested from the
+model), then every delivered file is re-opened and the badge region re-measured.
+Reels are additionally verified by **decoding frames back out of the encoded
+MP4**, so the check is on the shippable artifact, not the pre-encode frame.
+
+| Asset class | Count | Contrast (AA needs 4.5) | Lower-right | Unclipped | Phone-preview |
+|---|---|---|---|---|---|
+| Carousel slides (Tue) | 5 | 5.33 : 1 | 5/5 | 5/5 | 6.52–7.41 : 1 PASS |
+| Static (Fri) | 1 | 5.33 : 1 | 1/1 | 1/1 | 7.31 : 1 PASS |
+| Reel masters (decoded frames) | 5 | **5.07–5.08 : 1 min** | 5/5 | 5/5 | see below |
+| Reel shot frames | 20 | 5.08 : 1 | all | all | see below |
+| Reel covers (rebuilt) | 5 | 5.04 : 1 | 5/5 | 5/5 | 5.88–6.84 : 1 PASS |
+
+- Badge geometry, reels: `x=733, y=1753, 291×57 px` → right margin **56 px**,
+  bottom margin **110 px**, clear of the reel UI zone.
+- Badge geometry, 4:5: right margin **56 px**, bottom margin **86 px**.
+- §4 phone gate run as an actual downscale + **JPEG q26 round-trip**; all 11
+  still deliverables pass with 9–15 % surviving glyph coverage.
+
+### A real defect found and fixed in this run
+
+The first reel encode applied the Ken Burns zoom to frames that **already**
+carried the burnt badge. The zoom then moved the badge and cropped it on some
+frames: measured contrast collapsed to **2.36 : 1** and it failed §4. That build
+was **not** shipped.
+
+Fix: the motion is now applied to the clean generated frame, and the copy +
+badge are overlaid as a fixed alpha layer afterwards. Re-measured from decoded
+frames: **5.07–5.08 : 1, uniform, unclipped on every frame**. The rejection and
+the fix are recorded in `qa_report.json`.
+
+> Carried risk, unchanged from v2: the **supplied anchor sheets themselves carry
+> no `AI-generated` disclosure**, which §7.1 requires. If they are ever
+> published or reposted they breach §4 today. Recommend the Creative Director
+> re-issues them with the label burned in (AAR-7).
+
+---
+
+## 4. Per-post creative (all seven)
+
+*(treatment · shot list · script · caption · CTA · hashtags — unchanged from the
+approved v2 package; delivered frames now sit behind each)*
+
+### Monday — 10-minute morning movement · REEL 20.0 s · fitness 1/3
+**Treatment.** Achievable gentle home movement ritual, bright living-room corner.
+9:16, medium/three-quarter eye-level frames; relaxed long-sleeve tee, straight-fit
+track pants, barefoot on the mat. No jump cuts that obscure form.
+
+| Time | Shot | Frame | On-screen |
+|---|---|---|---|
+| 0–4 s | Standing beside yoga mat, arms relaxed | `MON_REEL_S1` | “10 min, bas. Chalo move karein? ✨” |
+| 4–8 s | Supported bodyweight squat — **full body in frame**, knees tracking toes | `MON_REEL_S2` | “2 min: slow squats — chest up, knees toes ke saath” |
+| 8–12 s | Wall incline push-up, straight body line | `MON_REEL_S3` | “2 min: wall push-ups — easy peasy” |
+| 12–16 s | Alternating step-back march on mat, upright | `MON_REEL_S4` | “3 min: step-back march, apni pace par” |
+| 16–20 s | Calm standing reach + smile, water bottle nearby | `MON_REEL_S5` | “3 min: stretch + paani. Done!” |
+
+**Voiceover.** “Aaj motivation low hai? Koi drama nahi—10 minute ka gentle reset.
+Slow squats, wall push-ups, step-back march, phir stretch. Form pe focus, speed pe
+nahi. Ho gaya, yaar.”
+**Caption.** “Morning ka mood late aaye, body ko invitation de do. Yeh 10-minute
+gentle flow hai—apni comfort ke hisaab se pause karna bilkul valid hai. 🌤️”
+**CTA.** “Save karo for tomorrow morning, aur comment karo: movement ya chai pehle?”
+**Hashtags.** #MorningMovement #BeginnerFitness #GentleWorkout #IndianWellness #AarohiDiaries
+
+### Tuesday — realistic active-day reset · CAROUSEL 4:5 ×5 · lifestyle 1/2
+**Treatment.** Soft daylight, honest “busy but doable” rhythm. Opaque cotton kurta
+with relaxed trousers; medium/waist-up; badge on every slide.
+
+| Slide | Frame | On-image copy |
+|---|---|---|
+| 1 | Sunlit work/study desk, planner, water bottle | “A realistic active-day reset” / “Five honest steps. No perfect-routine drama.” |
+| 2 | Filling a water bottle at kitchen counter | “1. Paani first. Fancy nahi, helpful hai.” |
+| 3 | Tree-lined park path, tote bag, neutral walk | “2. 10-minute fresh-air break” |
+| 4 | Fruit and nuts into a small lunch box | “3. Snack ready = less chaos” |
+| 5 | Journaling three priorities, calm smile | “4. Bas 3 priorities. Baaki kal.” |
+
+**Caption.** “Reset ka matlab perfect routine nahi. Mere liye: paani, thodi hawa,
+ready snack, aur teen priorities. Itna bhi kaafi hai. ☁️”
+**CTA.** “Swipe, save, aur apna one non-negotiable reset comment karo.”
+**Hashtags.** #RealisticWellness #ActiveDay #RoutineReset #MindfulHabits #AarohiDiaries
+
+### Wednesday — desk-to-dinner athleisure · REEL 12.0 s · fashion 1/2
+**Treatment.** Practical styling transition, not a body reveal. Relaxed long
+cardigan over opaque crew-neck tee and straight trousers, then soft scarf and
+clean sneakers. Three medium eye-level cuts at a café/bookshop exterior;
+**no changing-room scene**.
+
+| Time | Shot | Frame | On-screen |
+|---|---|---|---|
+| 0–4 s | Seated at café work table, laptop closed | `WED_REEL_S1` | “Desk day, dinner plan? Same outfit.” |
+| 4–8 s | Adding scarf + crossbody bag; hands/face in frame | `WED_REEL_S2` | “Add: soft scarf + tiny jhumkas ✨” |
+| 8–12 s | Walking past bookshop window, clean sneakers | `WED_REEL_S3` | “Comfort bhi, cute bhi. Done.” |
+
+**Voiceover.** “Mujhe outfits chahiye jo laptop ke saath bhi chalein aur dinner ke
+liye bhi. Cardigan, scarf, clean sneakers—and bas, I'm out.”
+**Caption.** “Desk se dinner tak ka rule: comfort ko compromise mat banao. Ek soft
+layer aur clean sneakers kaafi magic kar dete hain.”
+**CTA.** “Save this formula for your next after-work plan.”
+**Hashtags.** #AthleisureStyle #DeskToDinner #ModestFashion #EverydayStyle #AarohiDiaries
+
+### Thursday — beginner lower-body strength · REEL 16.0 s · fitness 2/3
+**Treatment.** Beginner strength tutorial, bright home corner. Neutral side /
+three-quarter medium framing that clearly shows alignment. Relaxed tee, track
+pants, barefoot.
+
+| Time | Shot | Frame | On-screen |
+|---|---|---|---|
+| 0–4 s | Beside a stable chair, ready stance | `THU_REEL_S1` | “Beginner lower body: chair nearby!” |
+| 4–8 s | Sit-to-stand: feet flat, chest lifted, controlled rise | `THU_REEL_S2` | “1. Sit-to-stand ×8 — slow control” |
+| 8–12 s | Supported static lunge, short range, upright torso | `THU_REEL_S3` | “2. Supported reverse lunge ×6/side” |
+| 12–16 s | Rest, water, gentle smile | `THU_REEL_S4` | “Sharp pain? Stop. Comfort first.” |
+
+**Voiceover.** “Lower-body day, beginner edition. Chair ko support bana lo.
+Sit-to-stand, supported reverse lunges, calf raises. Control rakho—aur pain sharp
+lage toh stop.”
+**Caption.** “Strength ka start simple ho sakta hai. Support lena cheating nahi,
+smart training hai. Pehle movement comfortable banao, phir reps badhao.”
+**CTA.** “Save for your next lower-body day; form ke liye slow jao.”
+**Hashtags.** #BeginnerStrength #LowerBodyWorkout #SafeFitness #HomeWorkoutIndia #AarohiDiaries
+
+### Friday — Friday self-care · STATIC 4:5 · lifestyle 2/2
+**Treatment.** One 4:5 editorial still: opaque cotton kurta with a cardigan at a
+sunlit window, chai beside a journal and marigolds. Eye-level medium frame,
+calm—not aspirationally glossy.
+**On-image headline.** “Friday self-care = chai + 10 quiet minutes”
+**Frame.** `AAR-W1-FRI-STATIC`
+**Caption.** “Aaj ka grand plan: phone side pe, chai garam, aur ten quiet minutes.
+Small pause, big relief. ☕”
+**CTA.** “Apne Friday reset ko save karo aur kisi chai-loving dost ko bhejo.”
+**Hashtags.** #FridaySelfCare #ChaiTime #SlowLivingIndia #MindfulMoments #AarohiDiaries
+
+### Saturday — festive kurta + sneakers · REEL 16.0 s · fashion 2/2
+**Treatment.** Cheerful, practical festive styling reel: soft-tone straight-cut
+opaque kurta, opaque trousers, secure drape, clean sneakers. Home hallway and
+market lane; walking, checking the outfit and lacing sneakers only.
+**No dancing / body display.**
+
+| Time | Shot | Frame | On-screen |
+|---|---|---|---|
+| 0–4 s | Final outfit check in a home hallway, laughing | `SAT_REEL_S1` | “Festive plans, walking bhi hai?” |
+| 4–8 s | Walking through a bright market lane | `SAT_REEL_S2` | “Kurta + comfy sneakers = my answer” |
+| 8–12 s | Lacing clean white sneakers on a low step | `SAT_REEL_S3` | “Ready for mithai, photos, errands…” |
+| 12–16 s | Full-figure walk toward camera, street | `SAT_REEL_S4` | “…aur zero shoe regret. ✨” |
+
+**Voiceover.** “Festive outfit ka mera favourite hack? Kurta, secure drape, aur
+sneakers. Thoda colour, full comfort, aur har plan ke liye ready.”
+**Caption.** “Festive dressing mein comfort ka seat reserved hai. Kurta aur
+sneakers—because celebrations mein chalna bhi hota hai, yaar.”
+**CTA.** “Save for your next festive plan; team sneakers ho ya juttis?”
+**Hashtags.** #FestiveStyle #KurtaStyle #SneakerStyle #ModestIndianFashion #AarohiDiaries
+
+### Sunday — desk-stiffness stretch · REEL 16.0 s · fitness 3/3
+**Treatment.** Desk-break reel, bright study space. Medium eye-level, relaxed
+long-sleeve top and straight trousers; all moves gentle and controlled, with a
+clear stop cue.
+
+| Time | Shot | Frame | On-screen |
+|---|---|---|---|
+| 0–4 s | At desk, gentle neck side-stretch | `SUN_REEL_S1` | “Desk-stiff? 3 gentle moves.” |
+| 4–8 s | Seated chair side-bend, upright torso | `SUN_REEL_S2` | “1. 5 slow shoulder rolls” |
+| 8–12 s | Standing chest opener, loose top, no deep arch | `SUN_REEL_S3` | “3. Easy chest opener” |
+| 12–16 s | Neutral close, shoulder rolls, calm smile | `SUN_REEL_S4` | “No force. If it hurts, stop.” |
+
+**Voiceover.** “Laptop ke baad shoulders thode protest kar rahe hain? Five slow
+rolls, gentle upper-back turns, easy chest opener. Pull ya pain ho, toh
+stop—slow is the vibe.”
+**Caption.** “Desk stiffness ko punish nahi, patiently move karo. Yeh tiny break
+meeting ke beech bhi ho sakta hai. Apni range mein raho.”
+**CTA.** “Save this for your next screen-break reminder.”
+**Hashtags.** #DeskStretch #MobilityBreak #GentleMovement #WorkFromHomeWellness #AarohiDiaries
+
+---
+
+## 5. Global generation blocks (as executed)
+
+**Positive base — appended to every shot prompt.**
+> A realistic editorial diary photograph of the same fictional North Indian
+> woman, age 22–26, wheatish skin with natural texture, long open dark hair worn
+> fully down, a small centred maroon bindi, and silver jhumkas. Warm daylight,
+> modest opaque everyday [wardrobe], [activity] in [non-intimate setting],
+> neutral eye-level medium framing, natural posture, realistic skin texture,
+> respectful lifestyle editorial.
+
+**Exclusion block — appended to every shot prompt (Persona Bible §3, unmodified).**
+> Do not change her face, apparent age, complexion, hairline, or facial
+> proportions. No tied hair, braid, ponytail, bun, clip-up, or updo. No missing
+> maroon bindi or silver jhumkas. No glamorised or sexualised styling; no sheer,
+> tight, low-cut, strapless, wet, lingerie-like, or bodycon clothing. No seductive
+> pose/expression, reclining, bedroom/bathroom/bed setting, body-focused crop,
+> low-angle chest/hip emphasis, or suggestive copy.
+
+**Anchor binding.** Each shot's registered anchor crop (plus its SHA-256) is
+supplied as the identity reference on the generation call, so continuity is
+provable rather than asserted. The exact per-frame digests are in the QA
+evidence bundle.
+
+**Model + method.** `google/gemini-3-pro-image` (image-input, image-output) via
+OpenRouter, one call per shot, anchor supplied inline. The disclosure string and
+on-image copy are **not** requested from the model; they are composited as a
+fixed layer so §4 is deterministic.
+
+---
+
+## 6. QA records (Persona Bible criteria cited per asset)
+
+Disposition vocabulary: **PASS** (verified) · **REJECTED** (found, not shipped) ·
+**BLOCKED** (cannot be satisfied with the supplied reference pack).
+
+| Post | §1 identity | §1 hair open | §1 bindi/jhumkas | §2 wardrobe/pose/setting | §4 label | §5 form/safety |
+|---|---|---|---|---|---|---|
+| Mon (5 shots) | PASS | PASS | PASS | PASS | PASS | PASS |
+| Tue (5 slides) | PASS | PASS | PASS | PASS | PASS 5/5 | N/A (no exercise) |
+| Wed (3 shots) | PASS | PASS | PASS | PASS | PASS | N/A (fashion) |
+| Thu (4 shots) | PASS | PASS | PASS | PASS | PASS | PASS |
+| Fri (1 static) | PASS | PASS | PASS | PASS | PASS | N/A |
+| Sat (4 shots) | PASS | PASS | PASS | PASS | PASS | N/A (fashion) |
+| Sun (4 shots) | PASS | PASS | PASS | PASS | PASS | PASS |
+
+### Two rejections executed under §5 (found by QA, regenerated, re-verified)
+
+1. **`MON-S2` — §5 form failure, REJECTED.** The first squat frame cropped below
+   the thigh, so **knee tracking was not assessable** — and §5 requires feet and
+   knees visible enough to assess alignment. Regenerated as a wide full-body
+   frame with hips, knees and both feet inside the frame. Re-verified: feet
+   hip-width and flat, knees tracking in line with the toes, chest lifted,
+   neutral spine, controlled beginner depth. **PASS.**
+2. **`SUN-S3` — §2 modesty failure, REJECTED.** The first chest-opener frame wore
+   a fitted top that outlined the bust — body-emphasising treatment, which §2
+   forbids. Regenerated in a loose, un-fitted opaque tunic that hangs in a
+   straight silhouette; stretch kept gentle with no forced arch. **PASS.**
+
+A third rejection was against my own encode, not a generated frame: the
+**reel-zoom badge crop** described in §3 (contrast 2.36 : 1). Rebuilt and
+re-measured to 5.07–5.08 : 1. **PASS.**
+
+A fourth was found on the v1 reel **covers**: the headline block sat high enough
+to land over her face on several frames, partly obscuring the subject and
+working against the §1 identity-continuity read. The headline and script line
+were restacked into the lower safe zone, leaving the face completely clear. The
+superseded covers were **deleted from the issue** and replaced, so no defective
+cover remains alongside the fix. Re-measured: badge 5.04 : 1, phone gate
+5.88–6.84 : 1. **PASS.**
+
+### §5 form gate detail (fitness posts only)
+
+- **Mon:** knees track over toes, chest lifted, spine neutral, wall push-up keeps
+  a straight head-to-heel line, march stays upright, pace reads beginner. PASS.
+- **Thu:** chair is stable, sit-to-stand lifts chest with weight through
+  mid-foot, lunge front knee stacks over the ankle with a short safe range,
+  torso upright, no pain-normalising frame. PASS.
+- **Sun:** neck stretch stays in a gentle range with no hyperextension, side-bend
+  keeps an upright torso, chest opener has no forced arch, explicit stop cue
+  present. PASS.
+
+### §2 modesty detail
+
+No sheer, tight, low-cut, strapless, wet, lingerie-like or bodycon styling in any
+of the 31 frames; chest, midriff, hips and upper thighs covered throughout. No
+reclining or arched-back pose, no sultry gaze or lip-bite, no body-focused crop,
+no low-angle chest/hip emphasis. Settings are public or domestic and
+non-intimate (living room, kitchen counter, study desk, park path, market lane,
+café/bookshop exterior, home hallway). No bedroom, bathroom, bed, shower,
+changing-room or poolside setting anywhere.
+
+---
+
+## 7. Open blockers, owners and next actions
+
+1. **Wardrobe/modesty reference (§7.3) missing.** Owner: **Creative Director**
+   (AAR-7, in progress). Action: publish an approved everyday-silhouette
+   reference carrying the `AI-generated` label. v3 contains the gap by generating
+   wardrobe under explicit modesty instruction, but a locked reference is still
+   the correct fix so §7.3 is satisfied rather than worked around.
+2. **Anchor sheets lack the §7.1 disclosure.** Owner: **Creative Director**
+   (AAR-7). Action: re-issue both sheets with `AI-generated` burned in, or
+   confirm they are internal-only and never published.
+3. **Image-generation provider — RESOLVED.** The OpenRouter image provider is
+   live from this runtime, and the Hugging Face connection was accepted and now
+   searches as `ready`. AAR-8's "connect an image-generation provider" ask is
+   satisfied for this package; the remaining decision on AAR-8 is whether the
+   board wants any *additional* provider.
+4. **Copywriter preflight — CLOSED.** AAR-9 signed off the §2 modesty and §6
+   caption/sequence lanes for all seven posts. Not self-certified.
+
+---
+
+## 8. Evidence files
+
+| File | Contents |
+|---|---|
+| `AAROHI_WEEK_1_QA_EVIDENCE_v3.md` | per-asset machine QA from delivered pixels, incl. decoded reel frames |
+| `qa_report.json` | raw measured QA: contrast, placement, glyph coverage, phone-preview |
+| `manifest.json` | asset registry: IDs, roles, specs, dimensions, badge bbox |
+| `anchor_registry.json` | approved anchor crop registry with SHA-256 per panel |
+| `reel_registry.json` | reel masters: duration, bytes, SHA-256, badge geometry, shot list |
+| `render_frames.py` | the actual generation pipeline (prompts + anchor binding) |
+| `compose_assets.py` / `build_reels.py` | compositing + encode pipeline |
+| `qa_assets.py` | the QA harness that produced the measurements |
+| 31 × labelled visual assets + 5 × `.mp4` | delivered to this issue |

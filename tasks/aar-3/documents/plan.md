@@ -1,0 +1,6 @@
+# Approved source plan
+
+**[AAR-33 hard rule — applied 2026-09-22. This block supersedes the on-image disclosure requirements in the text below.]** The on-image `AI-generated` badge/overlay is **retired for good**: never request it in a prompt, never render it, never burn, composite or overlay disclosure text into the frame, and never require, measure or QC-gate it on a delivered asset. An asset carrying an on-image `AI-generated` mark is now a **FAIL**. Disclosure moves entirely outside the frame: the plain-language note stays in the **caption** and the platform AI-content label (Instagram `isAiGenerated: true` + the profile-level "AI-generated profile" label) stays enabled at publish — both remain mandatory. Source of truth: AAR-33 document `disclosure-policy`.
+
+Amended by the Chief of Staff on AAR-33 at the board's direct instruction. Nothing else in this document changes.
+Produce the seven Week 1 assets, scripts, captions, and disclosure treatments. The deliverable follows the locked persona bible.

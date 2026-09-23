@@ -1,0 +1,79 @@
+{
+ "issue": "AAR-5",
+ "title": "Aarohi Week 1 insights — pass 2 delta (monitor checkpoint)",
+ "run_id": "0162075c-f923-43ee-aafd-a50b556091c5",
+ "produced_at_utc": "2026-09-22T07:05Z",
+ "verdict": "STILL PARTIAL — nothing material changed since pass 1; one durable-progress defect fixed",
+ "pass_1_read_at_utc": "2026-09-22T06:24:15Z",
+ "pass_2_read_at_utc": "2026-09-22T07:01:56.908Z (feed lastSync)",
+ "metrics_changed_since_pass_1": [],
+ "metrics_changed_count": 0,
+ "unchanged_facts": {
+  "week1_posts_live": 1,
+  "week1_posts_scheduled": 6,
+  "week1_post_metric_rows": 0,
+  "saves_on_every_post": 0,
+  "shares_on_every_post": 0,
+  "completion_rate_on_every_post": 0,
+  "followers": 22,
+  "follower_series_unchanged": true,
+  "account_total_comments": 2,
+  "audience_comments": 1,
+  "account_health": "healthy",
+  "analytics_access": "canFetchAnalytics true"
+ },
+ "live_week1_post_evidence": {
+  "zernio_post_id": "6ab21c1013e2cd514b3d63d7",
+  "platform_post_id": "18095719958399390",
+  "published_at_utc": "2026-09-22T06:11:25Z",
+  "age_at_pass_2_minutes": 50,
+  "in_analytics_feed": false,
+  "timeline_by_zernio_id": "one 2026-09-22 row, all counters 0",
+  "timeline_by_external_id": "not found (6ab21f0f784f8eebd68a33eb)",
+  "timeline_by_platform_id": "not found",
+  "in_comments_inbox": false
+ },
+ "monitor_defect_found_and_fixed": {
+  "what_happened": "The monitor set in pass 1 (nextCheckAt 2026-09-29T15:00Z) was consumed at 2026-09-22T06:59:46Z, 29 minutes later, and the issue was re-woken with reason issue_monitor_due.",
+  "cause_evidence": {
+   "activity_action": "issue.monitor_triggered",
+   "actorType": "user",
+   "actorId": "WQDCSqxCyGwdDVj9d5IDBZRvJFm99UYI (board owner)",
+   "source": "manual",
+   "nextCheckAt_at_trigger": "2026-09-29T15:00:00.000Z",
+   "attemptCount": 1
+  },
+  "conclusion": "The schedule did NOT misfire. A human ran 'check now' on the issue monitor. The harmful side effect is that a manual check CONSUMES the pending schedule: after it, monitorNextCheckAt and executionPolicy are both null, so the future re-wake is silently gone.",
+  "impact_if_unnoticed": "The 2026-09-29 full-report wake would never have fired and the task would have sat in_progress forever.",
+  "fix_applied": "Monitor re-armed in this run with an explicit nextCheckAt.",
+  "lesson": "After any monitor wake, read back monitorNextCheckAt and re-arm if it is null. Never assume a monitor survives its own trigger."
+ },
+ "new_creative_standards_adopted_since_pass_1": {
+  "issues": [
+   "AAR-12 (done 06:46Z)",
+   "AAR-13 (done 06:52Z)",
+   "AAR-15 (done 06:53Z)",
+   "AAR-14 (done 06:57Z)"
+  ],
+  "adopted_standard": [
+   "Images are text-free by default; AI-style headings, fake quotes, labels, watermarks, captions, CTAs and hashtags baked into the visual are rejected.",
+   "Full story moves to the caption: hook, context, value/feeling, one CTA, disclosure, 3-6 specific hashtags.",
+   "Caption wording must be traceable to what is actually in the visual."
+  ],
+  "implication_for_week_2_series": "Both recommended series must be specified in caption-first terms. Any on-image CTA or save-nudge is now non-compliant, so the save-oriented carousel series must carry its save ask in the caption only.",
+  "implication_for_week_1_data": "Week 1 assets were published 06:11Z, before these standards (AAR-12 landed 06:46Z), and carry a baked-in AI-generated disclosure badge per the AAR-4 record. Do not treat Week 1 visuals as exemplars of the new standard."
+ },
+ "revalidation_plan": {
+  "checkpoint_1": "2026-09-23T07:00Z - Tuesday's 24h window closes 06:11Z; test whether saves/shares/watch-time populate for a Week 1 post at all.",
+  "full_report_due": "2026-09-29T15:00Z - all seven Week 1 posts closed 24h (last publishes 2026-09-28T14:30Z).",
+  "then_re_score": [
+   "saves per post",
+   "completion proxy (avg watch % + reelsSkipRate) per reel",
+   "shares per post",
+   "reach per post by format",
+   "account follower delta across the Week 1 window",
+   "comment themes once volume exists"
+  ],
+  "decision_rule": "keep the series that wins on saves-per-reach and watch%; drop or reshape the other"
+ }
+}

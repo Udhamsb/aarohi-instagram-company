@@ -1,0 +1,713 @@
+{
+ "artifact": "aar24_demand_brief",
+ "issue": "AAR-24",
+ "parent": "AAR-23",
+ "runId": "f3688904-d4ac-4499-a46e-9e6f1c319385",
+ "generatedAtUtc": "2026-09-22T10:48:00Z",
+ "account": {
+  "handle": "@aarohi.kapoor.diaries",
+  "zernioAccountId": "6aab7e688d284ffb210ca690",
+  "zernioProfileId": "6aab7b2a184320f175383344",
+  "followers": 22,
+  "followerSeries": [
+   {
+    "date": "2026-09-17",
+    "followers": 0
+   },
+   {
+    "date": "2026-09-18",
+    "followers": 0
+   },
+   {
+    "date": "2026-09-19",
+    "followers": 7
+   },
+   {
+    "date": "2026-09-20",
+    "followers": 15
+   },
+   {
+    "date": "2026-09-21",
+    "followers": 19
+   },
+   {
+    "date": "2026-09-22",
+    "followers": 22
+   }
+  ],
+  "followerGainPlacement": "2026-09-19 and 2026-09-20 - BEFORE any Week 1 post existed; Week 1 has never been tested on a following",
+  "analyticsAccess": "instagram_business_manage_insights GRANTED; status healthy; token valid to 2026-11-16",
+  "source": "Paperclip tool gateway -> Zernio MCP connection 4049f71c-ee8e-46bb-bab2-c4d3a2bc24f1",
+  "feedLastSync": "2026-09-22T10:40:09.694Z",
+  "perPostMetricStamp": "2026-09-22 09:05:55"
+ },
+ "populationWarning": {
+  "measuredPosts": 6,
+  "allExternal": true,
+  "note": "All 6 measured posts are isExternal:true pre-launch imports (2026-09-17..2026-09-20). NO Week 1 calendar post has an analytics row. These are the only settled data on the account.",
+  "week1State": {
+   "published": 1,
+   "scheduled": 6,
+   "publishedId": "6ab21c1013e2cd514b3d63d7",
+   "publishedAt": "2026-09-22T06:11:25Z",
+   "analyticsRowPresent": false,
+   "timeline": "single 2026-09-22 row, all zeros"
+  }
+ },
+ "posts": [
+  {
+   "latePostId": "6aafcebb6b41635e50b4435a",
+   "publishedAt": "2026-09-20T12:17:57.000Z",
+   "isExternal": true,
+   "format": "carousel/static",
+   "reach": 5,
+   "impressions": 10,
+   "views": 10,
+   "likes": 2,
+   "comments": 0,
+   "saves": 0,
+   "shares": 0,
+   "reposts": 0,
+   "follows": 0,
+   "avgWatchMs": 0,
+   "durationSeconds": null,
+   "reelsSkipRate": 0,
+   "completionRateField": 0,
+   "derivedWatchPctOfDuration": null,
+   "engagementRate": 20,
+   "lastUpdated": "2026-09-22 09:05:55",
+   "caption": "stumbled into a bookshop this morning and walked out with three books i absolutely did not plan to buy \ud83d\udcda\nsunday plan: chai, ye wali kitaab, aur koi deadline nahi \u2615\naur tum batao \u2014 slide 2 ya slide 4, kaunsa frame sabse zyada 'sunday morning' lag raha hai? \ud83d\udc47\n#bookshopdiaries #sundaymornings #chai #photodiary"
+  },
+  {
+   "latePostId": "6aada47395e2e8e76085a112",
+   "publishedAt": "2026-09-18T20:53:30.000Z",
+   "isExternal": true,
+   "format": "carousel/static",
+   "reach": 26,
+   "impressions": 34,
+   "views": 34,
+   "likes": 5,
+   "comments": 0,
+   "saves": 0,
+   "shares": 0,
+   "reposts": 0,
+   "follows": 0,
+   "avgWatchMs": 0,
+   "durationSeconds": null,
+   "reelsSkipRate": 0,
+   "completionRateField": 0,
+   "derivedWatchPctOfDuration": null,
+   "engagementRate": 14.71,
+   "lastUpdated": "2026-09-22 09:05:55",
+   "caption": "friday golden hour hits different \u2600\ufe0f chai, string lights, aur meri terrace \u2014 weekend ka unofficial start \ud83e\udde1\naur tum batao \u2014 golden hour tumhari city mein kahan sabse pyaara lagta hai: rooftop, terrace, ya old-city ki galli? \ud83d\udc47\n#goldenhour #fridayvibes #chai #terraceevening"
+  },
+  {
+   "latePostId": "6aad066b744c85bf89722629",
+   "publishedAt": "2026-09-18T09:38:27.000Z",
+   "isExternal": true,
+   "format": "reel/video",
+   "reach": 137,
+   "impressions": 159,
+   "views": 159,
+   "likes": 4,
+   "comments": 2,
+   "saves": 0,
+   "shares": 0,
+   "reposts": 0,
+   "follows": null,
+   "avgWatchMs": 3277,
+   "durationSeconds": 10,
+   "reelsSkipRate": 65,
+   "completionRateField": 0,
+   "derivedWatchPctOfDuration": 32.77,
+   "engagementRate": 3.77,
+   "lastUpdated": "2026-09-22 09:05:55",
+   "caption": "the first bite always wins \ud83d\ude0e pani puri diaries, ep 1\nspicy wali ya sweet wali - tumhari pick? \ud83d\udc47 #streetfood #panipuri #chaatlover #eveningdiaries"
+  },
+  {
+   "latePostId": "6aad052cca2c8f78ed0346f4",
+   "publishedAt": "2026-09-18T09:33:54.000Z",
+   "isExternal": true,
+   "format": "carousel/static",
+   "reach": 23,
+   "impressions": 43,
+   "views": 43,
+   "likes": 5,
+   "comments": 0,
+   "saves": 0,
+   "shares": 0,
+   "reposts": 0,
+   "follows": 0,
+   "avgWatchMs": 0,
+   "durationSeconds": null,
+   "reelsSkipRate": 0,
+   "completionRateField": 0,
+   "derivedWatchPctOfDuration": null,
+   "engagementRate": 11.63,
+   "lastUpdated": "2026-09-22 09:05:55",
+   "caption": "pani puri budget: 20 pieces. actual: lost count after the fourth \ud83d\ude05\nfavourite street snack - pani puri, vada pav ya samosa? \ud83d\udc47 #streetfood #panipuri #chaatlover #eveningdiaries"
+  },
+  {
+   "latePostId": "6aabb366ab9502fd6307951d",
+   "publishedAt": "2026-09-17T09:31:55.000Z",
+   "isExternal": true,
+   "format": "reel/video",
+   "reach": 124,
+   "impressions": 137,
+   "views": 137,
+   "likes": 4,
+   "comments": 0,
+   "saves": 0,
+   "shares": 0,
+   "reposts": 0,
+   "follows": null,
+   "avgWatchMs": 2314,
+   "durationSeconds": 10,
+   "reelsSkipRate": 90.2,
+   "completionRateField": 0,
+   "derivedWatchPctOfDuration": 23.14,
+   "engagementRate": 2.92,
+   "lastUpdated": "2026-09-22 09:05:55",
+   "caption": "little moments lately: pani puri evening \ud83d\udc95 full story ish post mein hai\nspicy wali ya sweet wali? \ud83d\udc47 #streetfood #panipuri #chaatlover #eveningdiaries"
+  },
+  {
+   "latePostId": "6aaba137fdaad2c11edbc3c4",
+   "publishedAt": "2026-09-17T08:14:40.000Z",
+   "isExternal": true,
+   "format": "carousel/static",
+   "reach": 18,
+   "impressions": 26,
+   "views": 26,
+   "likes": 5,
+   "comments": 0,
+   "saves": 0,
+   "shares": 0,
+   "reposts": 0,
+   "follows": 0,
+   "avgWatchMs": 0,
+   "durationSeconds": null,
+   "reelsSkipRate": 0,
+   "completionRateField": 0,
+   "derivedWatchPctOfDuration": null,
+   "engagementRate": 19.23,
+   "lastUpdated": "2026-09-22 09:05:55",
+   "caption": "6:30 am - chai, plants, aur thodi si dhoop. the quiet little chapter of my day that nobody sees \u2600\ufe0f honestly my favourite part.\ntumhara 6:30 kaisa hota hai - alarm ke saath ya seedha chai? \ud83d\udc47 #morningrituals #morningdiaries #photodiary"
+  }
+ ],
+ "aggregates": {
+  "totalReach": 333,
+  "totalImpressions": 409,
+  "totalLikes": 25,
+  "totalComments": 2,
+  "totalSaves": 0,
+  "totalShares": 0,
+  "reel": {
+   "n": 2,
+   "avgReach": 130.5,
+   "likesPerReachPct": 3.07,
+   "meanEngagementRate": 3.34
+  },
+  "carouselStatic": {
+   "n": 4,
+   "avgReach": 18.0,
+   "likesPerReachPct": 23.61,
+   "meanEngagementRate": 16.39
+  },
+  "reachRatioReelOverCarousel": 7.25
+ },
+ "metricAvailability": {
+  "saves": {
+   "value": 0,
+   "status": "UNMEASURABLE_NOT_ZERO",
+   "evidence": "0 on all 6 posts; Zernio/Late docs: 'Counts below 5 may be returned as 0 due to Meta's privacy floor on small audiences'; Socialinsider 2026 benchmark: avg 1 save/post at 1-5K followers",
+   "consequence": "saves cannot be a selection metric or a success test at this account size"
+  },
+  "shares": {
+   "value": 0,
+   "status": "UNMEASURABLE_NOT_ZERO",
+   "evidence": "same privacy floor"
+  },
+  "completionRate": {
+   "value": 0,
+   "status": "FIELD_UNPOPULATED",
+   "evidence": "0 on every post including Reels carrying watch data; derived surrogate used instead"
+  },
+  "derivedWatchPct": {
+   "best": 32.8,
+   "worst": 23.1,
+   "status": "DERIVED_SURROGATE",
+   "formula": "igReelsAvgWatchTime(ms) / (videoDurationSeconds*1000) * 100"
+  },
+  "perPostFollows": {
+   "status": "UNUSABLE",
+   "evidence": "null on Reels by Meta's design; 0 on statics"
+  },
+  "demographics": {
+   "status": "REFUSED",
+   "verbatimNote": "Demographics show top 45 entries per dimension. Requires 100+ followers.",
+   "attempted": [
+    "follower_demographics",
+    "engaged_audience_demographics"
+   ],
+   "breakdown": "age,country,gender",
+   "result": {
+    "age": [],
+    "country": [],
+    "gender": []
+   },
+   "consequence": "no demographic segment may be asserted for this account"
+  },
+  "perPostSends": {
+   "status": "NOT_EXPOSED",
+   "evidence": "analytics row carries impressions, reach, likes, comments, shares, saves, reposts, views, watch time, skip rate - no sends field",
+   "consequence": "the 2026 top-ranked signal (sends/DM shares) cannot be read from this connector"
+  }
+ },
+ "contentDecay": {
+  "source": "analytics_get_content_decay, account-scoped, n=6",
+  "buckets": [
+   {
+    "bucket": "0-6h",
+    "avgPctOfFinal": 8.33
+   },
+   {
+    "bucket": "6-12h",
+    "avgPctOfFinal": 33.33
+   },
+   {
+    "bucket": "12-24h",
+    "avgPctOfFinal": 60.56
+   },
+   {
+    "bucket": "1-2d",
+    "avgPctOfFinal": 86.39
+   },
+   {
+    "bucket": "2-7d",
+    "avgPctOfFinal": 100.0
+   }
+  ],
+  "implication": "reading at 24h captures ~61% of eventual engagement; judge at 48-72h"
+ },
+ "accountInsights30d": {
+  "reach": 246,
+  "views": 406,
+  "accountsEngaged": 9,
+  "totalInteractions": 28,
+  "dateRange": {
+   "since": "2026-08-23",
+   "until": "2026-09-22"
+  },
+  "dataDelay": "up to 48 hours"
+ },
+ "bestTimeToPost": {
+  "status": "NOT_ACTIONABLE",
+  "topSlot": "Thursday 09:00, avg_engagement 5.5",
+  "postsPerSlot": "1-2 everywhere",
+  "consequence": "no slot has >=3 posts of support"
+ },
+ "sources": [
+  {
+   "id": "E1",
+   "name": "Meta/IPSOS India Reels study",
+   "date": "June 2026",
+   "sample": "4,000+ respondents, 23 cities + rural India",
+   "findings": {
+    "beautyMakeup": 52,
+    "fashionTrends": 52,
+    "lifestyle": 42,
+    "fitnessWellness": 42,
+    "comedy": 39,
+    "sports": 38,
+    "travel": 37,
+    "genZDailyReels": 89,
+    "womenDailyReels": 85,
+    "dailyVideoOnMeta": 97,
+    "urban": 98,
+    "rural": 94,
+    "creatorEngagementVsOtherPlatforms": "+60%"
+   },
+   "url": "https://about.fb.com/news/2026/06/reels-is-shaping-indias-video-first-future-across-gen-z-women-bharat/"
+  },
+  {
+   "id": "E2",
+   "name": "Metricool 2026 Instagram Study",
+   "date": "June 2026",
+   "sample": "24.3M posts, 375K accounts",
+   "findings": {
+    "reelInteractionsVsSingleImage": ">4x",
+    "avgReelWatchTimeSeconds": 8.5,
+    "carouselSavesVsSingleImage": "9x"
+   },
+   "url": "https://metricool.com/press-release-instagram-study-2026/"
+  },
+  {
+   "id": "E3",
+   "name": "Socialinsider 2026 Instagram benchmarks",
+   "sample": "35M posts",
+   "findings": {
+    "carouselER": 0.55,
+    "reelER": 0.52,
+    "imageER": 0.37,
+    "avgSavesPerPostAt1to5KFollowerAccounts": {
+     "reels": 1,
+     "carousels": 1,
+     "images": 1
+    }
+   },
+   "url": "https://www.socialinsider.io/social-media-benchmarks/instagram"
+  },
+  {
+   "id": "E4",
+   "name": "2026 algorithm analyses (Mosseri Jan 2026 + independent reviews)",
+   "findings": {
+    "rankOrder": [
+     "watch time",
+     "sends/DM shares",
+     "likes per reach"
+    ],
+    "saveWeightVsLike": "~3x",
+    "sendWeightVsLike": "~5x",
+    "reelReachRatePct": 33,
+    "carouselReachRatePct": 22
+   }
+  },
+  {
+   "id": "E5",
+   "name": "Instagram AI-generated profile label",
+   "date": "September 2026",
+   "findings": {
+    "undisclosedAiProfile": "ineligible for recommendations (Reels/Explore)",
+    "disclosedAiProfile": "no reach penalty for disclosing",
+    "label": "AI-generated profile (replaces AI creator)"
+   },
+   "url": "https://www.storyboard18.com/digital/instagram-renames-ai-creator-label-targets-unlabelled-ai-profiles-ws-kl-109489.htm"
+  },
+  {
+   "id": "E6",
+   "name": "MeitY IT Rules Amendment 2026 (SGI)",
+   "date": "notified 2026-02-10",
+   "findings": {
+    "requirement": "clear prominent labelling + permanent metadata/provenance; labels may not be removed"
+   }
+  },
+  {
+   "id": "E7",
+   "name": "ASCI influencer guidelines (India)",
+   "findings": {
+    "requirement": "virtual influencers must disclose that consumers are not interacting with a real human"
+   }
+  },
+  {
+   "id": "E8",
+   "name": "Meta/Ormax 'Micro dramas: The India story'",
+   "date": "February 2026",
+   "sample": "2,000 CAPI + 50 depth interviews, 14 states",
+   "findings": {
+    "discoveredViaSocialFeedsPct": 89,
+    "watchAlonePct": 90,
+    "topGenres": {
+     "romance": 72,
+     "familyDrama": 64,
+     "comedy": 63
+    },
+    "segments": {
+     "incidental": 39,
+     "intentBuilding": 43,
+     "highIntent": 18
+    }
+   }
+  },
+  {
+   "id": "E9",
+   "name": "AI-disclosure / trust studies on Indian users",
+   "date": "2026",
+   "findings": {
+    "trustActionGap": "human influencers outperform AI personas on trust and purchase intent",
+    "explicitDisclosureEffect": "lowers perceived authenticity"
+   },
+   "sample": "incl. a 332-respondent Indian Instagram study"
+  },
+  {
+   "id": "E10",
+   "name": "Zernio/Late API documentation",
+   "read": "live this run",
+   "findings": {
+    "watchTimeUnits": "milliseconds",
+    "completionRateRange": "0-1",
+    "perPostFollowsOnReels": "null by Meta design",
+    "privacyFloor": "counts below 5 may be returned as 0",
+    "demographicsMinimum": "100+ followers"
+   }
+  }
+ ],
+ "themes": [
+  {
+   "id": "T1",
+   "theme": "Street-food diary, numbered episode",
+   "strength": "HIGHEST_FIRST_PARTY",
+   "evidence": [
+    "FACT: both highest-reach posts are street-food/pani-puri content (137 and 124 vs 18.0 carousel-static avg)",
+    "FACT: ONE of them is explicitly numbered ('pani puri diaries, ep 1'); the numbering convention itself is UNPROVEN (narrowed in rev 2)",
+    "FACT: the account's only audience comment (n=1) sits on one of them"
+   ],
+   "hookMechanic": "counting/overshoot gag in the first line; episode number; one two-option question"
+  },
+  {
+   "id": "T2",
+   "theme": "6:30 am chai / quiet-morning ritual",
+   "strength": "STRONG_FIRST_PARTY_DEPTH",
+   "evidence": [
+    "FACT: 19.23% ER, 5 likes on 18 reach \u2014 SECOND-highest of the six measured posts, not the highest (max is 20.0%)",
+    "EVIDENCE E1 lifestyle 42%"
+   ]
+  },
+  {
+   "id": "T3",
+   "theme": "Chai + bookshop / slow-city weekend",
+   "strength": "MODERATE_FIRST_PARTY",
+   "evidence": [
+    "FACT: 20.0% and 14.71% ER; with T2, chai/quiet-life content holds the TOP THREE ER positions (20.0 / 19.23 / 14.71)"
+   ]
+  },
+  {
+   "id": "T4",
+   "theme": "Realistic reset saveable carousel (5 slides, save ask in caption only)",
+   "strength": "CATEGORY_BACKED_ON_ACCOUNT_UNTESTED",
+   "evidence": [
+    "E1 lifestyle 42%",
+    "E2/E3/E4 carousels win saves and depth",
+    "FACT carousel ER 4.9x Reel ER here"
+   ]
+  },
+  {
+   "id": "T5",
+   "theme": "10-minute no-equipment micro-movement + desk-stiffness break",
+   "strength": "CATEGORY_BACKED_UNTESTED",
+   "evidence": [
+    "E1 fitness & wellness 42%"
+   ]
+  },
+  {
+   "id": "T6",
+   "theme": "Modest desk-to-dinner / festive kurta + sneakers styling",
+   "strength": "CATEGORY_BACKED_UNTESTED",
+   "evidence": [
+    "E1 fashion & trends 52% (joint-highest)"
+   ]
+  },
+  {
+   "id": "T7",
+   "theme": "Numbered episodic series with recurring title",
+   "strength": "STRONG_CATEGORY_UNTESTED_HERE",
+   "evidence": [
+    "E8 89% discovered micro-drama via social feeds; episodic habit demonstrated at scale in India"
+   ]
+  },
+  {
+   "id": "T8",
+   "theme": "Hinglish two-option question CTA as repeatable mechanic",
+   "strength": "OBSERVED_PATTERN_EFFECT_UNPROVEN",
+   "evidence": [
+    "FACT: 6 of 6 measured posts close on a Hinglish option-choice question, but only 4 of 6 offer exactly TWO options; the other 2 offer three (rooftop/terrace/old-city; pani-puri/vada-pav/samosa)",
+    "FACT: total account comments = 2 \u2014 it is the only CTA form ever used here, not a proven winner",
+    "NOTE: revision 1 said '5 of 6 use a two-option question'; the rev-2 verification first said '6 of 6', both wrong. This is the corrected count."
+   ]
+  }
+ ],
+ "doNotCreate": [
+  "Any text baked into a visual (captions, headlines, CTAs, hashtags, fake quotes, labels, legible signage, watermarks, logos, UI, AI-style typography) \u2014 AAR-12/13/14/15 + owner directive on AAR-23",
+  "Any sexualised or modesty-breaching styling, pose, setting, crop or copy \u2014 Persona Bible \u00a72",
+  "Any identity-breaching frame (face drift, age/complexion change, tied/braided hair, missing bindi or jhumkas) \u2014 Persona Bible \u00a71/\u00a75",
+  "An undisclosed AI persona \u2014 E5 (loses Reels/Explore recommendation eligibility), E6 (MeitY), E7 (ASCI)",
+  "Fabricated authority or health claims (diagnoses, results promises, fake credentials) \u2014 E9, E5",
+  "A saves-based success test or saves-flavoured claims \u2014 unmeasurable at 22 followers (E3, E10)",
+  "Demographic targeting claims \u2014 connector refuses demographics below 100 followers (verified this run)",
+  "Long Reels as a discovery play \u2014 nothing over ~30s until on-account watch data exists",
+  "Any billable generation before AAR-27 confirm_cost"
+ ],
+ "recommendations": [
+  {
+   "rank": 1,
+   "id": "R1",
+   "concept": "Street-food diary, episodic, 8-12s Reel",
+   "status": "PROVISIONAL",
+   "basis": "highest-reach posts on the account (137, 124) + its only audience comment",
+   "falsifiedIf": "a Week 2 street-food Reel with settled metrics lands at/below the account's carousel reach per post, or records a lower derived watch% than 32.8%"
+  },
+  {
+   "rank": 2,
+   "id": "R2",
+   "concept": "Realistic-reset saveable carousel, 5 slides, save ask in caption",
+   "status": "PROVISIONAL",
+   "basis": "carousel ER 4.9x Reel ER here; E2/E3 carousel save/depth advantage; E1 lifestyle 42%",
+   "falsifiedIf": "after 72h a Week 2 carousel records fewer likes-per-reach than the Week 2 Reels. Do NOT use saves as the test."
+  },
+  {
+   "rank": 3,
+   "id": "R3",
+   "concept": "10-minute micro-movement + desk-stiffness Reels, <=12s cut, no equipment",
+   "status": "PROVISIONAL",
+   "basis": "E1 fitness & wellness 42%; Week 1 already ships this pillar",
+   "falsifiedIf": "a <=12s fitness Reel's derived watch% does not exceed 32.8% \u2014 in which case the pillar is the problem, not the length"
+  },
+  {
+   "rank": 4,
+   "id": "R4",
+   "concept": "Modest occasion-styling Reel timed to next festive window",
+   "status": "PROVISIONAL_SEASONAL",
+   "basis": "E1 fashion & trends 52%; reported festive reach multiplier",
+   "falsifiedIf": "reach lands below the account's own Reel median in a non-festive comparison week"
+  },
+  {
+   "rank": 5,
+   "id": "R5",
+   "concept": "Chai / quiet-morning carousel or static, low production cost",
+   "status": "PROVISIONAL",
+   "basis": "chai/quiet-morning content holds the 19.23% ER post and shares the top three ER positions (20.0 / 19.23 / 14.71)",
+   "falsifiedIf": "it fails to beat the static reach average (18.0) by a margin larger than noise"
+  }
+ ],
+ "selectionMetricConflict": {
+  "statedMetric": "saves and completion (named by sibling measurement task AAR-5 / AAR-23 line)",
+  "availability": "BOTH UNAVAILABLE \u2014 saves privacy-floored; completionRate field unpopulated",
+  "substitute": "reach and derived watch-percentage",
+  "labelling": "all recommendations PROVISIONAL with explicit falsifiers; substitution stated, not hidden"
+ },
+ "rescorePlan": [
+  {
+   "when": "2026-09-23T07:00Z",
+   "what": "AAR-5 checkpoint 1 \u2014 does the first Week 1 post's settled metrics populate at all (saves/shares/watch)"
+  },
+  {
+   "when": "2026-09-29T15:00Z",
+   "what": "AAR-5 full report \u2014 re-score R1-R5 on reach, derived watch%, likes-per-reach at 48-72h; if saves remain 0 across all seven, record the saves rule as unmeasurable and change the basis deliberately"
+  },
+  {
+   "note": "AAR-5 pass 2 re-armed the monitor after a manual check consumed it; verified monitorNextCheckAt 2026-09-23T07:00:00Z"
+  }
+ ],
+ "standardConflict": {
+  "status": "RESOLVED_ON_REVIEW \u2014 the 'conflict' reported in revision 1 was incorrect and is withdrawn",
+  "revision1Claim": "AAR-25 bans ALL visible text incl. labels; Persona Bible \u00a74 (still locked) mandates an on-image 'AI-generated' marker and says caption-only is insufficient",
+  "whyItWasWrong": "Revision 1 was drafted from AAR-25's issue DESCRIPTION because its documents did not yet exist when fetched (the fetch returned [] at 2026-09-22T10:41:21Z; AAR-25's standard was published 10:41:31Z, 10 seconds later). The published standard does NOT ban the disclosure marker.",
+  "whatTheStandardsActuallySay": {
+   "AAR25_Z3": "The only permitted on-asset text is (a) the post-production disclosure overlay, exact string `AI-generated` (hyphenated), applied after Pass 1-2 QC passes on the raw master; and (b) the AAR-13 \u00a72 board-approved campaign-text exception.",
+   "AAR25_disclosureTiming": "Generation prompts must NOT request the on-image disclosure; the render is text-free; the overlay is applied in post-production. 'The Persona Bible \u00a74 disclosure requirements remain fully in force \u2014 at the overlay/deliverable stage, not the generation stage.'",
+   "AAR25_SF3": "Onward masters must carry the exact `AI-generated` overlay, high contrast, inside the platform safe area, on every carousel slide and reel shot with no undisclosed cutaway.",
+   "PersonaBible_s4": "Every visual asset must visibly state 'AI-generated' on the asset itself; caption-only disclosure is insufficient. Still binding.",
+   "conclusion": "No conflict. The overlay is permitted by Z-3 and required by \u00a74, and both agree on placement (post-production, after QC, inside the safe area)."
+  },
+  "revision1RecommendationWithdrawn": "Caption-only disclosure. It would violate the locked Persona Bible \u00a74 and must not be used as sole disclosure.",
+  "AAR11_safeAreaDefect": "FIXED. AAR-11 is closed done: badge moved from x=733,y=1753 (inside the caption/audio reservation y>=1248 and deleted by the 4:5 grid crop) to x=700,y=1080, 291x57, verified on all 25 assets off re-downloaded bytes.",
+  "standingRule": "Generate text-free, then apply the exact `AI-generated` overlay in post-production inside the safe area on every asset. Do not copy Week 1's original badge geometry, which AAR-11 superseded.",
+  "consumersNotMisled": "AAR-26's script/prompt package independently states the same rule; AAR-25 Z-3/SF-3 carry it. The stale text lived only in the revision-1 document."
+ },
+ "openGaps": [
+  {
+   "gap": "per-post sends / DM shares",
+   "evidence": "connector exposes no sends field in the analytics row",
+   "whyItMatters": "sends is the 2026 top-ranked signal and the honest substitute for floored saves",
+   "action": "request from the connection vendor"
+  },
+  {
+   "gap": "profile-level AI label not readable",
+   "evidence": "no connector tool exposes it",
+   "action": "someone with account access should confirm the 'AI-generated profile' tag is enabled (E5 consequence)"
+  }
+ ],
+ "scriptPromptImplications": {
+  "scripts": [
+   "8-12s, one idea",
+   "hook in first 2s (a specific number, or a two-option question)",
+   "first person, present tense, Hinglish",
+   "exactly one CTA per caption; save ask in caption only, never on screen",
+   "no on-screen text of any kind",
+   "every caption line traceable to the frame (AAR-15)",
+   "health: non-diagnostic, no results promise, explicit stop-if-pain cue",
+   "disclosure in every caption"
+  ],
+  "visualPrompts": [
+   "text-free by default; negative prompt bans all letters/glyphs/pseudo-text/typography/legible signage/posters/labels/logos/watermarks/subtitles/UI",
+   "keep Persona Bible \u00a71/\u00a73 identity lock blocks unchanged (face anchor, wheatish texture, long open dark hair, small centred maroon bindi, silver jhumkas, modest opaque wardrobe, neutral eye-level framing)",
+   "lo-fi over glossy for R1 and R5 (handheld, real settings, mixed available light)",
+   "carousels: 4-6 slides, one idea per slide, no slide exempt from the clean-image rule",
+   "food/street: hands and food in frame, plausible portions, no legible price boards/menu text, no brand packaging",
+   "Reels first frame must carry the hook with no text to lean on"
+  ]
+ },
+ "spendAndAssets": {
+  "assetsGenerated": 0,
+  "generationServicesInvoked": 0,
+  "billableModelsCalled": 0,
+  "postsCreatedEditedOrScheduled": 0
+ },
+ "engagementRateDefinition": {
+  "vendorField": "engagementRate",
+  "reproducesAs": "(likes + comments) / impressions * 100",
+  "denomination": "impressions-based, not reach-based",
+  "note": "Impressions exceed reach on every post (409 vs 333 total), so the impressions- and reach-denominated rankings disagree on this data. Rankings in this brief use the vendor field; the likes-per-reach column is pooled sum(likes)/sum(reach) per format.",
+  "ranking": [
+   {
+    "latePostId": "6aafcebb6b41635e50b4435a",
+    "ER": 20.0,
+    "reach": 5
+   },
+   {
+    "latePostId": "6aaba137fdaad2c11edbc3c4",
+    "ER": 19.23,
+    "reach": 18
+   },
+   {
+    "latePostId": "6aada47395e2e8e76085a112",
+    "ER": 14.71,
+    "reach": 26
+   },
+   {
+    "latePostId": "6aad052cca2c8f78ed0346f4",
+    "ER": 11.63,
+    "reach": 23
+   },
+   {
+    "latePostId": "6aad066b744c85bf89722629",
+    "ER": 3.77,
+    "reach": 137
+   },
+   {
+    "latePostId": "6aabb366ab9502fd6307951d",
+    "ER": 2.92,
+    "reach": 124
+   }
+  ]
+ },
+ "verification": {
+  "revision": 2,
+  "verifyingRunId": "6ea17feb-ba9e-4f02-b49a-1393941265fe",
+  "verifiedAtUtc": "2026-09-22T11:08Z",
+  "artifactProvenance": {
+   "attachmentId": "3b850cf4-b78b-4192-a536-1c067967ed2c",
+   "byteSize": 21559,
+   "sha256": "bd1d3be164e7fef52a0b5a8ce1735a390d7f6fe907054421e7f27ee099cb7ffa",
+   "redownloadedAndMatched": true
+  },
+  "numbersReproduced": "37 of 37 re-derived from the raw gateway captures; none changed",
+  "textualDefectsCorrected": 4,
+  "defects": [
+   "T2 called 19.23% the highest ER; the maximum is 20.0% (bookshop post). T2 is second.",
+   "T3 read '14.71% and 20.0% \u2014 the top two ER scores after T2', which contradicts itself (20.0 > 19.23).",
+   "T8's CTA count was wrong twice: revision 1 said '5 of 6 two-option'; the verification's first pass said '6 of 6 two-option'. Correct count: 6 of 6 close on a Hinglish option-choice question, 4 of 6 offer exactly two options, 2 of 6 offer three.",
+   "The \u00a78 AAR-25-vs-Persona-Bible-\u00a74 'standard conflict' was wrong and its caption-only disclosure recommendation was non-compliant. Withdrawn and replaced."
+  ],
+  "claimsNarrowed": [
+   "T1: both highest-reach posts are street-food content, but only one is numbered; the numbering convention is an untested hypothesis, not an observed fact (revision 1 said 'exactly')."
+  ],
+  "unchanged": "No metric, ranking, theme order, format preference, do-not-create item or R1-R5 was changed.",
+  "spendOrAssets": "Nothing generated, published or spent in the verification pass.",
+  "selfCorrectionByVerifier": "The verification pass's own first revision asserted '6 of 6 two-option questions', which was wrong \u2014 it counted the presence of a choice question rather than the number of options. Corrected to 6 of 6 choice-question / 4 of 6 two-option in document rev 4. Recorded rather than silently fixed.",
+  "companionSupersession": "Use aar24_demand_brief_rev2.json (attachment 483a2053-a10c-44fd-9000-08cc70262060). aar24_demand_brief.json (attachment 3b850cf4-b78b-4192-a536-1c067967ed2c) is superseded and still carries the withdrawn standardConflict field.",
+  "documentRevisions": "Document audience-demand-brief final revision number at close of this run: 4 (rev 2 corrected the four defects; rev 3 fixed the \u00a79 companion pointer and stated the verification's real independence level; rev 4 fixed the verifier's own CTA-count error).",
+  "independence": "DIFFERENT RUN OF THE SAME AGENT, not a different role. The brief was produced by run f3688904-d4ac-4499-a46e-9e6f1c319385, which checked AAR-24 out and completed it at 10:55:21Z before this run could take the lock. This is a second pass by the same agent on its own output \u2014 weaker than review by a different owner and it should NOT be relied on as independent QA. Its strength is that every number was re-derived from the raw gateway captures rather than quoted. Treat the four corrections as the minimum defect set, not the complete set."
+ },
+ "revision": 2,
+ "revisionNote": "rev 2 companion \u2014 verified by a second run of the same agent (not independent QA); 37/37 figures reproduced; 4 author defects corrected plus 1 verifier-introduced error corrected; stale standard-conflict claim withdrawn."
+}

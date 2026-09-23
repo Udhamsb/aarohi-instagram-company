@@ -1,0 +1,164 @@
+{
+ "harness": "aar38-2",
+ "issue": "AAR-38",
+ "run": "01f83efc-3c16-4cb1-9721-48db77c5a738",
+ "subject": "AAR-36 delivered carousel, S1-S5, for the 2026-09-23 14:30Z daily slot",
+ "verdict": "NOT ACCEPTED \u2014 defects found, nothing published",
+ "publish_decision": {
+  "published": false,
+  "reason": "AAR-35 carousel-approval-criteria: one FAIL anywhere = the set is NOT accepted. Four criteria fail. Publishing was authorised for the slot but is gated on a pass.",
+  "slot": "2026-09-23T14:30:00Z (20:00 IST) \u2014 still free, all six old slots were cancelled",
+  "time_available": "one consolidated correction cycle before the slot"
+ },
+ "provenance": {
+  "files": 6,
+  "verified": 6,
+  "detail": "S1-S5 + manifest re-downloaded, sha256 AND byteSize matched to the AAR-36 attachment registry",
+  "sha256": {
+   "S1": 0.929,
+   "S2": 0.937,
+   "S3": 0.946,
+   "S4": 0.941,
+   "S5": 0.952
+  }
+ },
+ "checks": [
+  {
+   "id": "CAC-1/CAC-2",
+   "criterion": "still-image carousel, 5 slides, no reel/video/static",
+   "method": "file inventory + container check",
+   "result": "PASS",
+   "evidence": "5 PNG files; no mp4/video in the set"
+  },
+  {
+   "id": "CAC-3/CAC-4",
+   "criterion": "every slide 1080x1350, 4:5 portrait",
+   "method": "PNG IHDR read from the delivered bytes",
+   "result": "PASS",
+   "evidence": "5/5 measured exactly 1080x1350 (ratio 0.8000)"
+  },
+  {
+   "id": "CAC-5",
+   "criterion": "exactly one outfit across the whole carousel",
+   "method": "visual read of all 5 slides vs the AAR-35 locked outfit string",
+   "result": "PASS with note",
+   "evidence": "5/5 show the same oatmeal-beige knit cardigan, dusty-rose relaxed top, charcoal-grey straight trousers; 5/5 show silver jhumkas + centred maroon bindi + long open dark hair. NOTE: S2 carries a black shoulder bag whereas S1/S3/S5 show a brown leather bag (item-8 lock says 'one small crossbody bag or tote' without naming a colour)",
+   "note_is_defect": false
+  },
+  {
+   "id": "CAC-6",
+   "criterion": "outfit matches the date's locked rotation entry",
+   "method": "visual vs AAR-35 daily-brief-2026-09-23 outfit 5",
+   "result": "PASS",
+   "evidence": "the visible garments match the locked string for 2026-09-23"
+  },
+  {
+   "id": "CAC-10/CAC-11",
+   "criterion": "zero visible text in frame",
+   "method": "visual read at native size + targeted 2x-4x zooms of every text-bearing surface (notebook, pen, mug, book spines, plant pots, door frames, all four frame edges) + automated near-uniform-rectangle scan (80x40 boxes, >85% single quantised colour)",
+   "result": "PASS",
+   "evidence": "no legible string or glyph found: notebook page blank, pen barrel plain, mug plain, book spines unreadable, no signage/label/watermark/logo; the 6 near-uniform rectangles the scan flagged were all plain wall / sky / background bokeh (verified visually)"
+  },
+  {
+   "id": "CAC-12",
+   "criterion": "no on-image AI-generated mark",
+   "method": "known-box exact-fill probe (700,1080,291x57) vs 4 matched-size control boxes, all slides",
+   "result": "PASS",
+   "evidence": "plate_fraction 0.0 and no candidate on-image mark on 5/5; controls clean. AAR-36 states the vendor rendered a lower-edge AI-GENERATED frame mark which it removed by a bounded top-aligned crop; no such mark survives in the delivered bytes"
+  },
+  {
+   "id": "CAC-28",
+   "criterion": "caption carries the disclosure line",
+   "method": "regex over the AAR-37 caption",
+   "result": "PASS",
+   "evidence": "'AI-generated visual; styling and caption by Aarohi's team.' present (491 chars)"
+  },
+  {
+   "id": "CAC-29",
+   "criterion": "platform AI-content label enabled",
+   "method": "publish payload",
+   "result": "PENDING AT PUBLISH",
+   "evidence": "nothing is scheduled, so no label is set yet. isAiGenerated=true will be set on the post when it is created; the profile-level label is an account setting read back at publish"
+  },
+  {
+   "id": "CAC-20",
+   "criterion": "one lighting family across the set",
+   "method": "visual shadow-direction read per slide + objective light-path measures (hard-edge density, blown-highlight fraction, torso luminance)",
+   "result": "FAIL",
+   "evidence": "S4 is lit dominantly from camera-RIGHT (warm sun patches on the camera-right wall and bright doorway/sky on camera-left) where the brief specifies a single key from camera-left in 5/5. S4 also carries blown highlights at 0.38% vs 0.00-0.18% on the other four, and 3.4x the hard-edge density of the next-hardest slide (hard_edge_x 0.89% vs 0.14-0.43%) \u2014 visible as hard-edged projected shadow bands",
+   "caveat": "outer-third mean luminance alone is an unreliable direction proxy (it read S2/S3 as camera-left); the S4 finding rests on the visual read plus the light-path measures"
+  },
+  {
+   "id": "CAC-21",
+   "criterion": "consistent framing distance, +/-10% of slide 1",
+   "method": "YuNet face detection (confidence 0.93-0.95, boxes visually verified before use)",
+   "result": "FAIL",
+   "evidence": "face-height fraction per slide 0.157 / 0.130 / 0.151 / 0.124 / 0.162; deviation from S1 up to 20.8% (S2 17.5%, S4 20.8%) against a +/-10% tolerance; spread max/min = 1.30. Measured on a forehead-to-chin box, so the figure is a surrogate for the briefed top-of-head-to-chin fraction, not the same quantity",
+   "caveat": "surrogate metric \u2014 the sign and rough size of the deviation are the finding, not the exact percentage"
+  },
+  {
+   "id": "CAC-22",
+   "criterion": "eye line inside the middle third of the frame",
+   "method": "verified YuNet face box centre vs the 450-900 middle-third band of a 1350-tall frame",
+   "result": "FAIL on 5/5",
+   "evidence": "eye-line y per slide 337 / 222 / 314 / 294 / 349, all above 450. Chin sits at y 460/324/433/392/477 = 24-35% of frame height, so the face occupies the upper third and the frames read as slightly higher than eye level. Brief section 4 required the middle third on 5/5"
+  },
+  {
+   "id": "CAC-23",
+   "criterion": "slide k shows scene clause k",
+   "method": "visual read of each slide against the briefed clause",
+   "result": "FAIL on S2, S4, S5",
+   "evidence": "S2 briefed 'standing just behind the chair, both hands smoothing the open front of the cardigan at hip level, in a bright home corner' \u2014 delivered shows the subject centred against a bare wall beside a chair, not a home corner; S4 briefed 'three-quarter frame mid-step through an open domestic doorway onto the home balcony' \u2014 delivered is a full-length straight-on step through a glazed balcony door; S5 briefed 'warm late-afternoon light' \u2014 delivered reads as cool/neutral balcony daylight"
+  },
+  {
+   "id": "CAC-24",
+   "criterion": "every caption line traceable to something visible",
+   "method": "caption text vs slide contents",
+   "result": "FAIL (copy side)",
+   "evidence": "the caption opens 'Ek hi outfit, poora din \u2014 subah desk pe, shaam ko dinner pe' and later 'dressy enough for dinner right after'. No slide shows a dinner setting: the sequence ends at a balcony table with a chai glass. The caption promises a dinner outcome the visuals do not show"
+  },
+  {
+   "id": "CAC-25",
+   "criterion": "anatomy, realism and artifacts",
+   "method": "full-size visual review + zoom of every face, hand and fabric region",
+   "result": "PASS* (one art-direction note)",
+   "evidence": "0 measured artifacts; hands/fingers/eyes/teeth plausible, no watermark smudges. NOTE: S5's lower dusty-rose top carries an irregular dark mottled pattern. My read is a dappled light/shadow pattern rather than a stain, and no measure I built separates the two; flagged for the owner rather than asserted as a defect"
+  },
+  {
+   "id": "CAC-26",
+   "criterion": "provenance recorded per slide",
+   "method": "manifest + sha256/byteSize against the AAR-36 registry",
+   "result": "PASS",
+   "evidence": "5/5 slides byte-identical to the registry; manifest names each slide's Runway task id and SHA-256"
+  },
+  {
+   "id": "CAC-27",
+   "criterion": "correction budget respected",
+   "method": "correction history",
+   "result": "PASS",
+   "evidence": "no prior correction cycle on this set; this is cycle 1 of a maximum 2"
+  },
+  {
+   "id": "CAC-31",
+   "criterion": "billable-render gate honoured",
+   "method": "interaction + timeline read",
+   "result": "PASS",
+   "evidence": "human confirmation card 'Approve Runway carousel render charge' accepted 2026-09-22T14:34:09.663Z; delivered bytes uploaded 2026-09-22T14:42:16Z \u2014 the recorded contract (5x nano-banana-2 4:5/2K = 55 Runway credits) was approved before the render. The earlier 10-credit Higgsfield approval was not reused across the vendor change; a fresh Runway card was raised and accepted"
+  }
+ ],
+ "blocking_defects": [
+  "CAC-20 lighting family (S4)",
+  "CAC-21 framing distance",
+  "CAC-22 eye line (5/5)",
+  "CAC-23 scene clauses S2/S4/S5",
+  "CAC-24 caption/visual disagreement"
+ ],
+ "not_implemented_by_this_harness": [
+  "CAC-7 prompt string substring match (needs the render record)",
+  "CAC-8 garment colourway CIEDE2000 (region-sampling proxy disproved; visual read only)",
+  "CAC-9 approved-silhouette mapping (visual vs AAR-7 section 4)",
+  "CAC-13 identity lock vs the anchor crop (visual, must be a different owner)",
+  "CAC-14/CAC-15/CAC-16/CAC-17/CAC-18/CAC-19 modesty, markers, pose, setting (visual)"
+ ],
+ "independence_note": "Community & Insights Manager is the publishing owner, not the artifact owner, but this is a single-agent pass. CAC-13 (identity lock) is explicitly the one row I recommend a different owner certify."
+}

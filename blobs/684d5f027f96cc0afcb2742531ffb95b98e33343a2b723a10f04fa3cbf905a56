@@ -1,0 +1,25 @@
+{
+  "status": "success",
+  "data": {
+    "sogni": {
+      "settled": "0",
+      "fastUnclaimed": "0",
+      "relaxedUnclaimed": "0",
+      "credit": "0",
+      "debit": "0",
+      "net": "0"
+    },
+    "spark": {
+      "settled": "485.657774324032427701",
+      "fastUnclaimed": "0",
+      "relaxedUnclaimed": "0",
+      "credit": "0",
+      "debit": "38.42015232",
+      "net": "447.237622004032427701",
+      "premiumCredit": "0"
+    },
+    "USD": {
+      "subscriptionUnclaimed": "0.0"
+    }
+  }
+}

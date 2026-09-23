@@ -1,0 +1,58 @@
+# AAR-27 — AI Visual Producer Intake Gate v1.0 (final)
+
+Date: 2026-09-22 · Scope: all Aarohi photo/video jobs under AAR-23 · Vendor: Runway Dev (adopted AAR-22, board-directed Dev Models surface)
+
+## 1. Decision
+
+- **The gate itself: READY.** Every gate check, the render contract, and the cost model are defined and evidence-backed below.
+- **Production renders: NOT READY today.** Blocked on (a) AAR-24 research, AAR-25 creative standard, AAR-26 prompt package — all still `in_progress` with zero comments/attachments/documents as of this run (verified live), and (b) `RUNWAYML_API_SECRET` still unprovisioned (re-probed this run, name-only; SDK/REST calls and the live credit check stay blocked until a human provisions it). No billable call was made; no billable call is possible without the secret.
+
+## 2. Approved model path for character consistency (verified against official docs + pricing, fetched 2026-09-22)
+
+Source URLs: docs.dev.runwayml.com `/guides/models.md`, `/guides/pricing.md`, `/api.md`, `/ai-context.md` (all fetched live this run). Credits: **$0.01/credit** (official pricing page).
+
+### Step 1 — Character anchor keyframe (photos and pre-video)
+`gemini_image3_pro` (Nano Banana Pro) on `POST /v1/text_to_image` — the roster's strongest character-consistency image path with a **published price**: up to 14 references with up to 5 explicit `subject: "human"` (dedicated human-identity mode), tag-referenced, prompt ≤5500 chars, `outputCount` 1 (keep at 1; 4 would bill 4×).
+- Ratio: `896:1152` (≈4:5, closest published 1K tier to the AAR-14 house 928×1152) or `832:1248` (2:3); 2K/4K tiers available at published prices.
+- Price: **20 credits ($0.20) per 1K or 2K image**, 40 credits 4K.
+- Budget candidates pending AAR-26 brief QC (published prices, no explicit human-subject flag): `gen4_image` 5 cr/720p-class, 8 cr/1080p (≤3 tagged refs); `muse_image` 1 cr (≤10 loose refs); `gen4_image_turbo` 2 cr (refs **required**). `gemini_image3.1_flash` is excluded from costed plans: its price is **not published** in the official pricing table.
+- Excluded by the clean-image standard's zero-text gate regardless of model: the AAR-14 negative block is folded into prompt text (see §5 Gate A).
+
+### Step 2 — Character video (5 s, 9:16 class)
+`gen4.5` on `POST /v1/image_to_video`, driving from the **approved anchor still as first frame** (`promptImage.position: "first"`) — the strongest published-price character-lock video path on the current roster (Gen-4.5 is Runway's flagship; 720:1280 is a valid ratio; duration 5 is valid, 2–10 integer; promptText ≤1000 chars, required).
+- Price: **12 credits/s → 60 credits ($0.60) per 5 s at 720:1280**. No audio flag is documented for gen4.5 (audio bundled in the flat rate; PNG-sequence delivery notes a separate .wav when output has audio); Aarohi VO/music is composited downstream per the AAR-11 reel standard regardless.
+- No `negativePrompt` field on gen4.5 → negative clauses are written into the positive prompt.
+- Contingency when identity/wardrobe drift recurs: `seedance2_5` image-to-video (reference-image mode; `audio` param, refs free; 720p **30 cr/s → 160 cr ($1.60) per 5 s**; promptText ≤15000; ratio 720:1280 valid) — priced verbatim at request time before any gate.
+- Budget alternative (durations limited to 4/6/8 s): `veo3.1_fast` no-audio 10 cr/s (50 cr/5 s), supports `negativePrompt`; audio variant 15 cr/s.
+- Prohibited: `gen3a_turbo` and `gen4_aleph` (retired — hard-fail per official ai-context), and any identifier not on the 2026-09-22 roster. Model Router stays out of scope (AAR-22 surface decision).
+
+### Per-unit cost model (photo→video, 5 s, 9:16)
+| Line | Calls | Credits |
+| --- | --- | --- |
+| Anchor keyframe (gemini_image3_pro, 1K, outputCount 1) | 1 | 20 |
+| Multi-loop preflight (all gates) | 0 (no credits) | 0 |
+| Video (gen4.5 i2v, 720:1280, 5 s) | 1 | 60 |
+| **Planned total per approved unit** | **2 billable** | **80 = $0.80** |
+| QC-fail reserve: anchor re-gen + video re-render (each needs fresh approval) | ≤2 | ≤80 |
+| **Planning ceiling per unit** | ≤4 | ≤160 = $1.60 |
+
+Photo-only jobs: 1 call, 20 cr = $0.20. All live quotes are re-read from the task's `estimatedCost` (create response) and re-checked against `GET /v1/organization` → `creditBalance` (read-only) **before** submission; docs warn not to infer cost anywhere but the official pricing page, and output URLs are temporary (download and store).
+
+## 3. Mandatory pre-render contract (per brief; no exceptions)
+Before ANY billable call, record in the issue thread: (1) exact model id + endpoint + `X-Runway-Version: 2024-11-06`; (2) full parameters (ratio, duration/outputCount, reference count + SHA-256 of each anchor crop); (3) number of planned calls; (4) live cost estimate from §2 table + task `estimatedCost`; (5) funding check (creditBalance ≥ estimate; a gate approved against an unfunded pool 402s — proven on AAR-20); (6) brief approval reference; (7) `confirm_cost=true` set on the submission, gated behind an explicit human `confirm_cost` approval naming the exact contract and quote. **No billable generation call without an approved brief AND confirm_cost.** Moderation failures bill the same as successes — a rejected concept still costs its estimate, which is why Gate A runs first.
+
+## 4. Multi-loop preflight (runs on paper, zero credits, before render)
+Loop: **Gate A** prompt-vs-brief conflict scan (model/param compatibility vs §2 tables; negative block present and inside the prompt limit; forbidden-content cross-check prompt vs negative; moderation-risk flags) → **Gate B** continuity kit (approved anchor crop + SHA-256; identity/marker lock list; wardrobe clause from the AAR-20-revised standard) → **Gate C** scene hygiene (any visible text/letters/numbers, logos/brand marks/watermarks/stamps, UI/app frames/phone screens, signage/screens implied by the scene → surface exclusions added; disclosure badge plan exists for downstream composite). Run 1 → **consolidate ALL defects into ONE correction pass** (no per-defect regeneration; proven on AAR-14 where one pass cleared both variants) → Run 2 → Run 3 only if Run 2 introduced a NEW defect class → GO/NO-GO verdict recorded with the render contract. A NO-GO never spends.
+
+Post-render QC (non-billable, on delivered pixels): 10 evenly spaced frames judged per frame (identity, wardrobe, zero-readable-text, anatomy), overlay badge re-verified on a frame decoded from the ENCODED file, phone-preview legibility gate — per AAR-14/AAR-11 standards.
+
+## 5. Inputs received / pending review
+- AAR-24 (research): **nothing posted** — pending.
+- AAR-25 (creative standard): **nothing posted** — pending; Gate B will bind to it when it lands.
+- AAR-26 (prompt package): **nothing posted** — pending; Gate A review of the package (prompt conflicts, negative block, per-model limits — esp. gen4.5's 1000-char prompt cap vs longer AAR-20-style briefs) is the first execution of this gate.
+Review of these three is an open acceptance step of this gate; production stays NOT READY until they pass Gate A/B/C review plus §1(b).
+
+## 6. Unblock conditions (in order)
+1. AAR-24/25/26 post their deliverables → consolidated review in AAR-23.
+2. A human provisions `RUNWAYML_API_SECRET` (Dev portal; OAuth on dev.runwayml.com MCP remains human-gated per AAR-22).
+3. First billable unit: live re-quote + `creditBalance` check + explicit confirm_cost approval naming model, params, call count, and quote.

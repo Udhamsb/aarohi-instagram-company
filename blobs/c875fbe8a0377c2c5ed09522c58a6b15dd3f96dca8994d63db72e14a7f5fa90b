@@ -1,0 +1,78 @@
+{
+ "run": "8b45eadc-540f-463e-8518-e203e63b55c2",
+ "caption_source": {
+  "issue": "AAR-37",
+  "document": "rolling-carousel-calendar",
+  "revision": 3
+ },
+ "caption_verbatim": "Ek hi outfit, poora din \u2014 subah desk pe, shaam ko balcony pe chai ke saath.\n\nLayering ka pura point yehi hai: ek cardigan add karo aur look change ho jaata hai, outfit badle bina. Comfortable enough for back-to-back meetings, relaxed enough for a chai break right after.\n\nTurns out ek smart layer se hi puri day ka dressing sorted ho sakta hai.\n\nTumhara go-to desk-to-evening trick kya hai?\n\nAI-generated visual; styling and caption by Aarohi's team.\n\n#DeskToBalcony #ChaiBreak #IndianFashion #EverydayStyle #AarohiStyle",
+ "rows": [
+  {
+   "row": "CAC-28",
+   "check": "caption carries the disclosure line",
+   "verdict": "PASS",
+   "note": "found verbatim: \"AI-generated visual; styling and caption by Aarohi's team.\""
+  },
+  {
+   "row": "CAC-24",
+   "check": "claim[cardigan layering] traceable",
+   "verdict": "PASS",
+   "note": "S1-S5 all wear the open cardigan over the top"
+  },
+  {
+   "row": "CAC-24",
+   "check": "claim[desk setting (morning)] traceable",
+   "verdict": "PASS",
+   "note": "S1 is a desk scene (blank notebook, pen)"
+  },
+  {
+   "row": "CAC-24",
+   "check": "claim[balcony setting] traceable",
+   "verdict": "PASS",
+   "note": "S4/S5 balcony; S5 balcony table"
+  },
+  {
+   "row": "CAC-24",
+   "check": "claim[chai in the scene] traceable",
+   "verdict": "PASS",
+   "note": "S5 unbranded cup of chai on the balcony table"
+  },
+  {
+   "row": "CAC-24",
+   "check": "claim[late-afternoon light] traceable",
+   "verdict": "PASS",
+   "note": "S5 warm late-afternoon key per contract"
+  },
+  {
+   "row": "CAC-24",
+   "check": "claim[one outfit all day] traceable",
+   "verdict": "PASS",
+   "note": "5/5 one outfit measured"
+  },
+  {
+   "row": "CAC-24",
+   "check": "no dinner/evening-dress claim",
+   "verdict": "PASS",
+   "note": "no dinner language remains"
+  },
+  {
+   "row": "AAR-15",
+   "check": "single CTA as a question",
+   "verdict": "PASS",
+   "note": "one question-form CTA"
+  },
+  {
+   "row": "AAR-15",
+   "check": "5 specific hashtags",
+   "verdict": "PASS",
+   "note": "5 hashtags"
+  }
+ ],
+ "copy_side_fails": 0,
+ "visual_rows_deferred": [
+  "CAC-20",
+  "CAC-21",
+  "CAC-22",
+  "CAC-23"
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "run": "8b45eadc-540f-463e-8518-e203e63b55c2",
+ "source_declared": "1856x2304",
+ "source_is_exactly_4_5": false,
+ "source_ratio": 0.805556,
+ "required_ratio": 0.8,
+ "required_delivery": "1080x1350",
+ "cases": {
+  "A naive resize 1856x2304 -> 1080x1350": {
+   "bytes": 1080,
+   "pixels": 1350,
+   "measured": "1080x1350",
+   "ratio": 0.8,
+   "geometry_pass": true,
+   "method": "non-uniform; horizontal squeeze",
+   "distortion_pct": 0.69
+  },
+  "B uniform downscale to h=1350, centre-crop width to 1080": {
+   "bytes": 1080,
+   "pixels": 1350,
+   "measured": "1080x1350",
+   "ratio": 0.8,
+   "geometry_pass": true,
+   "method": "scale 0.585938; intermediate 1088x1350; crop 8px of width (0.74%)",
+   "distortion_pct": 0.0
+  },
+  "C crop to exact 4:5 first, then resize": {
+   "bytes": 1080,
+   "pixels": 1350,
+   "measured": "1080x1350",
+   "ratio": 0.8,
+   "geometry_pass": true,
+   "method": "crop width 1856->1843 (13px, 0.70%), then resize",
+   "distortion_pct": 0.0
+  }
+ },
+ "recommended": "C crop to exact 4:5 first, then resize"
+}
