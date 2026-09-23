@@ -29,11 +29,6 @@ agents:
     adapter:
       config:
         apiBaseUrl: "http://127.0.0.1:8642/p/chief_of_staff"
-        apiKey:
-          version: "latest"
-          projectionClass: "unclassified"
-          secretId: "87ecd40d-3f4d-4f97-b7f0-783f28a495ec"
-          type: "secret_ref"
         graceSec: 15
         sessionKeyStrategy: "issue"
         timeoutSec: 3600
@@ -63,11 +58,6 @@ agents:
     adapter:
       config:
         apiBaseUrl: "http://127.0.0.1:8642/p/community_insights_manager"
-        apiKey:
-          version: "latest"
-          projectionClass: "unclassified"
-          secretId: "551c55e2-8f2d-4db6-99ac-9be98c2d289e"
-          type: "secret_ref"
         sessionKeyStrategy: "issue"
         timeoutSec: 3600
       type: "hermes_gateway"
@@ -117,11 +107,6 @@ agents:
     adapter:
       config:
         apiBaseUrl: "http://127.0.0.1:8642/p/creative_director"
-        apiKey:
-          version: "latest"
-          projectionClass: "unclassified"
-          secretId: "945dca2f-2dc0-4889-951d-818819bb8a7d"
-          type: "secret_ref"
         sessionKeyStrategy: "issue"
         timeoutSec: 3600
       type: "hermes_gateway"

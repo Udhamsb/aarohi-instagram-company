@@ -45,6 +45,17 @@
 npx paperclipai company import this-github-url-or-folder
 ```
 
+## Destination setup after import
+
+Keep imported agents paused until their adapters are configured on the destination.
+The package omits source-instance secret IDs because those secrets do not exist on
+another Paperclip instance. Configure a destination-local API key/secret for each
+Hermes gateway agent: Chief of Staff, Community & Insights Manager, and Creative
+Director. Verify their gateway URLs and profile paths on the destination before
+activating them. No authentication requirement on the gateway itself is changed.
+
+If an earlier import failed, check the target company for partially created records
+before retrying to avoid duplicate companies or agents.
 See [Paperclip](https://paperclip.ing) for more information.
 
 ---
